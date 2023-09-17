@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="404, Hexo">
-    <meta name="description" content="Hexo">
+    <meta name="keywords" content="404, szy Blog">
+    <meta name="description" content="本网站主要记录成长历程，分享经验。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>404 | Hexo</title>
+    <title>404 | szy Blog</title>
     <link rel="icon" type="image/jpeg" href="/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230915160303.jpg">
     
     <style>
@@ -73,7 +73,7 @@
                     
                     <img src="/medias/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230915160701.jpg" class="logo-img" alt="LOGO">
                     
-                    <span class="logo-span">Hexo</span>
+                    <span class="logo-span">szy Blog</span>
                 </a>
             </div>
             
@@ -177,10 +177,10 @@
         
         <img src="/medias/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230915160701.jpg" class="logo-img circle responsive-img">
         
-        <div class="logo-name">Hexo</div>
+        <div class="logo-name">szy Blog</div>
         <div class="logo-desc">
             
-            Never really desperate, only the lost of the soul.
+            本网站主要记录成长历程，分享经验。
             
         </div>
     </div>
@@ -415,9 +415,9 @@
         <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
                    server="netease"
                    type="playlist"
-                   id="503838841"
+                   id="5470425598"
                    fixed='true'
-                   autoplay='false'
+                   autoplay='true'
                    theme='#42b983'
                    loop='all'
                    order='random'
@@ -502,9 +502,14 @@
 
 </div>
     </div>
+    <!-- Live2D -->
+    {% if theme.live2d.enable %}
+    <script src="{{ url_for(theme.live2d.pluginRootPath) }}/index.js"></script>
+    {% endif %}
 </footer>
 
 <div class="progress-bar"></div>
+
 
 
     <!-- 搜索遮罩框 -->

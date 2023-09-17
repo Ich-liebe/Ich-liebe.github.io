@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="我的第一篇博客, szy Blog">
-    <meta name="description" content="">
+    <meta name="keywords" content="szy Blog">
+    <meta name="description" content="本网站主要记录成长历程，分享经验。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>我的第一篇博客 | szy Blog</title>
+    <title>szy Blog</title>
     <link rel="icon" type="image/jpeg" href="/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230915160303.jpg">
     
     <style>
@@ -343,12 +343,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">我的第一篇博客</h1>
+                    <h1 class="description center-align post-title"></h1>
                 </div>
             </div>
         </div>
@@ -384,7 +384,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-09-14
+                    2023-09-17
                 </div>
                 
 
@@ -408,7 +408,269 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>看板娘登陆平台</title>
+<link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/bootstrap@5/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css">
+<script src="../live2d.min.js"></script>
+<style>
+html, body {
+	height: 100%;
+}
+body {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding-top: 40px;
+	padding-bottom: 40px;
+	background-color: #f5f5f5;
+}
+.form-signin {
+	width: 100%;
+	max-width: 330px;
+	padding: 15px;
+	margin: 0 auto;
+}
+.form-signin .checkbox {
+	font-weight: 400;
+}
+.form-signin .form-control {
+	position: relative;
+	box-sizing: border-box;
+	height: auto;
+	padding: 10px;
+	font-size: 16px;
+}
+.form-signin .form-control:focus {
+	z-index: 2;
+}
+.form-signin input[type=text] {
+	margin-bottom: -1px;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+}
+.form-signin input[type=password] {
+	margin-bottom: 10px;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+#stage {
+	position: relative;
+}
+#stage img {
+	width: 100%;
+	margin-bottom: 20px;
+	border-radius: 20px;
+}
+#stage button {
+	position: absolute;
+	padding: 0;
+}
+#inner {
+	position: relative;
+	background-color: #999;
+	clip-path: circle(120px at center);
+}
+#cover {
+	position: absolute;
+	background-color: #CB3837;
+	width: 100%;
+	height: 100%;
+	bottom: 10%;
+	transition: all 1s;
+	box-shadow: 0 0 0 5px rgba(0, 0, 0, .1);
+}
+#text {
+	position: absolute;
+	bottom: 30%;
+	font-size: 2em;
+	left: 50%;
+	transform: translateX(-50%);
+	opacity: 0.4;
+	font-weight: bold;
+}
+#detail {
+	position: absolute;
+	background: rgba(255, 255, 255, .1);
+	width: 100%;
+	height: 10px;
+	bottom: 0;
+}
+#handle {
+	position: absolute;
+	background: #ccc;
+	bottom: -2px;
+	box-shadow: 0 1px 0 1px rgba(0, 0, 0, .1);
+	height: 8px;
+	left: 50%;
+	margin-left: -15px;
+	width: 30px;
+	cursor: pointer;
+}
+#info {
+	left: 40px;
+	bottom: 20px;
+}
+#refresh {
+	right: 40px;
+	bottom: 20px;
+}
+#live2d {
+	cursor: grab;
+	height: 300px;
+	width: 300px;
+}
+#live2d:active {
+	cursor: grabbing;
+}
+</style>
+</head>
+<body class="text-center">
+<form class="form-signin" action="login.php" method="post">
+	<div id="stage">
+		<div id="inner">
+			<div id="cover">
+				<div id="text">
+					<span style="color: cyan;">MIMI</span><span style="color: white;">POWERED</span>
+				</div>
+				<div id="detail"></div>
+				<div id="handle"></div>
+			</div>
+			<canvas class="mb-4" id="live2d" width="800" height="800"></canvas>
+		</div>
+		<button class="btn btn-link" id="info"><i class="fa fa-lg fa-info"></i></button>
+		<button class="btn btn-link" id="refresh"><i class="fa fa-lg fa-sync-alt"></i></button>
+	</div>
+	<h1 class="h3 mb-3 fw-normal">看板娘登陆平台</h1>
+	<label for="room" class="sr-only">用户名</label>
+	<input type="text" name="room" class="form-control" placeholder="用户名" required autofocus>
+	<label for="pass" class="sr-only">密码</label>
+	<input type="password" name="pass" class="form-control" placeholder="密码" required>
+	<div class="checkbox mb-4">
+		<label>
+			<input type="checkbox" value="remember-me"> 记住我
+		</label>
+	</div>
+	<div class="d-grid">
+		<button class="btn btn-lg btn-primary" type="submit">登录</button>
+	</div>
+	<p class="mt-5 mb-3 text-muted">Copyleft &copy; Mimi 2019</p>
+</form>
+<script>
+/*
+ * _(:з」∠)_
+ * Created by Shuqiao Zhang in 2019.
+ * https://zhangshuqiao.org
+ */
+
+/*
+ * This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ */
+window.addEventListener("load", () => {
+	"use strict";
+
+	if (!CSS.supports("clip-path", "circle(120px at center)")) {
+		document.getElementById("stage").innerHTML = '<img src="../assets/screenshot-1.png">';
+		return;
+	}
+
+	const apiPath = "https://live2d.fghrsh.net/api";
+	let state = 0, loading = false,
+		modelId = localStorage.getItem("modelId"),
+		modelTexturesId = localStorage.getItem("modelTexturesId");
+	if (modelId === null) {
+		modelId = 1;
+		modelTexturesId = 53;
+	}
+	loadModel(modelId, modelTexturesId);
+
+	function loadModel(modelId, modelTexturesId) {
+		localStorage.setItem("modelId", modelId);
+		if (modelTexturesId === undefined) modelTexturesId = 0;
+		localStorage.setItem("modelTexturesId", modelTexturesId);
+		loadlive2d("live2d", `${apiPath}/get/?id=${modelId}-${modelTexturesId}`, null);
+		console.log("live2d", `模型 ${modelId}-${modelTexturesId} 加载完成`);
+		setTimeout(() => {
+			coverPosition("80%");
+			state = 2;
+		}, 2000);
+	}
+
+	function loadRandModel() {
+		const modelId = localStorage.getItem("modelId"),
+			modelTexturesId = localStorage.getItem("modelTexturesId");
+		fetch(`${apiPath}/rand_textures/?id=${modelId}-${modelTexturesId}`)
+			.then(response => response.json())
+			.then(result => {
+				loadModel(modelId, result.textures.id);
+				setTimeout(() => {
+					state = 2;
+					coverPosition("80%");
+					loading = false;
+				}, 1000);
+			});
+	}
+
+	function coverPosition(pos) {
+		document.getElementById("cover").style.bottom = pos;
+	}
+
+	document.getElementById("info").addEventListener("click", () => {
+		fetch("https://v1.hitokoto.cn")
+			.then(response => response.json())
+			.then(result => {
+				alert("「" + result.hitokoto + "」——" + result.from);
+			});
+	});
+
+	document.getElementById("refresh").addEventListener("click", () => {
+		if (loading) return;
+		state = 0;
+		coverPosition("10%");
+		loading = true;
+		setTimeout(loadRandModel, 1000);
+	});
+
+	document.getElementById("handle").addEventListener("click", () => {
+		if (state === 1) {
+			state = 2;
+			coverPosition("80%");
+		}
+		else if (state === 2) {
+			state = 1;
+			coverPosition("20%");
+		}
+	});
+
+	document.querySelector("input[type=password]").addEventListener("focus", () => {
+		if (state === 2) {
+			state = 1;
+			coverPosition("20%");
+		}
+	});
+	document.querySelector("input[type=password]").addEventListener("blur", () => {
+		if (state === 1) {
+			state = 2;
+			coverPosition("80%");
+		}
+	});
+});
+</script>
+</body>
+</html>
+
                 
             </div>
             <hr/>
@@ -434,7 +696,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://ich-liebe.github.io/2023/09/14/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/">https://ich-liebe.github.io/2023/09/14/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</a>
+                    <a href="https://ich-liebe.github.io/live2d-widget-master/demo/login.html">https://ich-liebe.github.io/live2d-widget-master/demo/login.html</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -815,61 +1077,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
-            <div class="card">
-                <a href="/2023/09/16/newdraft/">
-                    <div class="card-image">
-                        
-                        <img src="https://img1.imgtp.com/2023/09/15/6ghsFOuQ.jpg" class="responsive-img" alt="test">
-                        
-                        <span class="card-title">test</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-09-16
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-user fa-fw"></i>
-                            han yue
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E8%90%8C%E6%96%B0/">
-                        <span class="chip bg-color">萌新</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
             </div>
             <div class="card">
-                <a href="/2023/09/14/hello-world/">
+                <a href="/live2d-widget-master/demo/login.html">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="">
                         
-                        <span class="card-title">Hello World</span>
+                        <span class="card-title"></span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -880,7 +1099,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-09-14
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-09-17
                             </span>
                         <span class="publish-author">
                             
@@ -890,6 +1109,45 @@
                         </span>
                     </div>
                 </div>
+
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                本篇&nbsp;<i class="far fa-dot-circle"></i>
+            </div>
+            <div class="card">
+                <a href="/live2d-widget-master/demo/login.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="">
+                        
+                        <span class="card-title"></span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-09-17
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            han yue
+                            
+                        </span>
+                    </div>
+                </div>
+
                 
             </div>
         </div>
