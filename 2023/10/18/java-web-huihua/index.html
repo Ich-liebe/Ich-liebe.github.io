@@ -5,12 +5,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="java_web_huihua, szy Blog">
-    <meta name="description" content="会话技术1. 会话：一次会话中包含多次请求和响应
+    <meta name="description" content="一、 会话技术1. 会话：一次会话中包含多次请求和响应
 1.一次会话 ：浏览器第一次给服务器资源发送请求，会话建立
 
 2. 功能：在一次对话的范围内的多次请求间，共享数据3. 方式：
 1. 客户端会话技术 ：Cookie
-2. 服务器端会话 : ">
+2. 服务器端会话">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -413,13 +413,30 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="会话技术"><a href="#会话技术" class="headerlink" title="会话技术"></a>会话技术</h1><h3 id="1-会话：一次会话中包含多次请求和响应"><a href="#1-会话：一次会话中包含多次请求和响应" class="headerlink" title="1. 会话：一次会话中包含多次请求和响应"></a>1. 会话：一次会话中包含多次请求和响应</h3><ul>
+                <h1 id="一、-会话技术"><a href="#一、-会话技术" class="headerlink" title="一、 会话技术"></a>一、 会话技术</h1><h3 id="1-会话：一次会话中包含多次请求和响应"><a href="#1-会话：一次会话中包含多次请求和响应" class="headerlink" title="1. 会话：一次会话中包含多次请求和响应"></a>1. 会话：一次会话中包含多次请求和响应</h3><ul>
 <li><h5 id="1-一次会话-：浏览器第一次给服务器资源发送请求，会话建立"><a href="#1-一次会话-：浏览器第一次给服务器资源发送请求，会话建立" class="headerlink" title="1.一次会话 ：浏览器第一次给服务器资源发送请求，会话建立"></a>1.一次会话 ：浏览器第一次给服务器资源发送请求，会话建立</h5></li>
 </ul>
 <h3 id="2-功能：在一次对话的范围内的多次请求间，共享数据"><a href="#2-功能：在一次对话的范围内的多次请求间，共享数据" class="headerlink" title="2. 功能：在一次对话的范围内的多次请求间，共享数据"></a>2. 功能：在一次对话的范围内的多次请求间，共享数据</h3><h3 id="3-方式："><a href="#3-方式：" class="headerlink" title="3. 方式："></a>3. 方式：</h3><ul>
 <li><h5 id="1-客户端会话技术-：Cookie"><a href="#1-客户端会话技术-：Cookie" class="headerlink" title="1. 客户端会话技术 ：Cookie"></a>1. 客户端会话技术 ：Cookie</h5></li>
 <li><h5 id="2-服务器端会话-Session"><a href="#2-服务器端会话-Session" class="headerlink" title="2. 服务器端会话 : Session"></a>2. 服务器端会话 : Session</h5></li>
-<li></li>
+</ul>
+<hr>
+<h1 id="二、Cookie"><a href="#二、Cookie" class="headerlink" title="二、Cookie"></a>二、Cookie</h1><h3 id="1-概念-客户端会话技术，将数据保存到客户端"><a href="#1-概念-客户端会话技术，将数据保存到客户端" class="headerlink" title="1. 概念 : 客户端会话技术，将数据保存到客户端"></a>1. 概念 : 客户端会话技术，将数据保存到客户端</h3><h3 id="2-快速入门："><a href="#2-快速入门：" class="headerlink" title="2.快速入门："></a>2.快速入门：</h3><ul>
+<li><h5 id="使用步骤："><a href="#使用步骤：" class="headerlink" title="使用步骤："></a><strong>使用步骤</strong>：</h5><ol>
+<li>创建Cookie对象，绑定数据<ul>
+<li>new Cookie (String name, String value)</li>
+</ul>
+</li>
+<li>发送Cookie对象<ul>
+<li>response.addCookie (Cookie cookie)</li>
+</ul>
+</li>
+<li>获取Cookie，拿到数据<ul>
+<li>Cookie[] request.getCookies()</li>
+</ul>
+</li>
+</ol>
+</li>
 </ul>
 
                 
@@ -828,18 +845,17 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/10/18/java-web-huihua/">
+                <a href="/2023/10/18/%E5%85%B3%E4%BA%8E%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="java_web_huihua">
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="关于算法竞赛">
                         
-                        <span class="card-title">java_web_huihua</span>
+                        <span class="card-title">关于算法竞赛</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -849,9 +865,9 @@
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-10-18
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-10-18
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -860,7 +876,6 @@
                         </span>
                     </div>
                 </div>
-
                 
             </div>
         </div>
