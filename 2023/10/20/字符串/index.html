@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="java">
-    <meta name="description" content="关于java的基础">
+    <meta name="keywords" content="字符串">
+    <meta name="description" content="java中的字符串">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>java_test | szy Blog</title>
+    <title>字符串 | szy Blog</title>
     <link rel="icon" type="image/jpeg" href="/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230915160303.jpg">
     
     <style>
@@ -343,12 +343,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://picdm.sunbangyan.cn/2023/10/18/bc595069f84c1736877caddbb6583776.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://z1.ax1x.com/2023/10/20/piF9mEq.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">java_test</h1>
+                    <h1 class="description center-align post-title">字符串</h1>
                 </div>
             </div>
         </div>
@@ -372,8 +372,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Java/">
-                                <span class="chip bg-color">Java</span>
+                            <a href="/tags/java%E5%AD%97%E7%AC%A6%E4%B8%B2/">
+                                <span class="chip bg-color">java字符串</span>
                             </a>
                         
                     </div>
@@ -397,7 +397,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-10-18
+                    2023-10-20
                 </div>
                 
 
@@ -421,30 +421,29 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="九、接口"><a href="#九、接口" class="headerlink" title="九、接口"></a>九、接口</h1><h3 id="1-基本的概念等"><a href="#1-基本的概念等" class="headerlink" title="1. 基本的概念等"></a>1. 基本的概念等</h3><ol>
-<li><h4 id="定义："><a href="#定义：" class="headerlink" title="定义："></a>定义：</h4><ul>
-<li>public class 类名 implements 接口名</li>
-</ul>
-</li>
-<li><h4 id="概念："><a href="#概念：" class="headerlink" title="概念："></a>概念：</h4><ul>
-<li>接口也是抽象内容</li>
-<li>引用，用多态思想</li>
-</ul>
-</li>
-<li><h4 id="接口默认修饰"><a href="#接口默认修饰" class="headerlink" title="接口默认修饰"></a>接口默认修饰</h4><ul>
-<li>接口中成员变量默认被final修饰</li>
-<li>默认修饰是 public static final int a = 1; 等价于 int a = 1;</li>
-<li>接口里的方法默认带有 public abstract</li>
-</ul>
-</li>
-<li><h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><ul>
-<li>接口没有构造方法，主要是对行为进行抽象</li>
-</ul>
-</li>
-</ol>
-<h3 id="2-类与接口的关系"><a href="#2-类与接口的关系" class="headerlink" title="2.类与接口的关系"></a>2.类与接口的关系</h3><ul>
-<li></li>
-</ul>
+                <div align='center'>
+    <font size='8'>字符串</font>
+</div>
+
+<h3 id="API"><a href="#API" class="headerlink" title="API"></a>API</h3><p>应用程序开发接口的缩写。意思是一些预设好的函数或方法，允许第三方程序通过网络来调用数据或基于数据的服务。(而无需关注如何实现)</p>
+<h3 id="String"><a href="#String" class="headerlink" title="String"></a>String</h3><h4 id="String-构造方法："><a href="#String-构造方法：" class="headerlink" title="String 构造方法："></a>String 构造方法：</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token punctuation">(</span><span class="token keyword">char</span><span class="token punctuation">[</span><span class="token punctuation">]</span> chs<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 根据字符数组的内容，来创建字符串</span>
+<span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token punctuation">(</span><span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> bys<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 根据字节数组的内容，来创建字符串</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h4 id="String常用方法"><a href="#String常用方法" class="headerlink" title="String常用方法"></a>String常用方法</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java">s<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>ss<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 判断s和ss是否相等</span>
+s<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 返回s在位置i中的字符</span>
+s<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 返回字符长度(一般数组也可以用)</span>
+s<span class="token punctuation">.</span><span class="token function">tocharArray</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token class-name">String</span> line <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">;</span>
+<span class="token class-name">String</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> ss <span class="token operator">=</span> line<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">","</span><span class="token punctuation">)</span> <span class="token comment">// 以,为分割依据得到ss字符串数组</span>
+    						<span class="token comment">// 用来摘取字符串</span>
+s1<span class="token punctuation">.</span><span class="token function">compareTo</span><span class="token punctuation">(</span>s2<span class="token punctuation">)</span> <span class="token comment">// 比较两字符串的大小</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="StringBuilder"><a href="#StringBuilder" class="headerlink" title="StringBuilder"></a>StringBuilder</h3><h4 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token class-name">StringBuilder</span> <span class="token function">append</span><span class="token punctuation">(</span>任意类型<span class="token punctuation">)</span><span class="token operator">:</span> 添加数据，并返回对象本身
+<span class="token keyword">public</span> <span class="token class-name">StringBuilder</span> <span class="token function">reverse</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> 返回相反的字符序列
+a<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"sffdf"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"sdfds"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"djfdsf"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h3 id="String-与-StringBuilder"><a href="#String-与-StringBuilder" class="headerlink" title="String 与 StringBuilder"></a>String 与 StringBuilder</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">String</span> 转 <span class="token class-name">StringBuilder</span><span class="token operator">:</span> <span class="token class-name">StringBuilder</span><span class="token punctuation">(</span><span class="token class-name">String</span> s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+					   <span class="token class-name">StringBuilder</span> sb <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StringBuilder</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">StringBuilder</span> 转 <span class="token class-name">String</span><span class="token operator">:</span> <span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+					   <span class="token class-name">String</span> s <span class="token operator">=</span> sb<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
                 
             </div>
@@ -471,7 +470,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://ich-liebe.github.io/2023/10/18/java-test/">https://ich-liebe.github.io/2023/10/18/java-test/</a>
+                    <a href="https://ich-liebe.github.io/2023/10/20/%E5%AD%97%E7%AC%A6%E4%B8%B2/">https://ich-liebe.github.io/2023/10/20/%E5%AD%97%E7%AC%A6%E4%B8%B2/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -509,8 +508,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Java/">
-                                    <span class="chip bg-color">Java</span>
+                                <a href="/tags/java%E5%AD%97%E7%AC%A6%E4%B8%B2/">
+                                    <span class="chip bg-color">java字符串</span>
                                 </a>
                             
                         </div>
@@ -860,32 +859,43 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/10/18/java-web-huihua/">
+                <a href="/2023/10/20/%E9%9B%86%E5%90%88%E5%9F%BA%E7%A1%80/">
                     <div class="card-image">
                         
+                        <img src="https://z1.ax1x.com/2023/10/20/piFPZt0.jpg" class="responsive-img" alt="集合基础">
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="java_web_huihua">
-                        
-                        <span class="card-title">java_web_huihua</span>
+                        <span class="card-title">集合基础</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            java中的集合基础
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-10-18
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-10-20
                         </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            han yue
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/javase/" class="post-category">
+                                    javase
+                                </a>
+                            
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/java%E9%9B%86%E5%90%88%E5%9F%BA%E7%A1%80/">
+                        <span class="chip bg-color">java集合基础</span>
+                    </a>
+                    
                 </div>
                 
             </div>
@@ -894,26 +904,26 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/10/18/java-test/">
+                <a href="/2023/10/20/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80/">
                     <div class="card-image">
                         
-                        <img src="https://picdm.sunbangyan.cn/2023/10/18/bc595069f84c1736877caddbb6583776.jpg" class="responsive-img" alt="java_test">
+                        <img src="https://z1.ax1x.com/2023/10/20/piFSXT0.jpg" class="responsive-img" alt="面向对象基础">
                         
-                        <span class="card-title">java_test</span>
+                        <span class="card-title">面向对象基础</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            关于java的基础
+                            java的面向对象基础
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-10-18
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-10-20
                             </span>
                         <span class="publish-author">
                             
@@ -927,12 +937,11 @@
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Java/">
-                        <span class="chip bg-color">Java</span>
+                    <a href="/tags/java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80/">
+                        <span class="chip bg-color">java面向对象基础</span>
                     </a>
                     
                 </div>
