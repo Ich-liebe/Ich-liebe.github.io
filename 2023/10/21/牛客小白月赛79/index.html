@@ -429,16 +429,26 @@
 <div align='center'>
     <font size='6'>A</font>
 </div>
+### A
 
-<h3 id="A"><a href="#A" class="headerlink" title="A"></a>A</h3><p>问最少需要多少次操作，可以把数字n变成干净的</p>
-<p>从定义下手，干净的数满足下面两个条件之一</p>
-<ol>
-<li>是偶数，且不含前导0 (例如000023，23前面的0就叫做前导0)</li>
-<li>数字为空，也就是所有数位被删除</li>
-</ol>
-<p>一个数字的奇偶性，取决于个位数的奇偶，所以我们从数的最后一位开始枚举。</p>
-<p>每次判断是否为偶数，如果不是就删除最后一位。这样最多将数字删空，而不会出现前导0</p>
-<h4 id="c-代码"><a href="#c-代码" class="headerlink" title="c ++ 代码"></a>c ++ 代码</h4><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;bits&#x2F;stdc++.h&gt;
+#### 题意
+
+问最少需要多少次操作，可以把数字n变成干净的数
+
+#### 解题思路
+
+从定义下手，干净的数满足下面两个条件之一
+
+1. 是偶数，且不含前导0 (例如000023，23前面的0就叫做前导0)
+2. 数字为空，也就是所有数位被删除
+
+一个数字的奇偶性，取决于个位数的奇偶，所以我们从数的最后一位开始枚举。
+
+每次判断是否为偶数，如果不是就删除最后一位。这样最多将数字删空，而不会出现前导0
+
+#### c ++ 代码
+
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;bits&#x2F;stdc++.h&gt;
 
 using namespace std;
 
@@ -462,7 +472,10 @@ int main()
     return 0;
 &#125;
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="c代码"><a href="#c代码" class="headerlink" title="c代码"></a>c代码</h4><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+
+#### c代码
+
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
 
 <span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  
 <span class="token punctuation">&#123;</span>
@@ -484,14 +497,25 @@ int main()
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <div align='center'>
     <font size='6'>B</font>
 </div>
+### B
 
-<h3 id="B"><a href="#B" class="headerlink" title="B"></a>B</h3><p>n个正整数，可以将一些数放入背包，需要使得背包中的数的总和为偶数且为最大值。</p>
-<p>我们可以将所有的数放入背包，如果此时总和为偶数，那么这就是满足条件的数。</p>
-<p>如果此时总和为奇数，那么我们只需要把最小的一个奇数拿出去，那么总数就变成了偶数，也就是满足条件的最大值。</p>
-<h4 id="c-代码-1"><a href="#c-代码-1" class="headerlink" title="c++代码"></a>c++代码</h4><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;bits&#x2F;stdc++.h&gt;
+#### 题意
+
+n个正整数，可以将一些数放入背包，需要使得背包中的数的总和为偶数且为最大值。
+
+#### 解题思路
+
+我们可以将所有的数放入背包，如果此时总和为偶数，那么这就是满足条件的数。
+
+如果此时总和为奇数，那么我们只需要把最小的一个奇数拿出去，那么总数就变成了偶数，也就是满足条件的最大值。
+
+#### c++代码
+
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;bits&#x2F;stdc++.h&gt;
 
 using namespace std;
 
@@ -525,7 +549,10 @@ int main()
     return 0;
 &#125;
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="c代码-1"><a href="#c代码-1" class="headerlink" title="c代码"></a>c代码</h4><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+
+#### c代码
+
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;math.h></span></span>
 
 <span class="token keyword">const</span> <span class="token keyword">int</span> N <span class="token operator">=</span> <span class="token number">1e5</span> <span class="token operator">+</span> <span class="token number">10</span><span class="token punctuation">;</span>
@@ -558,6 +585,7 @@ int main()
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <div align='center'>
     <font size='6'>C</font>
 </div>
@@ -580,7 +608,7 @@ int main()
 </li>
 </ol>
 <p>需要注意的是，当所有数都为0的时候，要进行特判。</p>
-<h4 id="c-代码-2"><a href="#c-代码-2" class="headerlink" title="c++代码"></a>c++代码</h4><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;bits&#x2F;stdc++.h&gt;
+<h4 id="c-代码"><a href="#c-代码" class="headerlink" title="c++代码"></a>c++代码</h4><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;bits&#x2F;stdc++.h&gt;
 #define endl &#39;\n&#39;
 
 using namespace std;
@@ -629,7 +657,7 @@ int main()
 &#125;
 
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="c代码-2"><a href="#c代码-2" class="headerlink" title="c代码"></a>c代码</h4><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<h4 id="c代码"><a href="#c代码" class="headerlink" title="c代码"></a>c代码</h4><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
 
 <span class="token keyword">const</span> <span class="token keyword">int</span> N <span class="token operator">=</span> <span class="token number">1e5</span> <span class="token operator">+</span> <span class="token number">10</span><span class="token punctuation">;</span>
 
@@ -691,7 +719,7 @@ int main()
 <p>武器一每次会让丧尸的数量增加1，武器二每次会让丧尸的数量$*$2，也就是在二进制下的数左移一位(即在末尾加一个0)</p>
 <p>所以最多需要射击的次数是20，也就是每次都使用武器二的情况。</p>
 <p>所以只需要枚举20次，每次多使用一次武器一，取最少的次数即可。</p>
-<h4 id="c-代码-3"><a href="#c-代码-3" class="headerlink" title="c ++代码"></a>c ++代码</h4><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;bits&#x2F;stdc++.h&gt;
+<h4 id="c-代码-1"><a href="#c-代码-1" class="headerlink" title="c ++代码"></a>c ++代码</h4><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;bits&#x2F;stdc++.h&gt;
 #define endl &#39;\n&#39;
 
 using namespace std;
@@ -726,7 +754,7 @@ int main()
     return 0;
 &#125;
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="c代码-3"><a href="#c代码-3" class="headerlink" title="c代码"></a>c代码</h4><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<h4 id="c代码-1"><a href="#c代码-1" class="headerlink" title="c代码"></a>c代码</h4><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
 
 <span class="token keyword">int</span> <span class="token function">min</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> b<span class="token punctuation">)</span>
 <span class="token punctuation">&#123;</span>
@@ -782,7 +810,7 @@ int main()
 <p>${np^2}^{m}$(就是np的2次方的m次方)</p>
 <p>这道题的核心是个位的变化，下面是个位的数字在平方之后的变化，不难看出，在平方两次之后，个位的数字是不再变化了的，所以我们不用去真正的循环m次，最多只需要循环两次，就可以算出期望数的个位。而且m的范围是1e9，直接枚举是铁定超时的。</p>
 <p><img src="https://picss.sunbangyan.cn/2023/10/21/e04342bb9f2380d5fe7a3f3bba1cc0fa.png" alt=""></p>
-<h4 id="c-代码-4"><a href="#c-代码-4" class="headerlink" title="c++代码"></a>c++代码</h4><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;bits&#x2F;stdc++.h&gt;
+<h4 id="c-代码-2"><a href="#c-代码-2" class="headerlink" title="c++代码"></a>c++代码</h4><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;bits&#x2F;stdc++.h&gt;
 #define endl &#39;\n&#39;
 
 using namespace std;
@@ -813,7 +841,7 @@ int main()
     return 0;
 &#125;
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="c代码-4"><a href="#c代码-4" class="headerlink" title="c代码"></a>c代码</h4><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<h4 id="c代码-2"><a href="#c代码-2" class="headerlink" title="c代码"></a>c代码</h4><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
 
 <span class="token keyword">int</span> <span class="token function">min</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> b<span class="token punctuation">)</span>
 <span class="token punctuation">&#123;</span>
@@ -1258,47 +1286,45 @@ int main()
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/10/21/%E7%89%9B%E5%AE%A2%E5%B0%8F%E7%99%BD%E6%9C%88%E8%B5%9B79/">
+                <a href="/2023/10/21/Servlet/">
                     <div class="card-image">
                         
-                        <img src="https://picst.sunbangyan.cn/2023/10/21/0197464ed8a87712915fe3bf27b8d9c4.png" class="responsive-img" alt="牛客小白月赛79">
+                        <img src="https://picdl.sunbangyan.cn/2023/10/21/39cb7a311dbfaa7991c6fb28ff53fce3.jpg" class="responsive-img" alt="Servlet">
                         
-                        <span class="card-title">牛客小白月赛79</span>
+                        <span class="card-title">Servlet</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            牛客小白月赛79
+                            Servlet
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-10-21
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-10-21
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E9%A2%98%E8%A7%A3/" class="post-category">
-                                    题解
+                            <a href="/categories/javaweb/" class="post-category">
+                                    javaweb
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%B0%8F%E7%99%BD%E6%9C%88%E8%B5%9B/">
-                        <span class="chip bg-color">小白月赛</span>
+                    <a href="/tags/Servlet/">
+                        <span class="chip bg-color">Servlet</span>
                     </a>
                     
                 </div>
@@ -1823,6 +1849,4 @@ $(function () {
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"log":false});</script></body>
-
-</html>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"log":false});</script><script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>
