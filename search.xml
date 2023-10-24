@@ -1,0 +1,1047 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Request</title>
+    <url>/2023/10/24/Request/</url>
+    <content><![CDATA[<div align='center'>
+    <font size='8'>Request</font>
+</div>
+
+<h2 id="1-request对象和response对象的原理"><a href="#1-request对象和response对象的原理" class="headerlink" title="1. request对象和response对象的原理"></a>1. request对象和response对象的原理</h2><ol>
+<li>request和response对象是由服务器创建的。我们来使用他们</li>
+<li>request对象是来获取请求消息，response对象是来设置响应消息</li>
+</ol>
+<h2 id="2-request对象继承体系结构"><a href="#2-request对象继承体系结构" class="headerlink" title="2.request对象继承体系结构"></a>2.request对象继承体系结构</h2><p>​    ServletRequest    — 接口</p>
+<p>​    HttpServlet    — 接口</p>
+<p>​    org.apache.catalina.connector.RequestFacade 类(tomcat)</p>
+<h2 id="3-request功能"><a href="#3-request功能" class="headerlink" title="3. request功能"></a>3. request功能</h2><h3 id="1-获取请求数据消息"><a href="#1-获取请求数据消息" class="headerlink" title="1. 获取请求数据消息"></a>1. 获取请求数据消息</h3><h4 id="1-获取请求行数据"><a href="#1-获取请求行数据" class="headerlink" title="1. 获取请求行数据"></a>1. 获取请求行数据</h4><ul>
+<li><p>GET / day14 / demo1?name=zhangsan HTTP / 1.1</p>
+</li>
+<li><p>方法 (*)重要</p>
+<ol>
+<li><p>获取请求方式 ：GET</p>
+<ul>
+<li>String getMethod()</li>
+</ul>
+</li>
+<li><p>(*) 获取虚拟目录：/day14</p>
+<ul>
+<li>String getContextPath()</li>
+</ul>
+</li>
+<li><p>获取Servlet路径：/demo1</p>
+<ul>
+<li>String getServletPath()</li>
+</ul>
+</li>
+<li><p>获取get方式请求方式参数：name=zhangsan</p>
+<ul>
+<li>String getQueryString()</li>
+</ul>
+</li>
+<li><p>(*) 获取请求URI：/day14/demo1</p>
+<ul>
+<li><p>String getRequestURI()：</p>
+</li>
+<li><p>StringBuffer getRequestURI()：</p>
+</li>
+<li><p>URL：统一资源定位符：<a href="http://localhost/day14/demo1">http://localhost/day14/demo1</a></p>
+</li>
+<li><p>URI：统一资源标识符：/day14/demo1</p>
+</li>
+</ul>
+</li>
+<li><p>获取协议及版本：HTTP / 1.1</p>
+<ul>
+<li>String getProtocol()</li>
+</ul>
+</li>
+<li><p>获取客户机的IP地址：</p>
+<ul>
+<li>String getRemoteAddr()</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h4 id="2-获取请求头数据"><a href="#2-获取请求头数据" class="headerlink" title="2. 获取请求头数据"></a>2. 获取请求头数据</h4><ul>
+<li><h5 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h5><ul>
+<li>（*）String getHeader(String name)：通过请求头的名称获取请求头的值</li>
+<li>Enumeration<String> getHeaderNames()：获取所有的请求头名称</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-获取请求体数据"><a href="#3-获取请求体数据" class="headerlink" title="3. 获取请求体数据"></a>3. 获取请求体数据</h4><ul>
+<li><h5 id="请求体：只有POST请求方式，才有请求体，在请求体中封装了POST请求的请求参数"><a href="#请求体：只有POST请求方式，才有请求体，在请求体中封装了POST请求的请求参数" class="headerlink" title="请求体：只有POST请求方式，才有请求体，在请求体中封装了POST请求的请求参数"></a>请求体：只有POST请求方式，才有请求体，在请求体中封装了POST请求的请求参数</h5></li>
+<li><h5 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h5><ol>
+<li>获取流对象<ul>
+<li>BufferedReader getReader()：获取字节输入流，只能操作字符数据</li>
+<li>ServletInputStream getInputStream()：获取字节输入流，可以操作所有类型数据</li>
+</ul>
+</li>
+<li>再从流对象中拿数据</li>
+</ol>
+</li>
+</ul>
+<h3 id="2-其他功能"><a href="#2-其他功能" class="headerlink" title="2.其他功能"></a>2.其他功能</h3><h4 id="1-获取请求参数通用方式"><a href="#1-获取请求参数通用方式" class="headerlink" title="1. 获取请求参数通用方式"></a>1. 获取请求参数通用方式</h4><ul>
+<li>不论get还是post请求方式都可以使用下列方法来获取请求参数</li>
+</ul>
+<h5 id="1-String-getParameter-String-name-：根据参数名称获取参数值-username-24-amp-password-123"><a href="#1-String-getParameter-String-name-：根据参数名称获取参数值-username-24-amp-password-123" class="headerlink" title="1.(*) String getParameter(String name)：根据参数名称获取参数值  username=24&amp;password=123"></a>1.(*) String getParameter(String name)：根据参数名称获取参数值  username=24&amp;password=123</h5><h5 id="2-String-getParameterValues-String-name-：根据参数名称获取参数值的数组-hobby-xx-amp-hobby-game"><a href="#2-String-getParameterValues-String-name-：根据参数名称获取参数值的数组-hobby-xx-amp-hobby-game" class="headerlink" title="2. String[] getParameterValues(String name)：根据参数名称获取参数值的数组  hobby=xx&amp;hobby=game"></a>2. String[] getParameterValues(String name)：根据参数名称获取参数值的数组  hobby=xx&amp;hobby=game</h5><h5 id="3-Enumeration-getParameterNames-：获取所有请求的参数名称"><a href="#3-Enumeration-getParameterNames-：获取所有请求的参数名称" class="headerlink" title="3. Enumeration getParameterNames()：获取所有请求的参数名称"></a>3. Enumeration<String> getParameterNames()：获取所有请求的参数名称</h5><h5 id="4-Map-getParameterMap-：获取所有参数的map集合"><a href="#4-Map-getParameterMap-：获取所有参数的map集合" class="headerlink" title="4. (*)Map getParameterMap()：获取所有参数的map集合"></a>4. (*)Map<String, String[]> getParameterMap()：获取所有参数的map集合</h5><ul>
+<li>中文乱码问题<ul>
+<li>get方式：tomcat 8 已经解决get乱码</li>
+<li>post方式：会乱码<ul>
+<li>解决：在获取参数前，设置request的编码request.setCharacterEncoding(“utf-8”);</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-请求转发"><a href="#2-请求转发" class="headerlink" title="2. 请求转发"></a>2. 请求转发</h4><ul>
+<li>一种在服务器内部的资源跳转方式</li>
+</ul>
+<h5 id="1-步骤"><a href="#1-步骤" class="headerlink" title="1. 步骤"></a>1. 步骤</h5><ol>
+<li>通过request对象获取请求转发器对象：RequestDispatcher getRequestDispatcher(String path)</li>
+<li>使用RequestDispatcher对象来进行转发：forward(ServletRequest request, ServletResponse response)</li>
+</ol>
+<h5 id="2-特点"><a href="#2-特点" class="headerlink" title="2. 特点"></a>2. 特点</h5><ol>
+<li>浏览器地址栏路径不发生变化</li>
+<li>只能转发到当前的服务器内部资源中。</li>
+<li>转发是一次请求</li>
+</ol>
+<h4 id="3-共享数据"><a href="#3-共享数据" class="headerlink" title="3.  共享数据"></a>3.  共享数据</h4><ul>
+<li><h5 id="域对象：一个有作用范围的对象，可以在范围内共享数据"><a href="#域对象：一个有作用范围的对象，可以在范围内共享数据" class="headerlink" title="域对象：一个有作用范围的对象，可以在范围内共享数据"></a>域对象：一个有作用范围的对象，可以在范围内共享数据</h5></li>
+<li><h5 id="request域：代表一次请求的范围，一般用于请求转发的多个资源中共享数据"><a href="#request域：代表一次请求的范围，一般用于请求转发的多个资源中共享数据" class="headerlink" title="request域：代表一次请求的范围，一般用于请求转发的多个资源中共享数据"></a>request域：代表一次请求的范围，一般用于请求转发的多个资源中共享数据</h5></li>
+<li><p>方法：</p>
+<ul>
+<li>void setAttribute(String name, Object obj)：存储数据</li>
+<li>Object getAttribute(String name)：通过键获取值</li>
+<li>void removeAttribute(String name)：通过键移除键值对 </li>
+</ul>
+</li>
+</ul>
+<h4 id="4-获取ServletContext"><a href="#4-获取ServletContext" class="headerlink" title="4. 获取ServletContext"></a>4. 获取ServletContext</h4><ul>
+<li>ServletContext getServletContext()</li>
+</ul>
+]]></content>
+      <categories>
+        <category>javaweb</category>
+      </categories>
+      <tags>
+        <tag>Request</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>HTTP</title>
+    <url>/2023/10/24/HTTP/</url>
+    <content><![CDATA[<div align='center'>
+    <font size='8'>HTTP</font>
+</div>
+
+
+<h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>Hyper Text Transfer Protocol 超文本传输协议</p>
+<h4 id="传输协议"><a href="#传输协议" class="headerlink" title="传输协议"></a>传输协议</h4><p>定义了，客户端和服务器端通信时，发送数据的格式</p>
+<h4 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h4><ol>
+<li>基于TCP / IP的高级协议</li>
+<li>默认端口号：80</li>
+<li>无状态的：每次请求之间相互独立，不能交互数据</li>
+</ol>
+<h4 id="历史版本"><a href="#历史版本" class="headerlink" title="历史版本"></a>历史版本</h4><ul>
+<li>1.0：每一次请求响应都会建立新的连接</li>
+<li>1.1：复用连接</li>
+</ul>
+<h3 id="请求消息数据格式"><a href="#请求消息数据格式" class="headerlink" title="请求消息数据格式"></a>请求消息数据格式</h3><h4 id="1-请求行"><a href="#1-请求行" class="headerlink" title="1.请求行"></a>1.请求行</h4><p> 请求方式  请求url  请求协议 / 版本</p>
+<p>GET  /  login.html  HTTP / 1.1</p>
+<ul>
+<li>请求方式<ul>
+<li>HTTP协议有7种请求方式，常用的有2种<ul>
+<li>GET<ol>
+<li>请求参数在请求行中，在url后</li>
+<li>请求的url长度有限制</li>
+<li>不太安全</li>
+</ol>
+</li>
+<li>POST<ol>
+<li>请求参数在请求体中</li>
+<li>请求的url长度没有限制</li>
+<li>相对安全</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-请求头"><a href="#2-请求头" class="headerlink" title="2. 请求头"></a>2. 请求头</h4><h5 id="常见的请求头"><a href="#常见的请求头" class="headerlink" title="常见的请求头"></a>常见的请求头</h5><ol>
+<li><p>User-Agent ：浏览器告诉服务器，我访问你使用的服务器版本信息</p>
+<ul>
+<li>可以在服务器端获取该头的信息，解决浏览器的兼容性问题</li>
+</ul>
+</li>
+<li><p>Referer：<a href="http://localhost/login.html">http://localhost/login.html</a></p>
+<ul>
+<li>告诉服务器，当前请求从哪里来<ul>
+<li>作用<ol>
+<li>防盗链</li>
+<li>统计工作</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="3-请求空行"><a href="#3-请求空行" class="headerlink" title="3. 请求空行"></a>3. 请求空行</h4><ul>
+<li>空行，就是用于分割POST请求的请求头，和请求体</li>
+</ul>
+<h4 id="4-请求体-正文"><a href="#4-请求体-正文" class="headerlink" title="4. 请求体(正文)"></a>4. 请求体(正文)</h4><ul>
+<li>封装POST请求消息的请求参数</li>
+</ul>
+<h3 id="响应消息数据格式"><a href="#响应消息数据格式" class="headerlink" title="响应消息数据格式"></a>响应消息数据格式</h3>]]></content>
+      <categories>
+        <category>javaweb</category>
+      </categories>
+      <tags>
+        <tag>HTTP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Servlet</title>
+    <url>/2023/10/21/Servlet/</url>
+    <content><![CDATA[<div align='center'>
+    <font size='8'>Servlet</font>
+</div>
+
+<h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><ul>
+<li>运行在服务器端的小程序</li>
+<li>Servlet就是一个接口，定义了java类被浏览器访问到(tomcat识别)的规则</li>
+<li>定义一个类，实现Servlet接口，复写方法</li>
+</ul>
+<h3 id="快速入门"><a href="#快速入门" class="headerlink" title="快速入门"></a>快速入门</h3><h4 id="1-创建JavaEE项目"><a href="#1-创建JavaEE项目" class="headerlink" title="1.创建JavaEE项目"></a>1.创建JavaEE项目</h4><h4 id="2-定义一个类，实现Servlet接口"><a href="#2-定义一个类，实现Servlet接口" class="headerlink" title="2. 定义一个类，实现Servlet接口"></a>2. 定义一个类，实现Servlet接口</h4><h4 id="3-实现接口中的抽象方法"><a href="#3-实现接口中的抽象方法" class="headerlink" title="3. 实现接口中的抽象方法"></a>3. 实现接口中的抽象方法</h4><h4 id="4-配置Servlet"><a href="#4-配置Servlet" class="headerlink" title="4. 配置Servlet"></a>4. 配置Servlet</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> 配置<span class="token class-name">Servlet</span> <span class="token operator">--</span><span class="token operator">></span>
+        <span class="token generics"><span class="token punctuation">&lt;</span>servlet<span class="token punctuation">></span></span>
+            <span class="token operator">&lt;</span>servlet<span class="token operator">-</span>name<span class="token operator">></span>demo1<span class="token operator">&lt;</span><span class="token operator">/</span>servlet<span class="token operator">-</span>name<span class="token operator">></span>
+            <span class="token operator">&lt;</span>servlet<span class="token operator">-</span><span class="token keyword">class</span><span class="token operator">></span><span class="token class-name"><span class="token namespace">com<span class="token punctuation">.</span>example<span class="token punctuation">.</span>day_13tomcat<span class="token punctuation">.</span></span>ServletDemo1</span><span class="token operator">&lt;</span><span class="token operator">/</span>servlet<span class="token operator">-</span><span class="token keyword">class</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>servlet<span class="token operator">></span>
+    
+        <span class="token operator">&lt;</span>servlet<span class="token operator">-</span>mapping<span class="token operator">></span>
+            <span class="token operator">&lt;</span>servlet<span class="token operator">-</span>name<span class="token operator">></span>demo1<span class="token operator">&lt;</span><span class="token operator">/</span>servlet<span class="token operator">-</span>name<span class="token operator">></span>
+            <span class="token operator">&lt;</span>url<span class="token operator">-</span>pattern<span class="token operator">></span><span class="token operator">/</span>demo1<span class="token operator">&lt;</span><span class="token operator">/</span>url<span class="token operator">-</span>pattern<span class="token operator">></span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>servlet<span class="token operator">-</span>mapping<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ol>
+<li><h4 id="执行原理"><a href="#执行原理" class="headerlink" title="执行原理"></a>执行原理</h4><ol>
+<li>当服务器接收到客户端浏览器的请求后，会解析请求URL路径</li>
+<li>查找web.xml文件，是否有对应的<url-pattern>标签体内容</li>
+<li>如果有，则在找到对应的<servlet-class>全类名</li>
+<li>tomcat会将字节码文件加载进内存，并且创建其对象</li>
+<li>调用其方法</li>
+</ol>
+</li>
+<li><h4 id="Servlet中的生命周期方法"><a href="#Servlet中的生命周期方法" class="headerlink" title="Servlet中的生命周期方法"></a>Servlet中的生命周期方法</h4><ol>
+<li><h5 id="被创建：执行init方法，只执行一次"><a href="#被创建：执行init方法，只执行一次" class="headerlink" title="被创建：执行init方法，只执行一次"></a>被创建：执行init方法，只执行一次</h5><ul>
+<li>默认情况下，第一次被访问时，Servlet被创建</li>
+<li>可以配置执行Servlet的创建时机<ul>
+<li>在<Servlet>标签下配置<ol>
+<li>第一次被访问时，创建<ul>
+<li><load-on-startup>的值为负数</li>
+</ul>
+</li>
+<li>在服务器启动时，创建<ul>
+<li><load-on-startup>的值为非负数</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h5 id="提供服务：执行service方法，执行多次"><a href="#提供服务：执行service方法，执行多次" class="headerlink" title="提供服务：执行service方法，执行多次"></a>提供服务：执行service方法，执行多次</h5><ul>
+<li>每次访问Serlvet方法，只执行一次</li>
+</ul>
+</li>
+<li><h5 id="被销毁：执行destroy方法，只执行一次"><a href="#被销毁：执行destroy方法，只执行一次" class="headerlink" title="被销毁：执行destroy方法，只执行一次"></a>被销毁：执行destroy方法，只执行一次</h5><ul>
+<li>只有服务器正常关闭时，才会执行destroy方法</li>
+<li>在Servlet销毁前执行，一般用于释放资源</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+   <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>example<span class="token punctuation">.</span>day_13tomcat</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">javax<span class="token punctuation">.</span>servlet<span class="token punctuation">.</span></span><span class="token operator">*</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">IOException</span></span><span class="token punctuation">;</span>
+
+<span class="token comment">/**
+ * Servlet实现方法
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ServletDemo2</span> <span class="token keyword">implements</span> <span class="token class-name">Servlet</span> <span class="token punctuation">&#123;</span>
+
+    <span class="token comment">/**
+     * 初始化方法
+     * 在Servlet被创建时执行，只会执行一次
+     * @param servletConfig
+     * @throws ServletException
+     */</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">init</span><span class="token punctuation">(</span><span class="token class-name">ServletConfig</span> servletConfig<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">ServletException</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"init......"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">/**
+     * 获取ServletConfig对象(Servlet配置对象)
+     * @return
+     */</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token class-name">ServletConfig</span> <span class="token function">getServletConfig</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">/**
+     * 提供服务方法
+     * 每一次Servlet被访问时执行，执行多次
+     * @param servletRequest
+     * @param servletResponse
+     * @throws ServletException
+     * @throws IOException
+     */</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">service</span><span class="token punctuation">(</span><span class="token class-name">ServletRequest</span> servletRequest<span class="token punctuation">,</span> <span class="token class-name">ServletResponse</span> servletResponse<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">ServletException</span><span class="token punctuation">,</span> <span class="token class-name">IOException</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"service------"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">/**
+     * 获取Servlet的一些信息，版本，作者等。
+     * @return
+     */</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">getServletInfo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">/**
+     * 销毁方法
+     * 在服务器正常关闭时执行一次。
+     */</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">destroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"destroy------"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+   <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> 配置<span class="token class-name">Servlet</span> <span class="token operator">--</span><span class="token operator">></span>
+   <span class="token generics"><span class="token punctuation">&lt;</span>servlet<span class="token punctuation">></span></span>
+       <span class="token operator">&lt;</span>servlet<span class="token operator">-</span>name<span class="token operator">></span>demo2<span class="token operator">&lt;</span><span class="token operator">/</span>servlet<span class="token operator">-</span>name<span class="token operator">></span>
+       <span class="token operator">&lt;</span>servlet<span class="token operator">-</span><span class="token keyword">class</span><span class="token operator">></span><span class="token class-name"><span class="token namespace">com<span class="token punctuation">.</span>example<span class="token punctuation">.</span>day_13tomcat<span class="token punctuation">.</span></span>ServletDemo2</span><span class="token operator">&lt;</span><span class="token operator">/</span>servlet<span class="token operator">-</span><span class="token keyword">class</span><span class="token operator">></span>
+       <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> 指定<span class="token class-name">Servlet</span>的创建时机
+           <span class="token number">1.</span>第一次被访问时，创建
+               <span class="token operator">&lt;</span>load<span class="token operator">-</span>on<span class="token operator">-</span>startup<span class="token operator">></span>的值为负数
+           <span class="token number">2.</span>在服务器启动时，创建
+               <span class="token operator">&lt;</span>load<span class="token operator">-</span>on<span class="token operator">-</span>startup<span class="token operator">></span>的值为非负数
+       <span class="token operator">--</span><span class="token operator">></span>
+   
+       <span class="token operator">&lt;</span>load<span class="token operator">-</span>on<span class="token operator">-</span>startup<span class="token operator">></span><span class="token operator">-</span><span class="token number">5</span><span class="token operator">&lt;</span><span class="token operator">/</span>load<span class="token operator">-</span>on<span class="token operator">-</span>startup<span class="token operator">></span>
+   <span class="token operator">&lt;</span><span class="token operator">/</span>servlet<span class="token operator">></span>
+   
+   <span class="token operator">&lt;</span>servlet<span class="token operator">-</span>mapping<span class="token operator">></span>
+       <span class="token operator">&lt;</span>servlet<span class="token operator">-</span>name<span class="token operator">></span>demo2<span class="token operator">&lt;</span><span class="token operator">/</span>servlet<span class="token operator">-</span>name<span class="token operator">></span>
+       <span class="token operator">&lt;</span>url<span class="token operator">-</span>pattern<span class="token operator">></span><span class="token operator">/</span>demo2<span class="token operator">&lt;</span><span class="token operator">/</span>url<span class="token operator">-</span>pattern<span class="token operator">></span>
+   <span class="token operator">&lt;</span><span class="token operator">/</span>servlet<span class="token operator">-</span>mapping<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>   ​    </p>
+<h3 id="Servlet-3-0"><a href="#Servlet-3-0" class="headerlink" title="Servlet 3.0"></a>Servlet 3.0</h3><h4 id="好处"><a href="#好处" class="headerlink" title="好处"></a>好处</h4><pre><code>- 支持注解配置，不需要web.xml
+</code></pre><h4 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h4><ol>
+<li>创建JavaEE项目，选择Servlet3.0以上版本</li>
+<li>定义一个类，实现Servlet接口</li>
+<li>复写方法</li>
+<li>在类上使用@webServlet注解，进行配置<ul>
+<li>@webServlet(“资源路径”)</li>
+</ul>
+</li>
+</ol>
+<h3 id="IDEA与tomcat的相关配置"><a href="#IDEA与tomcat的相关配置" class="headerlink" title="IDEA与tomcat的相关配置"></a>IDEA与tomcat的相关配置</h3><h4 id="1-IDEA会位每一个tomcat部署的项目单独建立一份配置文件"><a href="#1-IDEA会位每一个tomcat部署的项目单独建立一份配置文件" class="headerlink" title="1. IDEA会位每一个tomcat部署的项目单独建立一份配置文件"></a>1. IDEA会位每一个tomcat部署的项目单独建立一份配置文件</h4><ul>
+<li>查看控制台的log：Using CATALINA_BASE: “C:\Users\31025\AppData\Local\JetBrains\IntelliJIdea2023.2\tomcat\d133112c-782a-40d3-af7c-b1e21579d506”</li>
+</ul>
+<h4 id="2-工作空间项目-和-tomcat部署的web项目"><a href="#2-工作空间项目-和-tomcat部署的web项目" class="headerlink" title="2. 工作空间项目   和    tomcat部署的web项目"></a>2. 工作空间项目   和    tomcat部署的web项目</h4><ul>
+<li>tomcat真正访问的是”tomcat部署的web项目”，”tomcat部署的web项目”对应着“工作空间项目” 的web目录下的所有资源</li>
+</ul>
+<h4 id="3-断点调试"><a href="#3-断点调试" class="headerlink" title="3.断点调试"></a>3.断点调试</h4><ul>
+<li>debug启动 </li>
+</ul>
+<h3 id="Servlet的体系结构"><a href="#Servlet的体系结构" class="headerlink" title="Servlet的体系结构"></a>Servlet的体系结构</h3><p>​    Servlet — 接口 —— GenericServlet — 抽象类 —— HttpServlet — 抽象类</p>
+<p>HttpServlet：对http协议的一种封装，简化操作</p>
+<ol>
+<li>定义类继承HttpServlet</li>
+<li>复写doGet / doPost方法</li>
+</ol>
+<h3 id="Servlet-相关配置"><a href="#Servlet-相关配置" class="headerlink" title="Servlet 相关配置"></a>Servlet 相关配置</h3><pre><code>#### 1. urlparttern.Servlet访问路径
+
+1. 一个Servlet可以定义多个访问路径
+2. 路径定义规则
+     1. /xxx
+     2. /xxx/xxx  多层路径，目录结构
+     3. *.do
+</code></pre>]]></content>
+      <categories>
+        <category>javaweb</category>
+      </categories>
+      <tags>
+        <tag>Servlet</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于算法竞赛</title>
+    <url>/2023/10/18/%E5%85%B3%E4%BA%8E%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B/</url>
+    <content><![CDATA[<h1 id="关于算法竞赛"><a href="#关于算法竞赛" class="headerlink" title="关于算法竞赛"></a>关于算法竞赛</h1><h3 id="1-关于我们算法协会"><a href="#1-关于我们算法协会" class="headerlink" title="1. 关于我们算法协会"></a>1. 关于我们算法协会</h3><p>社团的面向就是算法编程竞赛 </p>
+<p>比如：蓝桥杯，ccpc河北省赛（河北省程序设计大赛）</p>
+<p><a href="https://dasai.lanqiao.cn/">蓝桥杯官网</a></p>
+<h3 id="2-算法竞赛介绍"><a href="#2-算法竞赛介绍" class="headerlink" title="2. 算法竞赛介绍"></a>2. 算法竞赛介绍</h3><h5 id="1-优势"><a href="#1-优势" class="headerlink" title="1. 优势"></a>1. 优势</h5><ul>
+<li><p>我认为对算法算是学习计算机基础，一方面能锻炼你的编程思维和逻辑思维能力，另一方面是提高自主学习的能力。未来要走的更远，往往是基础的能力来决定的。</p>
+</li>
+<li><p>如果你要考研，在复试中可能面临机试（上机做题），学过算法可以更有底气。 拿过奖项也能更好展现自己的实力。</p>
+</li>
+<li><p>而如果你选择直接就业的话，也能丰富你的简历，向hr展示自己的能力。</p>
+<p>尤其在大厂的面试中，很多时候都会涉及到算法题。</p>
+</li>
+</ul>
+<h5 id="2-特点"><a href="#2-特点" class="headerlink" title="2. 特点"></a>2. 特点</h5><ul>
+<li><p>算法竞赛跟互联网+以及挑战杯等竞赛不一样，基本要靠自己去努力。</p>
+</li>
+<li><p>并且算法具有一定的难度，想要拿到很高的奖项，需要付出很大的努力，最重要是对算法有一定的兴趣。有前进的动力才能长久坚持下去。</p>
+</li>
+</ul>
+<h5 id="题目的介绍"><a href="#题目的介绍" class="headerlink" title="题目的介绍"></a>题目的介绍</h5><p><img src="https://picss.sunbangyan.cn/2023/10/18/ba92eda27cc49d8ceccef650874bd378.png" alt=""></p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> n<span class="token punctuation">;</span>
+    <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token punctuation">(</span>n <span class="token operator">%</span> <span class="token number">4</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> n <span class="token operator">%</span> <span class="token number">100</span><span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token punctuation">(</span>n <span class="token operator">%</span> <span class="token number">400</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"yes"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">else</span> <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"no"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h5 id="1-蓝桥杯"><a href="#1-蓝桥杯" class="headerlink" title="1. 蓝桥杯"></a>1. 蓝桥杯</h5><p>蓝桥杯的赛制是oi赛制</p>
+<p>分为省赛和国赛（省一可参加国赛）</p>
+<h5 id="2-ccpc河北省赛"><a href="#2-ccpc河北省赛" class="headerlink" title="2. ccpc河北省赛"></a>2. ccpc河北省赛</h5><p>ccpc采用ACM赛制</p>
+<p>与蓝桥杯单人参赛不同，ccpc是三人一组去参加比赛</p>
+<h3 id="3-算法的学习的方法等"><a href="#3-算法的学习的方法等" class="headerlink" title="3. 算法的学习的方法等"></a>3. 算法的学习的方法等</h3><h5 id="开始是掌握c-的语法知识，与c语言的语法知识相似。c-的很多东西在写题时会很实用。"><a href="#开始是掌握c-的语法知识，与c语言的语法知识相似。c-的很多东西在写题时会很实用。" class="headerlink" title="开始是掌握c++的语法知识，与c语言的语法知识相似。c++的很多东西在写题时会很实用。"></a>开始是掌握c++的语法知识，与c语言的语法知识相似。c++的很多东西在写题时会很实用。</h5><h5 id="之后就可以开始刷题了。"><a href="#之后就可以开始刷题了。" class="headerlink" title="之后就可以开始刷题了。"></a>之后就可以开始刷题了。</h5><h5 id="刷题网站："><a href="#刷题网站：" class="headerlink" title="刷题网站："></a>刷题网站：</h5><ul>
+<li><p><a href="https://ac.nowcoder.com/">牛客oj</a></p>
+</li>
+<li><p><a href="https://www.acwing.com/about/">acwing</a></p>
+</li>
+<li><p><a href="https://atcoder.jp/">atcoder</a></p>
+</li>
+<li><p><a href="https://codeforces.com/">codeforces</a></p>
+</li>
+</ul>
+<h3 id="4-其他想说的话"><a href="#4-其他想说的话" class="headerlink" title="4. 其他想说的话"></a>4. 其他想说的话</h3><p>如果你对算法竞赛感兴趣的话，在11月底或者12月初就是蓝桥杯的校赛， 也是你们参加的第一次比赛。蓝桥杯和ccpc的比赛都会在你们大一下举行，所以你们还有充足的时间去做准备。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>字符串</title>
+    <url>/2023/10/20/%E5%AD%97%E7%AC%A6%E4%B8%B2/</url>
+    <content><![CDATA[<div align='center'>
+    <font size='8'>字符串</font>
+</div>
+
+<h3 id="API"><a href="#API" class="headerlink" title="API"></a>API</h3><p>应用程序开发接口的缩写。意思是一些预设好的函数或方法，允许第三方程序通过网络来调用数据或基于数据的服务。(而无需关注如何实现)</p>
+<h3 id="String"><a href="#String" class="headerlink" title="String"></a>String</h3><h4 id="String-构造方法："><a href="#String-构造方法：" class="headerlink" title="String 构造方法："></a>String 构造方法：</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token punctuation">(</span><span class="token keyword">char</span><span class="token punctuation">[</span><span class="token punctuation">]</span> chs<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 根据字符数组的内容，来创建字符串</span>
+<span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token punctuation">(</span><span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> bys<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 根据字节数组的内容，来创建字符串</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h4 id="String常用方法"><a href="#String常用方法" class="headerlink" title="String常用方法"></a>String常用方法</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java">s<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>ss<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 判断s和ss是否相等</span>
+s<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 返回s在位置i中的字符</span>
+s<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 返回字符长度(一般数组也可以用)</span>
+s<span class="token punctuation">.</span><span class="token function">tocharArray</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token class-name">String</span> line <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">;</span>
+<span class="token class-name">String</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> ss <span class="token operator">=</span> line<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">","</span><span class="token punctuation">)</span> <span class="token comment">// 以,为分割依据得到ss字符串数组</span>
+    						<span class="token comment">// 用来摘取字符串</span>
+s1<span class="token punctuation">.</span><span class="token function">compareTo</span><span class="token punctuation">(</span>s2<span class="token punctuation">)</span> <span class="token comment">// 比较两字符串的大小</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="StringBuilder"><a href="#StringBuilder" class="headerlink" title="StringBuilder"></a>StringBuilder</h3><h4 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token class-name">StringBuilder</span> <span class="token function">append</span><span class="token punctuation">(</span>任意类型<span class="token punctuation">)</span><span class="token operator">:</span> 添加数据，并返回对象本身
+<span class="token keyword">public</span> <span class="token class-name">StringBuilder</span> <span class="token function">reverse</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> 返回相反的字符序列
+a<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"sffdf"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"sdfds"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"djfdsf"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h3 id="String-与-StringBuilder"><a href="#String-与-StringBuilder" class="headerlink" title="String 与 StringBuilder"></a>String 与 StringBuilder</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">String</span> 转 <span class="token class-name">StringBuilder</span><span class="token operator">:</span> <span class="token class-name">StringBuilder</span><span class="token punctuation">(</span><span class="token class-name">String</span> s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+					   <span class="token class-name">StringBuilder</span> sb <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StringBuilder</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">StringBuilder</span> 转 <span class="token class-name">String</span><span class="token operator">:</span> <span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+					   <span class="token class-name">String</span> s <span class="token operator">=</span> sb<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
+      <categories>
+        <category>javase</category>
+      </categories>
+      <tags>
+        <tag>java字符串</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>杂</title>
+    <url>/2023/10/20/%E6%9D%82/</url>
+    <content><![CDATA[<p><div align = 'center' >
+    <font size = '8'>
+        杂
+    </font>
+</div></p>
+<h5 id="JDK-gt-JRE-gt-JVM"><a href="#JDK-gt-JRE-gt-JVM" class="headerlink" title="JDK -&gt; JRE -&gt; JVM"></a>JDK -&gt; JRE -&gt; JVM</h5><h5 id="开发工具-gt-核心类库"><a href="#开发工具-gt-核心类库" class="headerlink" title="开发工具 -&gt; 核心类库"></a>开发工具 -&gt; 核心类库</h5><h3 id="不同表达："><a href="#不同表达：" class="headerlink" title="不同表达："></a>不同表达：</h3><ul>
+<li>类：大驼峰（首字母全部大写）</li>
+<li>方法变量 ：小驼峰 （第一个单词首字母小写，之后首字母大写）</li>
+</ul>
+<h3 id="拓展运算"><a href="#拓展运算" class="headerlink" title="拓展运算"></a>拓展运算</h3><ul>
+<li>拓展的运算符隐含了类型的强制转换</li>
+</ul>
+<h3 id="逻辑符号"><a href="#逻辑符号" class="headerlink" title="逻辑符号"></a>逻辑符号</h3><ul>
+<li><p>^ 逻辑异或 （相同为0，不同为1）</p>
+</li>
+<li><p>&amp;&amp; || 短路运算符判断能结束时，就不往下判断</p>
+</li>
+<li>&amp; | 判断到底</li>
+</ul>
+<h3 id="分支和循环语句"><a href="#分支和循环语句" class="headerlink" title="分支和循环语句"></a>分支和循环语句</h3><ul>
+<li>分支语句包括 if 和 switch</li>
+<li>循环语句包括 for 和 while 和 do-while</li>
+</ul>
+<h3 id="输入流程"><a href="#输入流程" class="headerlink" title="输入流程"></a>输入流程</h3><ul>
+<li><h5 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h5><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">Scanner</span></span><span class="token punctuation">;</span>
+<span class="token class-name">Scanner</span> sc <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Scanner</span><span class="token punctuation">(</span><span class="token class-name">System</span><span class="token punctuation">.</span>in<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> a <span class="token operator">=</span> sc<span class="token punctuation">.</span><span class="token function">nextInt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+</ul>
+<h3 id="随机数"><a href="#随机数" class="headerlink" title="随机数"></a>随机数</h3><ul>
+<li><h5 id="输出随机数"><a href="#输出随机数" class="headerlink" title="输出随机数"></a>输出随机数</h5></li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>unil<span class="token punctuation">.</span></span><span class="token class-name">Random</span></span><span class="token punctuation">;</span>
+<span class="token class-name">Random</span> r <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Random</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> number <span class="token operator">=</span> r<span class="token punctuation">.</span><span class="token function">nextInt</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 包括0，不包括10</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+]]></content>
+      <categories>
+        <category>javase</category>
+      </categories>
+      <tags>
+        <tag>javase</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>牛客小白月赛79</title>
+    <url>/2023/10/21/%E7%89%9B%E5%AE%A2%E5%B0%8F%E7%99%BD%E6%9C%88%E8%B5%9B79/</url>
+    <content><![CDATA[<div align='center'>
+    <font size='8'>牛客小白月赛79</font>
+</div>
+
+<p><a href="https://ac.nowcoder.com/acm/contest/66877#question">牛客小白月赛79</a></p>
+<div align='center'>
+    <font size='6'>A</font>
+</div>
+### A
+
+#### 题意
+
+问最少需要多少次操作，可以把数字n变成干净的数
+
+#### 解题思路
+
+从定义下手，干净的数满足下面两个条件之一
+
+1. 是偶数，且不含前导0 (例如000023，23前面的0就叫做前导0)
+2. 数字为空，也就是所有数位被删除
+
+一个数字的奇偶性，取决于个位数的奇偶，所以我们从数的最后一位开始枚举。
+
+每次判断是否为偶数，如果不是就删除最后一位。这样最多将数字删空，而不会出现前导0
+
+#### c ++ 代码
+
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;bits&#x2F;stdc++.h&gt;
+
+using namespace std;
+
+int main()  
+&#123;
+    int n, m;
+    cin &gt;&gt; n;
+
+    int cnt &#x3D; 0;
+    while (n)
+    &#123;
+        if(n % 2 &#x3D;&#x3D; 0) break;
+        else 
+        &#123;
+            n &#x2F;&#x3D; 10;
+        &#125;
+        cnt ++ ;
+    &#125;
+    cout &lt;&lt; cnt;
+
+    return 0;
+&#125;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+#### c代码
+
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> n<span class="token punctuation">,</span> m<span class="token punctuation">;</span>
+    <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">int</span> cnt <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>n<span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>n <span class="token operator">%</span> <span class="token number">2</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">else</span> 
+        <span class="token punctuation">&#123;</span>
+            n <span class="token operator">/=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        cnt <span class="token operator">++</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> cnt<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<div align='center'>
+    <font size='6'>B</font>
+</div>
+### B
+
+#### 题意
+
+n个正整数，可以将一些数放入背包，需要使得背包中的数的总和为偶数且为最大值。
+
+#### 解题思路
+
+我们可以将所有的数放入背包，如果此时总和为偶数，那么这就是满足条件的数。
+
+如果此时总和为奇数，那么我们只需要把最小的一个奇数拿出去，那么总数就变成了偶数，也就是满足条件的最大值。
+
+#### c++代码
+
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;bits&#x2F;stdc++.h&gt;
+
+using namespace std;
+
+const int N &#x3D; 1e5 + 10;
+
+int n, m;
+int a[N];
+
+int main()  
+&#123;
+    cin &gt;&gt; n;
+    int sum &#x3D; 0;
+    for (int i &#x3D; 0; i &lt; n; i ++ ) cin &gt;&gt; a[i], sum +&#x3D; a[i];
+
+    &#x2F;&#x2F; sort排序函数，默认从小到达排序
+    sort(a, a + n); 
+    
+    for (int i &#x3D; 0; i &lt; n; i ++ )
+    &#123;
+        &#x2F;&#x2F; 总和为偶数，直接跳出循环
+        if (sum % 2 &#x3D;&#x3D; 0) break;
+        &#x2F;&#x2F; 总和为奇数，找到最小的奇数
+        else if (a[i] % 2 &#x3D;&#x3D; 1)
+        &#123;
+            sum -&#x3D; a[i];
+            break;
+        &#125;
+    &#125;
+    cout &lt;&lt; sum &lt;&lt; endl;
+
+    return 0;
+&#125;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+#### c代码
+
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;math.h></span></span>
+
+<span class="token keyword">const</span> <span class="token keyword">int</span> N <span class="token operator">=</span> <span class="token number">1e5</span> <span class="token operator">+</span> <span class="token number">10</span><span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> a<span class="token punctuation">[</span>N<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> n<span class="token punctuation">;</span>
+    <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// sum为总和</span>
+    <span class="token keyword">int</span> sum <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i <span class="token operator">++</span> <span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        sum <span class="token operator">+=</span> a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    
+    <span class="token comment">//如果为奇数，就去掉最小的那个奇数</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>sum <span class="token operator">%</span> <span class="token number">2</span> <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">int</span> mi <span class="token operator">=</span> <span class="token number">1e9</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i <span class="token operator">++</span> <span class="token punctuation">)</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>a<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">%</span> <span class="token number">2</span> <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span> mi <span class="token operator">=</span> mi <span class="token operator">&lt;</span> a<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">?</span> mi <span class="token operator">:</span> a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        sum <span class="token operator">-=</span> mi<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> sum<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<div align='center'>
+    <font size='6'>C</font>
+</div>
+
+<h3 id="C"><a href="#C" class="headerlink" title="C"></a>C</h3><h4 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h4><p>​    题意就是求$mex(a_1,…a_r) * gcd(a_1…a_r)$的最大值<br>​    其中$a_1…a_r$可以是任意连续区间<br>​    gcd就是求最大公约数，而mex求的是区间中未出现的最小非负整数<br>​    例如 mex(0,2,3)=1</p>
+<h4 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h4><p>​    我们其实可以发现，如果区间里没有0的话，那么mex()的值为0，就一定不是最大值了。</p>
+<p>​    所以我们需要从包含0的区间入手。</p>
+<p>​    而这又分为两种情况，包含1，和不包含1</p>
+<ol>
+<li><p>当区间不包含1时，mex()的值就一定是1，此时就需要保证gcd()的值最大</p>
+</li>
+<li><p>当区间包含1时，gcd()的值就一定是1，此时就需要保证mex()的值最大</p>
+</li>
+</ol>
+<p>​    综上所述，我们需要找到包含0的区间内，gcd()的最大值，和mex()的最大值</p>
+<ol>
+<li><p>当我们以0为起始点，向左或向右走一步，此时gcd()就是最大值。因为加入更多的数后，最大公约数，只会不变或减小，而不可能增加。</p>
+</li>
+<li><p>而mex()的最大值就是包含所有n个数。因为mex()求的是最小的没有出现过的正整数，包含的数越多，mex()的值只会不变或增加，而不会减小。</p>
+</li>
+</ol>
+<p>需要注意的是，当所有数都为0的时候，要进行特判。</p>
+<h4 id="c-代码"><a href="#c-代码" class="headerlink" title="c++代码"></a>c++代码</h4><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;bits&#x2F;stdc++.h&gt;
+#define endl &#39;\n&#39;
+
+using namespace std;
+
+const int N &#x3D; 1e5 + 10;
+typedef long long ll;
+
+int n, m;
+int a[N];
+int c[N]; &#x2F;&#x2F;存储每个数出现的次数
+
+int main()  
+&#123;
+    cin &gt;&gt; n;
+    ll sum &#x3D; 0;
+    for (int i &#x3D; 0; i &lt; n; i ++ )
+    &#123;
+        cin &gt;&gt; a[i];
+        sum +&#x3D; (ll)a[i];
+        c[a[i]] ++ ;
+    &#125; 
+
+    &#x2F;&#x2F; 当所有数都为0，直接输出0
+    if (sum &#x3D;&#x3D; 0)
+    &#123;
+        cout &lt;&lt; 0;
+        return 0;
+    &#125;
+
+    int res &#x3D; 0;
+    &#x2F;&#x2F; mex()的最大值
+    while (c[res]) res ++ ;
+
+    for (int i &#x3D; 0; i &lt; n; i ++ )
+    &#123;
+        if (a[i] &#x3D;&#x3D; 0)
+        &#123;
+            &#x2F;&#x2F; 防止越界，需要特判i的值
+            if (i &gt; 0) res &#x3D; max(res, a[i - 1]);
+            if (i &lt; n) res &#x3D; max(res, a[i + 1]);
+        &#125;
+    &#125;
+    cout &lt;&lt; res &lt;&lt; endl;
+
+    return 0;
+&#125;
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="c代码"><a href="#c代码" class="headerlink" title="c代码"></a>c代码</h4><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+
+<span class="token keyword">const</span> <span class="token keyword">int</span> N <span class="token operator">=</span> <span class="token number">1e5</span> <span class="token operator">+</span> <span class="token number">10</span><span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> a<span class="token punctuation">[</span>N<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> c<span class="token punctuation">[</span>N<span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">//存储每个数出现的次数</span>
+
+<span class="token keyword">int</span> <span class="token function">max</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> b<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>a <span class="token operator">></span> b<span class="token punctuation">)</span> <span class="token keyword">return</span> a<span class="token punctuation">;</span>
+    <span class="token keyword">else</span> <span class="token keyword">return</span> b<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> n<span class="token punctuation">;</span>
+    <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> sum <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i <span class="token operator">++</span> <span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        sum <span class="token operator">+=</span> a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        c<span class="token punctuation">[</span>a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">++</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>  
+
+    <span class="token comment">// 当所有数都为0，直接输出0</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>sum <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+ 
+    <span class="token keyword">int</span> res <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>c<span class="token punctuation">[</span>res<span class="token punctuation">]</span><span class="token punctuation">)</span> res <span class="token operator">++</span> <span class="token punctuation">;</span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i <span class="token operator">++</span> <span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>a<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token comment">// 防止越界，需要特判i的值</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> res <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span>res<span class="token punctuation">,</span> a<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">&lt;</span> n<span class="token punctuation">)</span> res <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span>res<span class="token punctuation">,</span> a<span class="token punctuation">[</span>i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> res<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<div align='center'>
+    <font size='6'>D</font>
+</div>
+
+<h3 id="D"><a href="#D" class="headerlink" title="D"></a>D</h3><h4 id="题意-1"><a href="#题意-1" class="headerlink" title="题意"></a>题意</h4><p>有t波丧尸，有两种武器，一种发射一枚子弹，另一种向所有的僵尸发射一枚子弹。</p>
+<p>而丧尸被击中后不会死掉，且会复制一个新的丧尸，当丧尸数量是 $2^{20}$的倍数的时候，丧尸可以被消灭。</p>
+<h4 id="解题思路-1"><a href="#解题思路-1" class="headerlink" title="解题思路"></a>解题思路</h4><p>首先子弹数量非常充足，一定可以消灭丧尸(一个个的加也可以到$2^20$)</p>
+<p>对于$2^{20}$，我们可以转化为2进制来看，1000……，丧尸的数量同理也转化为2进制，如10111</p>
+<p>要成为1000……这种数字的倍数，需要保证自身二进制下的最后一个1在1000…..中1的位置或靠左的位置，如1000，那么101000就是他的倍数</p>
+<p>问题也就转化为了将n的二进制表示下最后一个1移动到$2^{20}$的二进制下1的位置或靠左的位置。</p>
+<p>武器一每次会让丧尸的数量增加1，武器二每次会让丧尸的数量$*$2，也就是在二进制下的数左移一位(即在末尾加一个0)</p>
+<p>所以最多需要射击的次数是20，也就是每次都使用武器二的情况。</p>
+<p>所以只需要枚举20次，每次多使用一次武器一，取最少的次数即可。</p>
+<h4 id="c-代码-1"><a href="#c-代码-1" class="headerlink" title="c ++代码"></a>c ++代码</h4><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;bits&#x2F;stdc++.h&gt;
+#define endl &#39;\n&#39;
+
+using namespace std;
+
+int main()  
+&#123;
+    int t;
+    cin &gt;&gt; t;
+
+    while (t -- )
+    &#123;
+        int n;
+        cin &gt;&gt; n;
+
+        int res &#x3D; 20;
+        for (int i &#x3D; 0; i &lt; 22; i ++ )
+        &#123;
+            int m &#x3D; n;
+            int cnt &#x3D; 0;
+            &#x2F;&#x2F;cnt为n的最右边的1的位置
+            while (m % 2 &#x3D;&#x3D; 0)
+            &#123;
+                m &gt;&gt;&#x3D; 1;
+                cnt ++ ;
+            &#125;
+            res &#x3D; min(res, i + max((20 - cnt), 0));
+            n ++ ;
+        &#125;
+        cout &lt;&lt; res &lt;&lt; endl;    
+    &#125;
+
+    return 0;
+&#125;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="c代码-1"><a href="#c代码-1" class="headerlink" title="c代码"></a>c代码</h4><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+
+<span class="token keyword">int</span> <span class="token function">min</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> b<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>a <span class="token operator">&lt;</span> b<span class="token punctuation">)</span> <span class="token keyword">return</span> a<span class="token punctuation">;</span>
+    <span class="token keyword">else</span> <span class="token keyword">return</span> b<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">int</span> <span class="token function">max</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> b<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>a <span class="token operator">></span> b<span class="token punctuation">)</span> <span class="token keyword">return</span> a<span class="token punctuation">;</span>
+    <span class="token keyword">else</span> <span class="token keyword">return</span> b<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> t<span class="token punctuation">;</span>
+    <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>t<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>t <span class="token operator">--</span> <span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">int</span> n<span class="token punctuation">;</span>
+        <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">int</span> res <span class="token operator">=</span> <span class="token number">20</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">22</span><span class="token punctuation">;</span> i <span class="token operator">++</span> <span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token keyword">int</span> m <span class="token operator">=</span> n<span class="token punctuation">;</span>
+            <span class="token keyword">int</span> cnt <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+            <span class="token comment">//cnt为n的最右边的1的位置</span>
+            <span class="token keyword">while</span> <span class="token punctuation">(</span>m <span class="token operator">%</span> <span class="token number">2</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+            <span class="token punctuation">&#123;</span>
+                m <span class="token operator">>>=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+                cnt <span class="token operator">++</span> <span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            res <span class="token operator">=</span> <span class="token function">min</span><span class="token punctuation">(</span>res<span class="token punctuation">,</span> i <span class="token operator">+</span> <span class="token function">max</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">20</span> <span class="token operator">-</span> cnt<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            n <span class="token operator">++</span> <span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> res<span class="token punctuation">)</span><span class="token punctuation">;</span>    
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<div align='center'>
+    <font size='6'>E</font>
+</div>
+
+<h3 id="E"><a href="#E" class="headerlink" title="E"></a>E</h3><h4 id="题意-2"><a href="#题意-2" class="headerlink" title="题意"></a>题意</h4><p>一个密码，长度不定，只有6种字符，只要密码后缀是@qq.com这7个字符，就算输入成功。</p>
+<p>每一秒随机输入一位，输入错误就重新输入，直到正确。现在需要求出期望时间的个位数。</p>
+<p>然后还有一个道具每使用一次可以是期望时间x变为$x^2$。</p>
+<h4 id="解题思路-2"><a href="#解题思路-2" class="headerlink" title="解题思路"></a>解题思路</h4><p>一种特殊情况就是，密码长度小于7，那么永远都无法输入正确，时间也就趋于正无穷，输出-1.</p>
+<p>每次输入正确的概率是$\frac{1}{6^7}$，期望概率P=$6^7$，那么期望时间就是np=$n*{6^7}$</p>
+<p>${np^2}^{m}$(就是np的2次方的m次方)</p>
+<p>这道题的核心是个位的变化，下面是个位的数字在平方之后的变化，不难看出，在平方两次之后，个位的数字是不再变化了的，所以我们不用去真正的循环m次，最多只需要循环两次，就可以算出期望数的个位。而且m的范围是1e9，直接枚举是铁定超时的。</p>
+<p><img src="https://picss.sunbangyan.cn/2023/10/21/e04342bb9f2380d5fe7a3f3bba1cc0fa.png" alt=""></p>
+<h4 id="c-代码-2"><a href="#c-代码-2" class="headerlink" title="c++代码"></a>c++代码</h4><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;bits&#x2F;stdc++.h&gt;
+#define endl &#39;\n&#39;
+
+using namespace std;
+
+int main()  
+&#123;
+    int n, m;
+    cin &gt;&gt; n &gt;&gt; m;
+
+    &#x2F;&#x2F; 如果n&lt;7，无法解开
+    if (n &lt; 7)
+    &#123;
+        cout &lt;&lt; -1;
+        return;  
+    &#125; 
+
+    &#x2F;&#x2F; 我把6^7给省略了，因为实际上只用得到他各位的6，n同样也只用到个位数
+    n %&#x3D; 10;
+    &#x2F;&#x2F; 原始期望时间
+    int res &#x3D; n * 6 % 10;
+
+    &#x2F;&#x2F; 使用道具之后
+    m &#x3D; min(2, m);
+    while (m -- ) res &#x3D; res * res % 10;
+
+    cout &lt;&lt; res;
+
+    return 0;
+&#125;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="c代码-2"><a href="#c代码-2" class="headerlink" title="c代码"></a>c代码</h4><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+
+<span class="token keyword">int</span> <span class="token function">min</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> b<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>a <span class="token operator">></span> b<span class="token punctuation">)</span> <span class="token keyword">return</span> b<span class="token punctuation">;</span>
+    <span class="token keyword">else</span> <span class="token keyword">return</span> a<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> n<span class="token punctuation">,</span> m<span class="token punctuation">;</span>
+    <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d%d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>n<span class="token punctuation">,</span> <span class="token operator">&amp;</span>m<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 如果n&lt;7，无法解开</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">&lt;</span> <span class="token number">7</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>  
+    <span class="token punctuation">&#125;</span> 
+
+    <span class="token comment">// 我把6^7给省略了，因为实际上只用得到他各位的6，n同样也只用到个位数</span>
+    n <span class="token operator">%=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+    <span class="token comment">// 原始期望时间</span>
+    <span class="token keyword">int</span> res <span class="token operator">=</span> n <span class="token operator">*</span> <span class="token number">6</span> <span class="token operator">%</span> <span class="token number">10</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 使用道具之后</span>
+    m <span class="token operator">=</span> <span class="token function">min</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> m<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>m <span class="token operator">--</span> <span class="token punctuation">)</span> res <span class="token operator">=</span> res <span class="token operator">*</span> res <span class="token operator">%</span> <span class="token number">10</span><span class="token punctuation">;</span>
+
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> res<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>小白月赛</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>集合基础</title>
+    <url>/2023/10/20/%E9%9B%86%E5%90%88%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<div align='center'>
+    <font size='8'>集合基础</font>
+</div>
+
+<h3 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h3><h4 id="ArrayList常用方法"><a href="#ArrayList常用方法" class="headerlink" title="ArrayList常用方法"></a>ArrayList常用方法</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">ArrayList</span></span><span class="token punctuation">;</span> <span class="token comment">// 导包</span>
+<span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> s <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 定义</span>
+s<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">"dfsd"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> s<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"dsds"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 添加（下标0开始）</span>
+<span class="token function">remove</span><span class="token punctuation">(</span>boject o<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 删除索引元素，返回是否成功</span>
+<span class="token function">remove</span><span class="token punctuation">(</span><span class="token keyword">int</span> index<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 删除指定索引处元素，返回被删除元素</span>
+<span class="token function">set</span><span class="token punctuation">(</span><span class="token keyword">int</span> index<span class="token punctuation">,</span> object o<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 修改索引处元素，返回被修改的元素(修改前)</span>
+<span class="token function">get</span><span class="token punctuation">(</span><span class="token keyword">int</span> index<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 返回指定位置的元素</span>
+<span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 返回集合中元素个数</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
+      <categories>
+        <category>javase</category>
+      </categories>
+      <tags>
+        <tag>java集合基础</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>面向对象基础</title>
+    <url>/2023/10/20/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<div align='center'>
+    <font size='8'>面向对象基础</font>
+</div>
+
+<h3 id="类和对象"><a href="#类和对象" class="headerlink" title="类和对象"></a>类和对象</h3><ul>
+<li>类的重要性：类是java程序组成基本单位</li>
+<li>类的组成：属性和行为</li>
+</ul>
+<h3 id="对象内存图"><a href="#对象内存图" class="headerlink" title="对象内存图"></a>对象内存图</h3><ul>
+<li><h4 id="成员变量："><a href="#成员变量：" class="headerlink" title="成员变量："></a>成员变量：</h4><ul>
+<li>堆内存：随着对象的存在而存在，随着对象的消失而消失</li>
+<li>有默认的初始值</li>
+</ul>
+</li>
+<li><h4 id="局部变量"><a href="#局部变量" class="headerlink" title="局部变量"></a>局部变量</h4><ul>
+<li>栈内存：随着方法的调用而存在，随着方法的消失而消失</li>
+<li>没有默认的初始值，必须先定义</li>
+</ul>
+</li>
+</ul>
+<h3 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h3><ul>
+<li>prinate的使用 getxxx(), setxxx();</li>
+<li>this的使用 (成员变量与局部变量冲突)</li>
+</ul>
+<h3 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h3><ul>
+<li>系统默认无参构造方法</li>
+<li>可以定义不同的构造方法</li>
+</ul>
+]]></content>
+      <categories>
+        <category>javase</category>
+      </categories>
+      <tags>
+        <tag>java面向对象基础</tag>
+      </tags>
+  </entry>
+</search>
