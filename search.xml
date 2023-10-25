@@ -448,10 +448,9 @@
   <entry>
     <title>字符串</title>
     <url>/2023/10/20/%E5%AD%97%E7%AC%A6%E4%B8%B2/</url>
-    <content><![CDATA[<div align='center'>
+    <content><![CDATA[<p><div align='center'>
     <font size='8' color='pink'>字符串</font>
-</div>
-
+</div></p>
 <h3 id="API"><a href="#API" class="headerlink" title="API"></a>API</h3><p>应用程序开发接口的缩写。意思是一些预设好的函数或方法，允许第三方程序通过网络来调用数据或基于数据的服务。(而无需关注如何实现)</p>
 <h3 id="String"><a href="#String" class="headerlink" title="String"></a>String</h3><h4 id="String-构造方法："><a href="#String-构造方法：" class="headerlink" title="String 构造方法："></a>String 构造方法：</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token punctuation">(</span><span class="token keyword">char</span><span class="token punctuation">[</span><span class="token punctuation">]</span> chs<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 根据字符数组的内容，来创建字符串</span>
 <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token punctuation">(</span><span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> bys<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 根据字节数组的内容，来创建字符串</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
