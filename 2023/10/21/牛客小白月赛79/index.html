@@ -426,29 +426,18 @@
 </div>
 
 <p><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/66877#question">牛客小白月赛79</a></p>
-<div align='center'>
+<p><div align='center'>
     <font size='6'>A</font>
-</div>
-### A
-
-#### 题意
-
-问最少需要多少次操作，可以把数字n变成干净的数
-
-#### 解题思路
-
-从定义下手，干净的数满足下面两个条件之一
-
-1. 是偶数，且不含前导0 (例如000023，23前面的0就叫做前导0)
-2. 数字为空，也就是所有数位被删除
-
-一个数字的奇偶性，取决于个位数的奇偶，所以我们从数的最后一位开始枚举。
-
-每次判断是否为偶数，如果不是就删除最后一位。这样最多将数字删空，而不会出现前导0
-
-#### c ++ 代码
-
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;bits&#x2F;stdc++.h&gt;
+</div></p>
+<h3 id="A"><a href="#A" class="headerlink" title="A"></a>A</h3><h4 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h4><p>问最少需要多少次操作，可以把数字n变成干净的数</p>
+<h4 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h4><p>从定义下手，干净的数满足下面两个条件之一</p>
+<ol>
+<li>是偶数，且不含前导0 (例如000023，23前面的0就叫做前导0)</li>
+<li>数字为空，也就是所有数位被删除</li>
+</ol>
+<p>一个数字的奇偶性，取决于个位数的奇偶，所以我们从数的最后一位开始枚举。</p>
+<p>每次判断是否为偶数，如果不是就删除最后一位。这样最多将数字删空，而不会出现前导0</p>
+<h4 id="c-代码"><a href="#c-代码" class="headerlink" title="c ++ 代码"></a>c ++ 代码</h4><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;bits&#x2F;stdc++.h&gt;
 
 using namespace std;
 
@@ -472,10 +461,7 @@ int main()
     return 0;
 &#125;
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-#### c代码
-
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<h4 id="c代码"><a href="#c代码" class="headerlink" title="c代码"></a>c代码</h4><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
 
 <span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  
 <span class="token punctuation">&#123;</span>
@@ -497,25 +483,13 @@ int main()
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<div align='center'>
+<p><div align='center'>
     <font size='6'>B</font>
-</div>
-### B
-
-#### 题意
-
-n个正整数，可以将一些数放入背包，需要使得背包中的数的总和为偶数且为最大值。
-
-#### 解题思路
-
-我们可以将所有的数放入背包，如果此时总和为偶数，那么这就是满足条件的数。
-
-如果此时总和为奇数，那么我们只需要把最小的一个奇数拿出去，那么总数就变成了偶数，也就是满足条件的最大值。
-
-#### c++代码
-
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;bits&#x2F;stdc++.h&gt;
+</div></p>
+<h3 id="B"><a href="#B" class="headerlink" title="B"></a>B</h3><h4 id="题意-1"><a href="#题意-1" class="headerlink" title="题意"></a>题意</h4><p>n个正整数，可以将一些数放入背包，需要使得背包中的数的总和为偶数且为最大值。</p>
+<h4 id="解题思路-1"><a href="#解题思路-1" class="headerlink" title="解题思路"></a>解题思路</h4><p>我们可以将所有的数放入背包，如果此时总和为偶数，那么这就是满足条件的数。</p>
+<p>如果此时总和为奇数，那么我们只需要把最小的一个奇数拿出去，那么总数就变成了偶数，也就是满足条件的最大值。</p>
+<h4 id="c-代码-1"><a href="#c-代码-1" class="headerlink" title="c++代码"></a>c++代码</h4><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;bits&#x2F;stdc++.h&gt;
 
 using namespace std;
 
@@ -549,10 +523,7 @@ int main()
     return 0;
 &#125;
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-#### c代码
-
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<h4 id="c代码-1"><a href="#c代码-1" class="headerlink" title="c代码"></a>c代码</h4><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;math.h></span></span>
 
 <span class="token keyword">const</span> <span class="token keyword">int</span> N <span class="token operator">=</span> <span class="token number">1e5</span> <span class="token operator">+</span> <span class="token number">10</span><span class="token punctuation">;</span>
@@ -585,13 +556,11 @@ int main()
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<div align='center'>
+<p><div align='center'>
     <font size='6'>C</font>
-</div>
-
-<h3 id="C"><a href="#C" class="headerlink" title="C"></a>C</h3><h4 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h4><p>​    题意就是求$mex(a_1,…a_r) * gcd(a_1…a_r)$的最大值<br>​    其中$a_1…a_r$可以是任意连续区间<br>​    gcd就是求最大公约数，而mex求的是区间中未出现的最小非负整数<br>​    例如 mex(0,2,3)=1</p>
-<h4 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h4><p>​    我们其实可以发现，如果区间里没有0的话，那么mex()的值为0，就一定不是最大值了。</p>
+</div></p>
+<h3 id="C"><a href="#C" class="headerlink" title="C"></a>C</h3><h4 id="题意-2"><a href="#题意-2" class="headerlink" title="题意"></a>题意</h4><p>​    题意就是求$mex(a_1,…a_r) * gcd(a_1…a_r)$的最大值<br>​    其中$a_1…a_r$可以是任意连续区间<br>​    gcd就是求最大公约数，而mex求的是区间中未出现的最小非负整数<br>​    例如 mex(0,2,3)=1</p>
+<h4 id="解题思路-2"><a href="#解题思路-2" class="headerlink" title="解题思路"></a>解题思路</h4><p>​    我们其实可以发现，如果区间里没有0的话，那么mex()的值为0，就一定不是最大值了。</p>
 <p>​    所以我们需要从包含0的区间入手。</p>
 <p>​    而这又分为两种情况，包含1，和不包含1</p>
 <ol>
@@ -608,7 +577,7 @@ int main()
 </li>
 </ol>
 <p>需要注意的是，当所有数都为0的时候，要进行特判。</p>
-<h4 id="c-代码"><a href="#c-代码" class="headerlink" title="c++代码"></a>c++代码</h4><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;bits&#x2F;stdc++.h&gt;
+<h4 id="c-代码-2"><a href="#c-代码-2" class="headerlink" title="c++代码"></a>c++代码</h4><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;bits&#x2F;stdc++.h&gt;
 #define endl &#39;\n&#39;
 
 using namespace std;
@@ -657,7 +626,7 @@ int main()
 &#125;
 
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="c代码"><a href="#c代码" class="headerlink" title="c代码"></a>c代码</h4><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<h4 id="c代码-2"><a href="#c代码-2" class="headerlink" title="c代码"></a>c代码</h4><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
 
 <span class="token keyword">const</span> <span class="token keyword">int</span> N <span class="token operator">=</span> <span class="token number">1e5</span> <span class="token operator">+</span> <span class="token number">10</span><span class="token punctuation">;</span>
 
@@ -706,20 +675,19 @@ int main()
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<div align='center'>
+<p><div align='center'>
     <font size='6'>D</font>
-</div>
-
-<h3 id="D"><a href="#D" class="headerlink" title="D"></a>D</h3><h4 id="题意-1"><a href="#题意-1" class="headerlink" title="题意"></a>题意</h4><p>有t波丧尸，有两种武器，一种发射一枚子弹，另一种向所有的僵尸发射一枚子弹。</p>
+</div></p>
+<h3 id="D"><a href="#D" class="headerlink" title="D"></a>D</h3><h4 id="题意-3"><a href="#题意-3" class="headerlink" title="题意"></a>题意</h4><p>有t波丧尸，有两种武器，一种发射一枚子弹，另一种向所有的僵尸发射一枚子弹。</p>
 <p>而丧尸被击中后不会死掉，且会复制一个新的丧尸，当丧尸数量是 $2^{20}$的倍数的时候，丧尸可以被消灭。</p>
-<h4 id="解题思路-1"><a href="#解题思路-1" class="headerlink" title="解题思路"></a>解题思路</h4><p>首先子弹数量非常充足，一定可以消灭丧尸(一个个的加也可以到$2^20$)</p>
+<h4 id="解题思路-3"><a href="#解题思路-3" class="headerlink" title="解题思路"></a>解题思路</h4><p>首先子弹数量非常充足，一定可以消灭丧尸(一个个的加也可以到$2^20$)</p>
 <p>对于$2^{20}$，我们可以转化为2进制来看，1000……，丧尸的数量同理也转化为2进制，如10111</p>
 <p>要成为1000……这种数字的倍数，需要保证自身二进制下的最后一个1在1000…..中1的位置或靠左的位置，如1000，那么101000就是他的倍数</p>
 <p>问题也就转化为了将n的二进制表示下最后一个1移动到$2^{20}$的二进制下1的位置或靠左的位置。</p>
 <p>武器一每次会让丧尸的数量增加1，武器二每次会让丧尸的数量$*$2，也就是在二进制下的数左移一位(即在末尾加一个0)</p>
 <p>所以最多需要射击的次数是20，也就是每次都使用武器二的情况。</p>
 <p>所以只需要枚举20次，每次多使用一次武器一，取最少的次数即可。</p>
-<h4 id="c-代码-1"><a href="#c-代码-1" class="headerlink" title="c ++代码"></a>c ++代码</h4><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;bits&#x2F;stdc++.h&gt;
+<h4 id="c-代码-3"><a href="#c-代码-3" class="headerlink" title="c ++代码"></a>c ++代码</h4><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;bits&#x2F;stdc++.h&gt;
 #define endl &#39;\n&#39;
 
 using namespace std;
@@ -754,7 +722,7 @@ int main()
     return 0;
 &#125;
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="c代码-1"><a href="#c代码-1" class="headerlink" title="c代码"></a>c代码</h4><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<h4 id="c代码-3"><a href="#c代码-3" class="headerlink" title="c代码"></a>c代码</h4><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
 
 <span class="token keyword">int</span> <span class="token function">min</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> b<span class="token punctuation">)</span>
 <span class="token punctuation">&#123;</span>
@@ -798,19 +766,18 @@ int main()
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<div align='center'>
+<p><div align='center'>
     <font size='6'>E</font>
-</div>
-
-<h3 id="E"><a href="#E" class="headerlink" title="E"></a>E</h3><h4 id="题意-2"><a href="#题意-2" class="headerlink" title="题意"></a>题意</h4><p>一个密码，长度不定，只有6种字符，只要密码后缀是@qq.com这7个字符，就算输入成功。</p>
+</div></p>
+<h3 id="E"><a href="#E" class="headerlink" title="E"></a>E</h3><h4 id="题意-4"><a href="#题意-4" class="headerlink" title="题意"></a>题意</h4><p>一个密码，长度不定，只有6种字符，只要密码后缀是@qq.com这7个字符，就算输入成功。</p>
 <p>每一秒随机输入一位，输入错误就重新输入，直到正确。现在需要求出期望时间的个位数。</p>
 <p>然后还有一个道具每使用一次可以是期望时间x变为$x^2$。</p>
-<h4 id="解题思路-2"><a href="#解题思路-2" class="headerlink" title="解题思路"></a>解题思路</h4><p>一种特殊情况就是，密码长度小于7，那么永远都无法输入正确，时间也就趋于正无穷，输出-1.</p>
+<h4 id="解题思路-4"><a href="#解题思路-4" class="headerlink" title="解题思路"></a>解题思路</h4><p>一种特殊情况就是，密码长度小于7，那么永远都无法输入正确，时间也就趋于正无穷，输出-1.</p>
 <p>每次输入正确的概率是$\frac{1}{6^7}$，期望概率P=$6^7$，那么期望时间就是np=$n*{6^7}$</p>
 <p>${np^2}^{m}$(就是np的2次方的m次方)</p>
 <p>这道题的核心是个位的变化，下面是个位的数字在平方之后的变化，不难看出，在平方两次之后，个位的数字是不再变化了的，所以我们不用去真正的循环m次，最多只需要循环两次，就可以算出期望数的个位。而且m的范围是1e9，直接枚举是铁定超时的。</p>
 <p><img src="https://picss.sunbangyan.cn/2023/10/21/e04342bb9f2380d5fe7a3f3bba1cc0fa.png" alt=""></p>
-<h4 id="c-代码-2"><a href="#c-代码-2" class="headerlink" title="c++代码"></a>c++代码</h4><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;bits&#x2F;stdc++.h&gt;
+<h4 id="c-代码-4"><a href="#c-代码-4" class="headerlink" title="c++代码"></a>c++代码</h4><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;bits&#x2F;stdc++.h&gt;
 #define endl &#39;\n&#39;
 
 using namespace std;
@@ -841,7 +808,7 @@ int main()
     return 0;
 &#125;
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="c代码-2"><a href="#c代码-2" class="headerlink" title="c代码"></a>c代码</h4><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<h4 id="c代码-4"><a href="#c代码-4" class="headerlink" title="c代码"></a>c代码</h4><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
 
 <span class="token keyword">int</span> <span class="token function">min</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> b<span class="token punctuation">)</span>
 <span class="token punctuation">&#123;</span>

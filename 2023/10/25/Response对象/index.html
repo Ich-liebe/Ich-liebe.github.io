@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Servlet">
-    <meta name="description" content="Servlet">
+    <meta name="keywords" content="response对象">
+    <meta name="description" content="response对象">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Servlet | szy Blog</title>
+    <title>Response对象 | szy Blog</title>
     <link rel="icon" type="image/jpeg" href="/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230915160303.jpg">
     
     <style>
@@ -343,12 +343,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://picdl.sunbangyan.cn/2023/10/21/39cb7a311dbfaa7991c6fb28ff53fce3.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://picst.sunbangyan.cn/2023/10/26/fc4522b45ba0d372059006329eaabbaf.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Servlet</h1>
+                    <h1 class="description center-align post-title">Response对象</h1>
                 </div>
             </div>
         </div>
@@ -372,8 +372,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Servlet/">
-                                <span class="chip bg-color">Servlet</span>
+                            <a href="/tags/response%E5%AF%B9%E8%B1%A1/">
+                                <span class="chip bg-color">response对象</span>
                             </a>
                         
                     </div>
@@ -397,7 +397,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-10-21
+                    2023-10-25
                 </div>
                 
 
@@ -422,182 +422,92 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <div align='center'>
-    <font size='8' color='pink'>Servlet</font>
+    <font size='8' color='pink'>Response对象</font>
 </div>
 
 
-<h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><ul>
-<li>运行在服务器端的小程序</li>
-<li>Servlet就是一个接口，定义了java类被浏览器访问到(tomcat识别)的规则</li>
-<li>定义一个类，实现Servlet接口，复写方法</li>
+<h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><h3 id="1-设置响应行"><a href="#1-设置响应行" class="headerlink" title="1. 设置响应行"></a>1. 设置响应行</h3><h4 id="1-格式："><a href="#1-格式：" class="headerlink" title="1. 格式："></a>1. 格式：</h4><ul>
+<li>HTTP / 1.1  200  ok</li>
 </ul>
-<h3 id="快速入门"><a href="#快速入门" class="headerlink" title="快速入门"></a>快速入门</h3><h4 id="1-创建JavaEE项目"><a href="#1-创建JavaEE项目" class="headerlink" title="1.创建JavaEE项目"></a>1.创建JavaEE项目</h4><h4 id="2-定义一个类，实现Servlet接口"><a href="#2-定义一个类，实现Servlet接口" class="headerlink" title="2. 定义一个类，实现Servlet接口"></a>2. 定义一个类，实现Servlet接口</h4><h4 id="3-实现接口中的抽象方法"><a href="#3-实现接口中的抽象方法" class="headerlink" title="3. 实现接口中的抽象方法"></a>3. 实现接口中的抽象方法</h4><h4 id="4-配置Servlet"><a href="#4-配置Servlet" class="headerlink" title="4. 配置Servlet"></a>4. 配置Servlet</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> 配置<span class="token class-name">Servlet</span> <span class="token operator">--</span><span class="token operator">></span>
-        <span class="token generics"><span class="token punctuation">&lt;</span>servlet<span class="token punctuation">></span></span>
-            <span class="token operator">&lt;</span>servlet<span class="token operator">-</span>name<span class="token operator">></span>demo1<span class="token operator">&lt;</span><span class="token operator">/</span>servlet<span class="token operator">-</span>name<span class="token operator">></span>
-            <span class="token operator">&lt;</span>servlet<span class="token operator">-</span><span class="token keyword">class</span><span class="token operator">></span><span class="token class-name"><span class="token namespace">com<span class="token punctuation">.</span>example<span class="token punctuation">.</span>day_13tomcat<span class="token punctuation">.</span></span>ServletDemo1</span><span class="token operator">&lt;</span><span class="token operator">/</span>servlet<span class="token operator">-</span><span class="token keyword">class</span><span class="token operator">></span>
-        <span class="token operator">&lt;</span><span class="token operator">/</span>servlet<span class="token operator">></span>
-    
-        <span class="token operator">&lt;</span>servlet<span class="token operator">-</span>mapping<span class="token operator">></span>
-            <span class="token operator">&lt;</span>servlet<span class="token operator">-</span>name<span class="token operator">></span>demo1<span class="token operator">&lt;</span><span class="token operator">/</span>servlet<span class="token operator">-</span>name<span class="token operator">></span>
-            <span class="token operator">&lt;</span>url<span class="token operator">-</span>pattern<span class="token operator">></span><span class="token operator">/</span>demo1<span class="token operator">&lt;</span><span class="token operator">/</span>url<span class="token operator">-</span>pattern<span class="token operator">></span>
-        <span class="token operator">&lt;</span><span class="token operator">/</span>servlet<span class="token operator">-</span>mapping<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<ol>
-<li><h4 id="执行原理"><a href="#执行原理" class="headerlink" title="执行原理"></a>执行原理</h4><ol>
-<li>当服务器接收到客户端浏览器的请求后，会解析请求URL路径</li>
-<li>查找web.xml文件，是否有对应的<url-pattern>标签体内容</li>
-<li>如果有，则在找到对应的<servlet-class>全类名</li>
-<li>tomcat会将字节码文件加载进内存，并且创建其对象</li>
-<li>调用其方法</li>
+<h4 id="2-设置状态码："><a href="#2-设置状态码：" class="headerlink" title="2. 设置状态码："></a>2. 设置状态码：</h4><ul>
+<li>setStatus（int  sc）</li>
+</ul>
+<h3 id="2-设置响应头"><a href="#2-设置响应头" class="headerlink" title="2. 设置响应头"></a>2. 设置响应头</h3><ul>
+<li>setHeader(String name, String value)</li>
+</ul>
+<h3 id="3-设置响应体"><a href="#3-设置响应体" class="headerlink" title="3. 设置响应体"></a>3. 设置响应体</h3><h4 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h4><h5 id="1-获取输出流"><a href="#1-获取输出流" class="headerlink" title="1. 获取输出流"></a>1. 获取输出流</h5><ul>
+<li>字符输出流：PrintWriter getWriter（）</li>
+<li>字节输出流：ServletOutputStream getOutputStream（）</li>
+</ul>
+<h5 id="2-使用输出流，将数据输出到客户端浏览器"><a href="#2-使用输出流，将数据输出到客户端浏览器" class="headerlink" title="2. 使用输出流，将数据输出到客户端浏览器"></a>2. 使用输出流，将数据输出到客户端浏览器</h5><h2 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h2><h3 id="1-完成重定向"><a href="#1-完成重定向" class="headerlink" title="1. 完成重定向"></a>1. 完成重定向</h3><h4 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a>重定向</h4><ul>
+<li>资源跳转的方式</li>
+</ul>
+<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><h5 id="1-设置状态码302"><a href="#1-设置状态码302" class="headerlink" title="1. 设置状态码302"></a>1. 设置状态码302</h5><ul>
+<li>response.setStatus(302);</li>
+</ul>
+<h5 id="2-设置响应头location"><a href="#2-设置响应头location" class="headerlink" title="2. 设置响应头location"></a>2. 设置响应头location</h5><ul>
+<li>response.setHeader(“location”, “/responseDemo2”);</li>
+</ul>
+<h5 id="简单的重定向方法"><a href="#简单的重定向方法" class="headerlink" title="简单的重定向方法"></a>简单的重定向方法</h5><ul>
+<li>response.sendRedirect(“/ day / responseDemo2”);</li>
+</ul>
+<h4 id="重定向的特点：redirect"><a href="#重定向的特点：redirect" class="headerlink" title="重定向的特点：redirect"></a>重定向的特点：redirect</h4><ol>
+<li>地址栏发生变化</li>
+<li>重定向可以访问其他站点（服务器）的资源</li>
+<li>重定向是两次请求。不能使用request对象来共享数据</li>
 </ol>
-</li>
-<li><h4 id="Servlet中的生命周期方法"><a href="#Servlet中的生命周期方法" class="headerlink" title="Servlet中的生命周期方法"></a>Servlet中的生命周期方法</h4><ol>
-<li><h5 id="被创建：执行init方法，只执行一次"><a href="#被创建：执行init方法，只执行一次" class="headerlink" title="被创建：执行init方法，只执行一次"></a>被创建：执行init方法，只执行一次</h5><ul>
-<li>默认情况下，第一次被访问时，Servlet被创建</li>
-<li>可以配置执行Servlet的创建时机<ul>
-<li>在<Servlet>标签下配置<ol>
-<li>第一次被访问时，创建<ul>
-<li><load-on-startup>的值为负数</li>
-</ul>
-</li>
-<li>在服务器启动时，创建<ul>
-<li><load-on-startup>的值为非负数</li>
-</ul>
-</li>
+<h4 id="转发的特点：forward"><a href="#转发的特点：forward" class="headerlink" title="转发的特点：forward"></a>转发的特点：forward</h4><ol>
+<li>转发地址栏路径不变</li>
+<li>转发只能访问当前服务器下的资源</li>
+<li>转发是一次请求，可以使用request对象来共享数据</li>
 </ol>
-</li>
+<h4 id="forward-和-redirect-区别"><a href="#forward-和-redirect-区别" class="headerlink" title="forward 和 redirect 区别"></a>forward 和 redirect 区别</h4><h4 id="路径写法"><a href="#路径写法" class="headerlink" title="路径写法"></a>路径写法</h4><h5 id="1-路径分类"><a href="#1-路径分类" class="headerlink" title="1. 路径分类"></a>1. 路径分类</h5><ol>
+<li><p>相对路径：通过相对路径不可以确定唯一资源</p>
+<ul>
+<li>如：./index.html</li>
+<li>以. 开头路径</li>
+<li><ul>
+<li>规则：找到当前资源和目标资源之间的相对位置关系<ul>
+<li>./：当前目录</li>
+<li>../：后退一级目录</li>
 </ul>
 </li>
 </ul>
 </li>
-<li><h5 id="提供服务：执行service方法，执行多次"><a href="#提供服务：执行service方法，执行多次" class="headerlink" title="提供服务：执行service方法，执行多次"></a>提供服务：执行service方法，执行多次</h5><ul>
-<li>每次访问Serlvet方法，只执行一次</li>
 </ul>
 </li>
-<li><h5 id="被销毁：执行destroy方法，只执行一次"><a href="#被销毁：执行destroy方法，只执行一次" class="headerlink" title="被销毁：执行destroy方法，只执行一次"></a>被销毁：执行destroy方法，只执行一次</h5><ul>
-<li>只有服务器正常关闭时，才会执行destroy方法</li>
-<li>在Servlet销毁前执行，一般用于释放资源</li>
+<li><p>绝对路径：通过绝对路径可以确定唯一资源</p>
+<ul>
+<li><p>如：/responseDemo1</p>
+</li>
+<li><p>以 / 开头的路径</p>
+</li>
+<li></li>
+<li>规则：判断定义的路径是给谁用的？判断请求将从哪儿发出<ul>
+<li>给客户端浏览器使用：需要加虚拟目录（项目的访问路径）<ul>
+<li>建议虚拟目录动态获取：request.getContextPath()</li>
+<li>a标签，form标签 重定向…</li>
 </ul>
 </li>
-</ol>
-</li>
-</ol>
-   <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>example<span class="token punctuation">.</span>day_13tomcat</span><span class="token punctuation">;</span>
-
-<span class="token keyword">import</span> <span class="token import"><span class="token namespace">javax<span class="token punctuation">.</span>servlet<span class="token punctuation">.</span></span><span class="token operator">*</span></span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">IOException</span></span><span class="token punctuation">;</span>
-
-<span class="token comment">/**
- * Servlet实现方法
- */</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ServletDemo2</span> <span class="token keyword">implements</span> <span class="token class-name">Servlet</span> <span class="token punctuation">&#123;</span>
-
-    <span class="token comment">/**
-     * 初始化方法
-     * 在Servlet被创建时执行，只会执行一次
-     * @param servletConfig
-     * @throws ServletException
-     */</span>
-    <span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">init</span><span class="token punctuation">(</span><span class="token class-name">ServletConfig</span> servletConfig<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">ServletException</span> <span class="token punctuation">&#123;</span>
-        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"init......"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-
-    <span class="token comment">/**
-     * 获取ServletConfig对象(Servlet配置对象)
-     * @return
-     */</span>
-    <span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">public</span> <span class="token class-name">ServletConfig</span> <span class="token function">getServletConfig</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">return</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-
-    <span class="token comment">/**
-     * 提供服务方法
-     * 每一次Servlet被访问时执行，执行多次
-     * @param servletRequest
-     * @param servletResponse
-     * @throws ServletException
-     * @throws IOException
-     */</span>
-    <span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">service</span><span class="token punctuation">(</span><span class="token class-name">ServletRequest</span> servletRequest<span class="token punctuation">,</span> <span class="token class-name">ServletResponse</span> servletResponse<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">ServletException</span><span class="token punctuation">,</span> <span class="token class-name">IOException</span> <span class="token punctuation">&#123;</span>
-        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"service------"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-
-    <span class="token comment">/**
-     * 获取Servlet的一些信息，版本，作者等。
-     * @return
-     */</span>
-    <span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">getServletInfo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">return</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-
-    <span class="token comment">/**
-     * 销毁方法
-     * 在服务器正常关闭时执行一次。
-     */</span>
-    <span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">destroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"destroy------"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-   <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> 配置<span class="token class-name">Servlet</span> <span class="token operator">--</span><span class="token operator">></span>
-   <span class="token generics"><span class="token punctuation">&lt;</span>servlet<span class="token punctuation">></span></span>
-       <span class="token operator">&lt;</span>servlet<span class="token operator">-</span>name<span class="token operator">></span>demo2<span class="token operator">&lt;</span><span class="token operator">/</span>servlet<span class="token operator">-</span>name<span class="token operator">></span>
-       <span class="token operator">&lt;</span>servlet<span class="token operator">-</span><span class="token keyword">class</span><span class="token operator">></span><span class="token class-name"><span class="token namespace">com<span class="token punctuation">.</span>example<span class="token punctuation">.</span>day_13tomcat<span class="token punctuation">.</span></span>ServletDemo2</span><span class="token operator">&lt;</span><span class="token operator">/</span>servlet<span class="token operator">-</span><span class="token keyword">class</span><span class="token operator">></span>
-       <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> 指定<span class="token class-name">Servlet</span>的创建时机
-           <span class="token number">1.</span>第一次被访问时，创建
-               <span class="token operator">&lt;</span>load<span class="token operator">-</span>on<span class="token operator">-</span>startup<span class="token operator">></span>的值为负数
-           <span class="token number">2.</span>在服务器启动时，创建
-               <span class="token operator">&lt;</span>load<span class="token operator">-</span>on<span class="token operator">-</span>startup<span class="token operator">></span>的值为非负数
-       <span class="token operator">--</span><span class="token operator">></span>
-   
-       <span class="token operator">&lt;</span>load<span class="token operator">-</span>on<span class="token operator">-</span>startup<span class="token operator">></span><span class="token operator">-</span><span class="token number">5</span><span class="token operator">&lt;</span><span class="token operator">/</span>load<span class="token operator">-</span>on<span class="token operator">-</span>startup<span class="token operator">></span>
-   <span class="token operator">&lt;</span><span class="token operator">/</span>servlet<span class="token operator">></span>
-   
-   <span class="token operator">&lt;</span>servlet<span class="token operator">-</span>mapping<span class="token operator">></span>
-       <span class="token operator">&lt;</span>servlet<span class="token operator">-</span>name<span class="token operator">></span>demo2<span class="token operator">&lt;</span><span class="token operator">/</span>servlet<span class="token operator">-</span>name<span class="token operator">></span>
-       <span class="token operator">&lt;</span>url<span class="token operator">-</span>pattern<span class="token operator">></span><span class="token operator">/</span>demo2<span class="token operator">&lt;</span><span class="token operator">/</span>url<span class="token operator">-</span>pattern<span class="token operator">></span>
-   <span class="token operator">&lt;</span><span class="token operator">/</span>servlet<span class="token operator">-</span>mapping<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>   ​    </p>
-<h3 id="Servlet-3-0"><a href="#Servlet-3-0" class="headerlink" title="Servlet 3.0"></a>Servlet 3.0</h3><h4 id="好处"><a href="#好处" class="headerlink" title="好处"></a>好处</h4><ul>
-<li>支持注解配置，不需要web.xml</li>
+<li>给服务器使用：不需要加虚拟目录<ul>
+<li>转发路径</li>
 </ul>
-<h4 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h4><ol>
-<li>创建JavaEE项目，选择Servlet3.0以上版本</li>
-<li>定义一个类，实现Servlet接口</li>
-<li>复写方法</li>
-<li>在类上使用@webServlet注解，进行配置<ul>
-<li>@webServlet(“资源路径”)</li>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ol>
-<h3 id="IDEA与tomcat的相关配置"><a href="#IDEA与tomcat的相关配置" class="headerlink" title="IDEA与tomcat的相关配置"></a>IDEA与tomcat的相关配置</h3><h4 id="1-IDEA会位每一个tomcat部署的项目单独建立一份配置文件"><a href="#1-IDEA会位每一个tomcat部署的项目单独建立一份配置文件" class="headerlink" title="1. IDEA会位每一个tomcat部署的项目单独建立一份配置文件"></a>1. IDEA会位每一个tomcat部署的项目单独建立一份配置文件</h4><ul>
-<li>查看控制台的log：Using CATALINA_BASE: “C:\Users\31025\AppData\Local\JetBrains\IntelliJIdea2023.2\tomcat\d133112c-782a-40d3-af7c-b1e21579d506”</li>
-</ul>
-<h4 id="2-工作空间项目-和-tomcat部署的web项目"><a href="#2-工作空间项目-和-tomcat部署的web项目" class="headerlink" title="2. 工作空间项目   和    tomcat部署的web项目"></a>2. 工作空间项目   和    tomcat部署的web项目</h4><ul>
-<li>tomcat真正访问的是”tomcat部署的web项目”，”tomcat部署的web项目”对应着“工作空间项目” 的web目录下的所有资源</li>
-</ul>
-<h4 id="3-断点调试"><a href="#3-断点调试" class="headerlink" title="3.断点调试"></a>3.断点调试</h4><ul>
-<li>debug启动 </li>
-</ul>
-<h3 id="Servlet的体系结构"><a href="#Servlet的体系结构" class="headerlink" title="Servlet的体系结构"></a>Servlet的体系结构</h3><p>​    Servlet — 接口 —— GenericServlet — 抽象类 —— HttpServlet — 抽象类</p>
-<p>HttpServlet：对http协议的一种封装，简化操作</p>
-<ol>
-<li>定义类继承HttpServlet</li>
-<li>复写doGet / doPost方法</li>
+<h3 id="2-服务器输出字符数据到浏览器"><a href="#2-服务器输出字符数据到浏览器" class="headerlink" title="2. 服务器输出字符数据到浏览器"></a>2. 服务器输出字符数据到浏览器</h3><h4 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h4><h5 id="1-获取字符输出流"><a href="#1-获取字符输出流" class="headerlink" title="1. 获取字符输出流"></a>1. 获取字符输出流</h5><h5 id="2-输出数据"><a href="#2-输出数据" class="headerlink" title="2. 输出数据"></a>2. 输出数据</h5><h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><h5 id="乱码问题"><a href="#乱码问题" class="headerlink" title="乱码问题"></a>乱码问题</h5><ol>
+<li>PrintWriter pw = response.getWriter(); 获取的流的默认编码是ISO-8859-1</li>
+<li>设置该流的默认编码</li>
+<li>告诉浏览器响应体使用的编码</li>
 </ol>
-<h3 id="Servlet-相关配置"><a href="#Servlet-相关配置" class="headerlink" title="Servlet 相关配置"></a>Servlet 相关配置</h3><h4 id="1-urlparttern-Servlet访问路径"><a href="#1-urlparttern-Servlet访问路径" class="headerlink" title="1. urlparttern.Servlet访问路径"></a>1. urlparttern.Servlet访问路径</h4><ol>
-<li>一个Servlet可以定义多个访问路径</li>
-<li>路径定义规则<ol>
-<li>/xxx</li>
-<li>/xxx/xxx  多层路径，目录结构</li>
-<li>*.do</li>
-</ol>
-</li>
-</ol>
-
+<ul>
+<li>简单的形式，设置编码，是在获取流之前设置：</li>
+<li>response.setContentType(“text/html;charset=utf-8”);</li>
+</ul>
+<h3 id="3。-服务器输出字节数据到浏览器"><a href="#3。-服务器输出字节数据到浏览器" class="headerlink" title="3。 服务器输出字节数据到浏览器"></a>3。 服务器输出字节数据到浏览器</h3><h4 id="步骤-1"><a href="#步骤-1" class="headerlink" title="步骤"></a>步骤</h4><h5 id="1-获取字节输出流"><a href="#1-获取字节输出流" class="headerlink" title="1. 获取字节输出流"></a>1. 获取字节输出流</h5><h5 id="2-输出数据-1"><a href="#2-输出数据-1" class="headerlink" title="2. 输出数据"></a>2. 输出数据</h5><h3 id="4-验证码"><a href="#4-验证码" class="headerlink" title="4. 验证码"></a>4. 验证码</h3>
                 
             </div>
             <hr/>
@@ -623,7 +533,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://ich-liebe.github.io/2023/10/21/Servlet/">https://ich-liebe.github.io/2023/10/21/Servlet/</a>
+                    <a href="https://ich-liebe.github.io/2023/10/25/Response%E5%AF%B9%E8%B1%A1/">https://ich-liebe.github.io/2023/10/25/Response%E5%AF%B9%E8%B1%A1/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -661,8 +571,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Servlet/">
-                                    <span class="chip bg-color">Servlet</span>
+                                <a href="/tags/response%E5%AF%B9%E8%B1%A1/">
+                                    <span class="chip bg-color">response对象</span>
                                 </a>
                             
                         </div>
@@ -1008,28 +918,78 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2023/10/24/HTTP/">
+                <a href="/2023/10/25/Response%E5%AF%B9%E8%B1%A1/">
                     <div class="card-image">
                         
-                        <img src="https://picst.sunbangyan.cn/2023/10/24/4dbdb6384ab58663396b4f426aa02404.jpg" class="responsive-img" alt="HTTP">
+                        <img src="https://picst.sunbangyan.cn/2023/10/26/fc4522b45ba0d372059006329eaabbaf.jpg" class="responsive-img" alt="Response对象">
                         
-                        <span class="card-title">HTTP</span>
+                        <span class="card-title">Response对象</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            HTTP
+                            response对象
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-10-24
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-10-25
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/javaweb/" class="post-category">
+                                    javaweb
+                                </a>
+                            
+                            
                         </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/response%E5%AF%B9%E8%B1%A1/">
+                        <span class="chip bg-color">response对象</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/10/25/%E6%A1%88%E4%BE%8B%E2%80%94%E2%80%94%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/">
+                    <div class="card-image">
+                        
+                        <img src="https://picdl.sunbangyan.cn/2023/10/25/c250578c2705b3a3b972142482645707.jpg" class="responsive-img" alt="案例——用户登录">
+                        
+                        <span class="card-title">案例——用户登录</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            用户登录案例
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-10-25
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1045,56 +1005,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/HTTP/">
-                        <span class="chip bg-color">HTTP</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2023/10/21/%E7%89%9B%E5%AE%A2%E5%B0%8F%E7%99%BD%E6%9C%88%E8%B5%9B79/">
-                    <div class="card-image">
-                        
-                        <img src="https://picst.sunbangyan.cn/2023/10/21/0197464ed8a87712915fe3bf27b8d9c4.png" class="responsive-img" alt="牛客小白月赛79">
-                        
-                        <span class="card-title">牛客小白月赛79</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            牛客小白月赛79
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-10-21
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E9%A2%98%E8%A7%A3/" class="post-category">
-                                    题解
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E5%B0%8F%E7%99%BD%E6%9C%88%E8%B5%9B/">
-                        <span class="chip bg-color">小白月赛</span>
+                    <a href="/tags/%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E6%A1%88%E4%BE%8B/">
+                        <span class="chip bg-color">用户登录案例</span>
                     </a>
                     
                 </div>
