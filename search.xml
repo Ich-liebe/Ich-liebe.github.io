@@ -127,7 +127,7 @@
         <category>javaweb</category>
       </categories>
       <tags>
-        <tag>javaweb_Request</tag>
+        <tag>javaweb</tag>
       </tags>
   </entry>
   <entry>
@@ -283,7 +283,7 @@ hello , reponse
         <category>javaweb</category>
       </categories>
       <tags>
-        <tag>javaweb_HTTP</tag>
+        <tag>javaweb</tag>
       </tags>
   </entry>
   <entry>
@@ -470,7 +470,7 @@ hello , reponse
         <category>javaweb</category>
       </categories>
       <tags>
-        <tag>javaweb_Servlet</tag>
+        <tag>javaweb</tag>
       </tags>
   </entry>
   <entry>
@@ -566,7 +566,7 @@ a<span class="token punctuation">.</span><span class="token function">append</sp
         <category>javase</category>
       </categories>
       <tags>
-        <tag>java字符串</tag>
+        <tag>javase</tag>
       </tags>
   </entry>
   <entry>
@@ -613,7 +613,7 @@ a<span class="token punctuation">.</span><span class="token function">append</sp
         <category>javase</category>
       </categories>
       <tags>
-        <tag>javase_杂</tag>
+        <tag>javase</tag>
       </tags>
   </entry>
   <entry>
@@ -1069,7 +1069,7 @@ s<span class="token punctuation">.</span><span class="token function">add</span>
         <category>javase</category>
       </categories>
       <tags>
-        <tag>javase_集合基础</tag>
+        <tag>javase</tag>
       </tags>
   </entry>
   <entry>
@@ -1109,7 +1109,7 @@ s<span class="token punctuation">.</span><span class="token function">add</span>
         <category>javase</category>
       </categories>
       <tags>
-        <tag>java面向对象基础</tag>
+        <tag>javase</tag>
       </tags>
   </entry>
   <entry>
@@ -1362,7 +1362,7 @@ CREATE TABLE USER(
         <category>javaweb</category>
       </categories>
       <tags>
-        <tag>javaweb用户登录案例</tag>
+        <tag>javaweb</tag>
       </tags>
   </entry>
   <entry>
@@ -1459,7 +1459,7 @@ CREATE TABLE USER(
         <category>javaweb</category>
       </categories>
       <tags>
-        <tag>javaweb_response对象</tag>
+        <tag>javaweb</tag>
       </tags>
   </entry>
   <entry>
@@ -1486,7 +1486,7 @@ CREATE TABLE USER(
         <category>javase</category>
       </categories>
       <tags>
-        <tag>javase内部类</tag>
+        <tag>javase</tag>
       </tags>
   </entry>
   <entry>
@@ -1537,7 +1537,7 @@ CREATE TABLE USER(
         <category>javase</category>
       </categories>
       <tags>
-        <tag>javase修饰符</tag>
+        <tag>javase</tag>
       </tags>
   </entry>
   <entry>
@@ -1584,7 +1584,7 @@ CREATE TABLE USER(
         <category>javase</category>
       </categories>
       <tags>
-        <tag>javase多态</tag>
+        <tag>javase</tag>
       </tags>
   </entry>
   <entry>
@@ -1633,7 +1633,7 @@ CREATE TABLE USER(
         <category>javase</category>
       </categories>
       <tags>
-        <tag>javase抽象类</tag>
+        <tag>javase</tag>
       </tags>
   </entry>
   <entry>
@@ -1710,7 +1710,7 @@ CREATE TABLE USER(
         <category>javase</category>
       </categories>
       <tags>
-        <tag>javase接口</tag>
+        <tag>javase</tag>
       </tags>
   </entry>
   <entry>
@@ -1758,7 +1758,7 @@ CREATE TABLE USER(
         <category>javase</category>
       </categories>
       <tags>
-        <tag>javase继承</tag>
+        <tag>javase</tag>
       </tags>
   </entry>
   <entry>
@@ -1823,7 +1823,7 @@ CREATE TABLE USER(
         <category>javaweb</category>
       </categories>
       <tags>
-        <tag>javaweb_ServletContext</tag>
+        <tag>javaweb</tag>
       </tags>
   </entry>
 </search>
