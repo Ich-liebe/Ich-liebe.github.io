@@ -1761,4 +1761,69 @@ CREATE TABLE USER(
         <tag>javase继承</tag>
       </tags>
   </entry>
+  <entry>
+    <title>servletContext</title>
+    <url>/2023/10/27/servletContext/</url>
+    <content><![CDATA[<div align='center'>
+    <font size='8' color='pink'>ServletContext</font>
+</div>
+
+<h3 id="1-概念"><a href="#1-概念" class="headerlink" title="1. 概念"></a>1. 概念</h3><ul>
+<li>代表整个web应用，可以和程序的容器（服务器）来通信</li>
+</ul>
+<h3 id="2-获取"><a href="#2-获取" class="headerlink" title="2. 获取"></a>2. 获取</h3><h4 id="1-通过request对象获取"><a href="#1-通过request对象获取" class="headerlink" title="1. 通过request对象获取"></a>1. 通过request对象获取</h4><ul>
+<li>resquest.getServletContext()；</li>
+</ul>
+<h4 id="2-通过HttpServlet对象获取"><a href="#2-通过HttpServlet对象获取" class="headerlink" title="2. (*)通过HttpServlet对象获取"></a>2. (*)通过HttpServlet对象获取</h4><ul>
+<li>this.getServletContext()；</li>
+</ul>
+<h3 id="3-功能"><a href="#3-功能" class="headerlink" title="3. 功能"></a>3. 功能</h3><h4 id="1-获取MIME类型"><a href="#1-获取MIME类型" class="headerlink" title="1. 获取MIME类型"></a>1. 获取MIME类型</h4><ul>
+<li><p>MIME类型：在互联网通信过程中定义的一种文件数据类型</p>
+<ul>
+<li>格式： 大类型 / 小类型   text/html    image / jpeg</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>获取：String getMimeType(String file)</li>
+</ul>
+<h4 id="2-域对象：共享数据"><a href="#2-域对象：共享数据" class="headerlink" title="2. 域对象：共享数据"></a>2. 域对象：共享数据</h4><ol>
+<li>setAttribute(String name, Object value)</li>
+<li>getAttribute(String name)</li>
+<li>removeAttribute(String name)</li>
+</ol>
+<ul>
+<li>ServletContext对象范围：所有用户所有请求的数据</li>
+</ul>
+<h4 id="3-获取文件的真实（服务器）路径"><a href="#3-获取文件的真实（服务器）路径" class="headerlink" title="3. 获取文件的真实（服务器）路径"></a>3. 获取文件的真实（服务器）路径</h4><h3 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h3><h4 id="1-文件下载需求："><a href="#1-文件下载需求：" class="headerlink" title="1. 文件下载需求："></a>1. 文件下载需求：</h4><ol>
+<li>页面显示超链接</li>
+<li>点击超链接后弹出下载提示框</li>
+<li>完成图片文件下载</li>
+</ol>
+<h4 id="2-分析"><a href="#2-分析" class="headerlink" title="2. 分析"></a>2. 分析</h4><ol>
+<li>超链接指向的资源如果能被浏览器解析，则在浏览器中展示，如果不能解析，则弹出下载提示框。不满足需求</li>
+<li>任何资源都必须弹出下载提示框</li>
+<li>使用响应头设置资源的打开方式<ul>
+<li>content - disposition:attachment; filename = xxx</li>
+</ul>
+</li>
+</ol>
+<h4 id="4-步骤"><a href="#4-步骤" class="headerlink" title="4. 步骤"></a>4. 步骤</h4><ol>
+<li>定义页面，编辑超链接href属性，指向Servlet，传递资源名称filename</li>
+<li>定义Servlet<ol>
+<li>获取文件名称</li>
+<li>使用字节输入流加载文件进内存</li>
+<li>指定response的响应头：context - disposition：attachment; filename=xxx</li>
+<li>将数据写出到response输出流</li>
+</ol>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>javaweb</category>
+      </categories>
+      <tags>
+        <tag>javaweb_ServletContext</tag>
+      </tags>
+  </entry>
 </search>
