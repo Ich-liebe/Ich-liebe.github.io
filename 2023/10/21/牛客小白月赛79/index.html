@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="牛客小白月赛">
-    <meta name="description" content="牛客小白月赛79">
+    <meta name="description" content="牛客小白月赛79题解">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -426,9 +426,10 @@
 </div>
 
 <p><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/66877#question">牛客小白月赛79</a></p>
-<p><div align='center'>
-    <font size='6'>A</font>
-</div></p>
+<div align='center'>
+    <font size='6'>A 数位dp？</font>
+</div>
+
 <h3 id="A"><a href="#A" class="headerlink" title="A"></a>A</h3><h4 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h4><p>问最少需要多少次操作，可以把数字n变成干净的数</p>
 <h4 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h4><p>从定义下手，干净的数满足下面两个条件之一</p>
 <ol>
@@ -483,9 +484,10 @@ int main()
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><div align='center'>
-    <font size='6'>B</font>
-</div></p>
+<div align='center'>
+    <font size='6'>B 灵异背包？</font>
+</div>
+
 <h3 id="B"><a href="#B" class="headerlink" title="B"></a>B</h3><h4 id="题意-1"><a href="#题意-1" class="headerlink" title="题意"></a>题意</h4><p>n个正整数，可以将一些数放入背包，需要使得背包中的数的总和为偶数且为最大值。</p>
 <h4 id="解题思路-1"><a href="#解题思路-1" class="headerlink" title="解题思路"></a>解题思路</h4><p>我们可以将所有的数放入背包，如果此时总和为偶数，那么这就是满足条件的数。</p>
 <p>如果此时总和为奇数，那么我们只需要把最小的一个奇数拿出去，那么总数就变成了偶数，也就是满足条件的最大值。</p>
@@ -556,9 +558,10 @@ int main()
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><div align='center'>
-    <font size='6'>C</font>
-</div></p>
+<div align='center'>
+    <font size='6'>C mex和gcd的乘积</font>
+</div>
+
 <h3 id="C"><a href="#C" class="headerlink" title="C"></a>C</h3><h4 id="题意-2"><a href="#题意-2" class="headerlink" title="题意"></a>题意</h4><p>​    题意就是求$mex(a_1,…a_r) * gcd(a_1…a_r)$的最大值<br>​    其中$a_1…a_r$可以是任意连续区间<br>​    gcd就是求最大公约数，而mex求的是区间中未出现的最小非负整数<br>​    例如 mex(0,2,3)=1</p>
 <h4 id="解题思路-2"><a href="#解题思路-2" class="headerlink" title="解题思路"></a>解题思路</h4><p>​    我们其实可以发现，如果区间里没有0的话，那么mex()的值为0，就一定不是最大值了。</p>
 <p>​    所以我们需要从包含0的区间入手。</p>
@@ -675,9 +678,10 @@ int main()
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><div align='center'>
-    <font size='6'>D</font>
-</div></p>
+<div align='center'>
+    <font size='6'>D 2^20</font>
+</div>
+
 <h3 id="D"><a href="#D" class="headerlink" title="D"></a>D</h3><h4 id="题意-3"><a href="#题意-3" class="headerlink" title="题意"></a>题意</h4><p>有t波丧尸，有两种武器，一种发射一枚子弹，另一种向所有的僵尸发射一枚子弹。</p>
 <p>而丧尸被击中后不会死掉，且会复制一个新的丧尸，当丧尸数量是 $2^{20}$的倍数的时候，丧尸可以被消灭。</p>
 <h4 id="解题思路-3"><a href="#解题思路-3" class="headerlink" title="解题思路"></a>解题思路</h4><p>首先子弹数量非常充足，一定可以消灭丧尸(一个个的加也可以到$2^20$)</p>
@@ -766,9 +770,10 @@ int main()
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><div align='center'>
-    <font size='6'>E</font>
-</div></p>
+<div align='center'>
+    <font size='6'>E 重生之我是QQ邮箱</font>
+</div>
+
 <h3 id="E"><a href="#E" class="headerlink" title="E"></a>E</h3><h4 id="题意-4"><a href="#题意-4" class="headerlink" title="题意"></a>题意</h4><p>一个密码，长度不定，只有6种字符，只要密码后缀是@qq.com这7个字符，就算输入成功。</p>
 <p>每一秒随机输入一位，输入错误就重新输入，直到正确。现在需要求出期望时间的个位数。</p>
 <p>然后还有一个道具每使用一次可以是期望时间x变为$x^2$。</p>
@@ -1231,7 +1236,7 @@ int main()
         verify: 'false' === 'true',
         visitor: 'true' === 'true',
         avatar: 'mm',
-        pageSize: '10',
+        pageSize: '12',
         lang: 'zh-cn',
         placeholder: '想说点啥？Just go go ^_^'
     });
