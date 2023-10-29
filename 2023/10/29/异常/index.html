@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="常用API">
-    <meta name="description" content="java中的常用API">
+    <meta name="keywords" content="异常">
+    <meta name="description" content="java中的异常">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>常用API | szy Blog</title>
+    <title>异常 | szy Blog</title>
     <link rel="icon" type="image/jpeg" href="/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230915160303.jpg">
     
     <style>
@@ -343,12 +343,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://picst.sunbangyan.cn/2023/10/29/da23768dfa4519181e06e96872ddcffc.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://picss.sunbangyan.cn/2023/10/29/e865f8ce9d3896b6206f3a52a22fbe75.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">常用API</h1>
+                    <h1 class="description center-align post-title">异常</h1>
                 </div>
             </div>
         </div>
@@ -422,180 +422,75 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <div align='center'>
-    <span style="font-size:45px; color:pink">常用API</span>
+    <span style="font-size:45px; color:pink">异常</span>
 </div>
 
-<h2 id="1-Math"><a href="#1-Math" class="headerlink" title="1. Math"></a>1. Math</h2><h3 id="Math常用方法"><a href="#Math常用方法" class="headerlink" title="Math常用方法"></a>Math常用方法</h3><ol>
-<li>Math.ceil(double a)<ul>
-<li>返回大于等于 a 的最小整数(返回 double 类型 .0)</li>
-</ul>
-</li>
-<li>Math.floor(double a)<ul>
-<li>返回小于等于 a 的最大整数(返回 double 类型 .0)</li>
-</ul>
-</li>
-<li>Math.round(float a)<ul>
-<li>返回四舍五入的 a 的值</li>
-</ul>
-</li>
-<li>Math.pow(double a, double b)<ul>
-<li>返回 a 的 b 次幂($a^b$); (返回 double 类型 .0)</li>
-</ul>
-</li>
-<li>Math.random()<ul>
-<li>返回 double 的正值 [0.0, 1.0</li>
-</ul>
-</li>
-</ol>
-<h2 id="2-System"><a href="#2-System" class="headerlink" title="2. System"></a>2. System</h2><h3 id="System常用方法"><a href="#System常用方法" class="headerlink" title="System常用方法"></a>System常用方法</h3><ol>
-<li>System.exit(0);<ul>
-<li>终止当前 java 虚拟机，非 0 表示异常终止</li>
-</ul>
-</li>
-<li>System.currentTimeMills();<ul>
-<li>返回当前时间（以毫秒为单位）</li>
-</ul>
-</li>
-</ol>
-<h2 id="3-Object"><a href="#3-Object" class="headerlink" title="3. Object"></a>3. Object</h2><h3 id="1-Object-概述"><a href="#1-Object-概述" class="headerlink" title="1. Object 概述"></a>1. Object 概述</h3><ol>
-<li>Object 是类层次结构的根，每个类都可以将 Object 作为超类</li>
-<li>所有类都可以直接或间接继承该类</li>
-</ol>
-<h3 id="2-Object-构造方法"><a href="#2-Object-构造方法" class="headerlink" title="2. Object 构造方法"></a>2. Object 构造方法</h3><ol>
-<li>public Object()</li>
-</ol>
-<h3 id="3-Object-方法"><a href="#3-Object-方法" class="headerlink" title="3. Object 方法"></a>3. Object 方法</h3><ol>
-<li>to_String();  建议重写 <ul>
-<li>默认：调用对象的toString()将返回一个由类名和散列码组成的字符串（如 com.example.MyClass@1234567), 并不包含有关对象属性或状态信息</li>
-</ul>
-</li>
-<li>equals();  建议重写<ul>
-<li>默认：只有当两个对象引用指向同一内存地址时，才会返回true</li>
-</ul>
-</li>
-</ol>
-<h2 id="4-Array"><a href="#4-Array" class="headerlink" title="4. Array"></a>4. Array</h2><h3 id="Array-常用方法"><a href="#Array-常用方法" class="headerlink" title="Array 常用方法"></a>Array 常用方法</h3><ol>
-<li>toString(int[ ] a)<ul>
-<li>返回指定数组内容的字符串表达形式</li>
-</ul>
-</li>
-<li>sort(int[ ] a)<ul>
-<li>按数字排序</li>
-</ul>
-</li>
-</ol>
-<h2 id="5-基本类型包装类"><a href="#5-基本类型包装类" class="headerlink" title="5. 基本类型包装类"></a>5. 基本类型包装类</h2><h3 id="1-常用的操作之一"><a href="#1-常用的操作之一" class="headerlink" title="1. 常用的操作之一"></a>1. 常用的操作之一</h3><ul>
-<li>用于基本数据类型与字符串之间的转换</li>
-</ul>
-<h3 id="2-基本数据类型-和-包装类"><a href="#2-基本数据类型-和-包装类" class="headerlink" title="2. 基本数据类型 和 包装类"></a>2. 基本数据类型 和 包装类</h3><ol>
-<li>char    和    Character</li>
-<li>int      和     Integer</li>
-</ol>
-<h3 id="3-数字转字符串"><a href="#3-数字转字符串" class="headerlink" title="3. 数字转字符串"></a>3. 数字转字符串</h3><ol>
-<li>Integer i2 = Integer.valueof(“10021”);<ul>
-<li>将字符串转化为数字</li>
-</ul>
-</li>
-<li>String ss = String.valueOf(number);<ul>
-<li>数字转字符串</li>
-</ul>
-</li>
-</ol>
-<h4 id="其他三个转换-String-与-Integer-与-int："><a href="#其他三个转换-String-与-Integer-与-int：" class="headerlink" title="其他三个转换 String 与 Integer 与 int："></a>其他三个转换 String 与 Integer 与 int：</h4><ol>
-<li>Integer i = Integer.valueOf(ss);<ul>
-<li>String 转 Integer</li>
-</ul>
-</li>
-<li>x = i.intValue();<ul>
-<li>Integer 转 int</li>
-</ul>
-</li>
-<li>x = Integer.parseInt(x);<ul>
-<li>String 直接转 int</li>
-</ul>
-</li>
-</ol>
 <ul>
-<li>只想得到基本数据类型，parseInt 更方便</li>
+<li>throws IOException</li>
 </ul>
-<h3 id="4-得到字符串中的每个数据方法"><a href="#4-得到字符串中的每个数据方法" class="headerlink" title="4. 得到字符串中的每个数据方法"></a>4. 得到字符串中的每个数据方法</h3><ul>
-<li>String[ ] strArray = s.split(“ “);</li>
-</ul>
-<h3 id="5-基本数据类型与包装类转换-装箱与拆箱"><a href="#5-基本数据类型与包装类转换-装箱与拆箱" class="headerlink" title="5. 基本数据类型与包装类转换 (装箱与拆箱)"></a>5. 基本数据类型与包装类转换 (装箱与拆箱)</h3><h4 id="1-装箱："><a href="#1-装箱：" class="headerlink" title="1.装箱："></a>1.装箱：</h4><ol>
-<li>Integer i = Integer.valueOf(100);</li>
-<li>Integer i = 100; (自动装箱)</li>
-<li>i = i + 200 (自动装箱)</li>
-</ol>
-<h4 id="2-拆箱"><a href="#2-拆箱" class="headerlink" title="2. 拆箱"></a>2. 拆箱</h4><ol>
-<li>i += 200;   （i + 200 自动拆箱）</li>
-<li>i = i + 200; （i + 200 自动拆箱）</li>
-</ol>
-<h3 id="6-注意；"><a href="#6-注意；" class="headerlink" title="6. 注意；"></a>6. 注意；</h3><ol>
-<li>在使用包装类类型的时候，如果要操作，最多先判断是否为null。</li>
-</ol>
-<h4 id="推荐："><a href="#推荐：" class="headerlink" title="推荐："></a>推荐：</h4><ul>
-<li>只要是对象，在使用前就必须判断是否为null</li>
-</ul>
-<h4 id="包装类的使用："><a href="#包装类的使用：" class="headerlink" title="包装类的使用："></a>包装类的使用：</h4><ol>
-<li>集合能接收的类型为Object，基本类型是无法添加进去的，还有泛式也必须使用包装类。</li>
-<li>包装类型是引用类型，说白了就是一个类</li>
-</ol>
-<h2 id="6-Date-日期类"><a href="#6-Date-日期类" class="headerlink" title="6. Date 日期类"></a>6. Date 日期类</h2><h3 id="1-Date-定义"><a href="#1-Date-定义" class="headerlink" title="1. Date 定义"></a>1. Date 定义</h3><ul>
-<li>Date d = new Date();</li>
-</ul>
-<h3 id="2-Date-常用方法"><a href="#2-Date-常用方法" class="headerlink" title="2. Date 常用方法"></a>2. Date 常用方法</h3><ol>
-<li>System.out.println(d.getTime());<ul>
-<li>从1970年1月1日到现在的毫秒值</li>
-</ul>
-</li>
-</ol>
-<h3 id="3-表示"><a href="#3-表示" class="headerlink" title="3. 表示"></a>3. 表示</h3><ol>
-<li>y 年</li>
-<li>M 月</li>
-<li>d 日</li>
-<li>H 时</li>
-<li>m 分</li>
-<li>s 秒</li>
-</ol>
-<h3 id="4-Date-与-String："><a href="#4-Date-与-String：" class="headerlink" title="4. Date 与 String："></a>4. Date 与 String：</h3><h4 id="1-从-date-到-String"><a href="#1-从-date-到-String" class="headerlink" title="1. 从 date 到 String"></a>1. 从 date 到 String</h4><ul>
-<li>Date d = new Date();</li>
-<li><p>两种构造方法</p>
-<ol>
-<li>SimpleDateFormat sdf = new SimpleDateFormat();  //  2023/7/3 上午10:50</li>
-<li>SimpleDateFormat sdf = new SimpleDateFormat(“yyyy年MM月dd日 HH:mm:ss”); //  2023年07年03日  10:48:47</li>
-</ol>
-</li>
-<li><p>转换：</p>
-<ul>
-<li>String s = sdf.format(d);  //从data到String   (format())</li>
-</ul>
-</li>
-</ul>
-<h4 id="2-从-String-到-date"><a href="#2-从-String-到-date" class="headerlink" title="2. 从 String 到 date"></a>2. 从 String 到 date</h4><ul>
-<li>String ss = “2023年07年03日 11:11:11”;</li>
-<li><p>SimpleDateFormat sdf2 = new SimpleDateFormat(“yyyy年MM月dd日 HH:mm:ss”);</p>
-</li>
-<li><p>转换：</p>
-<ul>
-<li>Date dd = sdf2.parse(ss); // 从 String 到 date   (parse())</li>
-</ul>
-</li>
-</ul>
-<h2 id="7-Calendar-常用方法："><a href="#7-Calendar-常用方法：" class="headerlink" title="7. Calendar 常用方法："></a>7. Calendar 常用方法：</h2><h4 id="1-get-例如：返回年-月-日"><a href="#1-get-例如：返回年-月-日" class="headerlink" title="1. get:   例如：返回年 月 日"></a>1. get:   例如：返回年 月 日</h4><ol>
-<li>Calendar c = Calendar.getInstance();<ol>
-<li>int year = c.get(Calendar.YEAR);</li>
-<li>int month = c.get(Calendar.MONTH) + 1;</li>
-<li>int date = c.get(Calendar.DATE);</li>
-<li>System.out.println(year + “年” + month + “月” + date + “日”);</li>
+<h2 id="1-异常体系"><a href="#1-异常体系" class="headerlink" title="1. 异常体系"></a>1. 异常体系</h2><h3 id="1-异常体系："><a href="#1-异常体系：" class="headerlink" title="1. 异常体系："></a>1. 异常体系：</h3><ol>
+<li>Throwable:<ol>
+<li>Error: 严重问题，不需要处理</li>
+<li>Exception:<ol>
+<li>RuntimeException: (称为运行时异常，其他均为编译时异常) 在编译期是不检查的，出现问题后，需要我们回来改代码</li>
+<li>非RuntimeException: 编译期就必须处理的，否则程序不能通过编译，更不能正常运行</li>
 </ol>
 </li>
 </ol>
-<h4 id="2-add-例如：年份减去3"><a href="#2-add-例如：年份减去3" class="headerlink" title="2. add:   例如：年份减去3"></a>2. add:   例如：年份减去3</h4><ul>
-<li>c.add(Calendar.YEAR, -3);</li>
+</li>
+</ol>
+<h2 id="2-JVM的默认处理方案"><a href="#2-JVM的默认处理方案" class="headerlink" title="2. JVM的默认处理方案"></a>2. JVM的默认处理方案</h2><ul>
+<li>如果程序出现了问题，我们没有做任何处理，最终JVM会做默认的处理：<ol>
+<li>把异常的名称，异常原因和异常出现的位置等信息输出在了控制台。</li>
+<li>程序终止执行。</li>
+</ol>
+</li>
 </ul>
-<h4 id="3-set-例如：设置2020-12-23-注意：月份从0开始"><a href="#3-set-例如：设置2020-12-23-注意：月份从0开始" class="headerlink" title="3. set:  例如：设置2020.12.23 (注意：月份从0开始)"></a>3. set:  例如：设置2020.12.23 (注意：月份从0开始)</h4><ul>
-<li>c.set(2020,11,23);</li>
+<h2 id="3-异常处理"><a href="#3-异常处理" class="headerlink" title="3. 异常处理"></a>3. 异常处理</h2><ul>
+<li>在JVM的默认处理方案上，不会终止程序，而会继续执行</li>
 </ul>
+<h3 id="1-格式："><a href="#1-格式：" class="headerlink" title="1. 格式："></a>1. 格式：</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">try</span><span class="token punctuation">&#123;</span>
+	可能出现异常的代码<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">&#123;</span>
+	异常的处理代码<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="2-例如："><a href="#2-例如：" class="headerlink" title="2. 例如："></a>2. 例如：</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">try</span><span class="token punctuation">&#123;</span>
+	<span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> arr <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>arr<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">ArrayIndexOutOfBoundsException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 返回最全面的异常信息 (最常用)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="4-两种异常"><a href="#4-两种异常" class="headerlink" title="4.两种异常"></a>4.两种异常</h2><ol>
+<li>编译时异常：必须显示处理，否则程序就会发生错误，无法通过编译</li>
+<li>运行时异常：无需显示处理，也可以和编译时异常一样处理</li>
+</ol>
+<h2 id="5-处理异常2-throws-异常类名-："><a href="#5-处理异常2-throws-异常类名-：" class="headerlink" title="5. 处理异常2 (throws 异常类名)："></a>5. 处理异常2 (throws 异常类名)：</h2><ul>
+<li>throw抛出异常没有处理，不往下执行，try catch往下执行</li>
+</ul>
+<h4 id="异常处理之throws"><a href="#异常处理之throws" class="headerlink" title="异常处理之throws:"></a>异常处理之throws:</h4><ol>
+<li>编译时异常必须要进行处理，两种处理方案：try…catch… 或者 throws。(如果throws来处理，将来谁调用谁处理)</li>
+<li>运行时异常可以不处理，出现问题后，需要我们回来改代码</li>
+</ol>
+<h2 id="6-自定义异常"><a href="#6-自定义异常" class="headerlink" title="6. 自定义异常"></a>6. 自定义异常</h2><h3 id="1-格式：-1"><a href="#1-格式：-1" class="headerlink" title="1. 格式："></a>1. 格式：</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> 异常类名 <span class="token keyword">extends</span> <span class="token class-name">Exception</span> <span class="token punctuation">&#123;</span>
+	无参构造
+	带参构造
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="2-范例"><a href="#2-范例" class="headerlink" title="2. 范例"></a>2. 范例</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ScoreException</span> <span class="token keyword">extends</span> <span class="token class-name">Exception</span><span class="token punctuation">&#123;</span>
+	<span class="token keyword">public</span> <span class="token class-name">ScoreException</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+	<span class="token keyword">public</span> <span class="token class-name">ScoreException</span> <span class="token punctuation">(</span><span class="token class-name">String</span> message<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		<span class="token keyword">super</span><span class="token punctuation">(</span>message<span class="token punctuation">)</span><span class="token punctuation">;</span>	
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="7-throw-和-throws-的区别"><a href="#7-throw-和-throws-的区别" class="headerlink" title="7. throw 和 throws 的区别"></a>7. throw 和 throws 的区别</h2><h4 id="1-throws"><a href="#1-throws" class="headerlink" title="1. throws:"></a>1. throws:</h4><ol>
+<li>用在方法名后面，跟的是异常类名</li>
+<li>表示抛出异常，由该方法的调用者来处理</li>
+<li>表示可以出现异常（不一定出现异常）</li>
+</ol>
+<h4 id="2-throw"><a href="#2-throw" class="headerlink" title="2. throw:"></a>2. throw:</h4><ol>
+<li>用在方法体内，跟的是异常对象名</li>
+<li>表示抛出异常，由方法体内的语句处理</li>
+<li>一定出现了某种异常</li>
+</ol>
 
                 
             </div>
@@ -622,7 +517,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://ich-liebe.github.io/2023/10/29/%E5%B8%B8%E7%94%A8API/">https://ich-liebe.github.io/2023/10/29/%E5%B8%B8%E7%94%A8API/</a>
+                    <a href="https://ich-liebe.github.io/2023/10/29/%E5%BC%82%E5%B8%B8/">https://ich-liebe.github.io/2023/10/29/%E5%BC%82%E5%B8%B8/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -1007,9 +902,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2023/10/29/%E5%BC%82%E5%B8%B8/">
                     <div class="card-image">
@@ -1026,9 +922,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-10-29
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-10-29
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1041,6 +937,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -1059,30 +956,30 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/10/28/%E7%89%9B%E5%AE%A2%E5%B0%8F%E7%99%BD%E6%9C%88%E8%B5%9B80/">
+                <a href="/2023/10/29/%E5%B8%B8%E7%94%A8API/">
                     <div class="card-image">
                         
-                        <img src="https://picdl.sunbangyan.cn/2023/10/28/5b2d9d0a77a99999ff03ac43cd2dafd2.jpg" class="responsive-img" alt="牛客小白月赛80">
+                        <img src="https://picst.sunbangyan.cn/2023/10/29/da23768dfa4519181e06e96872ddcffc.jpg" class="responsive-img" alt="常用API">
                         
-                        <span class="card-title">牛客小白月赛80</span>
+                        <span class="card-title">常用API</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            牛客小白月赛80题解
+                            java中的常用API
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-10-28
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-10-29
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E9%A2%98%E8%A7%A3/" class="post-category">
-                                    题解
+                            <a href="/categories/javase/" class="post-category">
+                                    javase
                                 </a>
                             
                             
@@ -1092,8 +989,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%B0%8F%E7%99%BD%E6%9C%88%E8%B5%9B/">
-                        <span class="chip bg-color">小白月赛</span>
+                    <a href="/tags/javase/">
+                        <span class="chip bg-color">javase</span>
                     </a>
                     
                 </div>
