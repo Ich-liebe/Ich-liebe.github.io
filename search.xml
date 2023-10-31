@@ -2646,4 +2646,113 @@ bool <span class="token function">find</span><span class="token punctuation">(</
         <tag>javase</tag>
       </tags>
   </entry>
+  <entry>
+    <title>会话技术</title>
+    <url>/2023/10/31/%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AF/</url>
+    <content><![CDATA[<div align='center'>
+    <span style="font-size:45px; color:pink">会话技术</span>
+</div>
+
+<h5 id="1-会话-一次会话中包含多次请求和响应。"><a href="#1-会话-一次会话中包含多次请求和响应。" class="headerlink" title="1. 会话: 一次会话中包含多次请求和响应。"></a>1. 会话: 一次会话中包含多次请求和响应。</h5><ul>
+<li>一次会话：浏览器第一次给服务器资源发送请求，会话建立，知道有一方断开为止</li>
+</ul>
+<h5 id="2-功能：在一次会话的范围内多次请求间，共享数据"><a href="#2-功能：在一次会话的范围内多次请求间，共享数据" class="headerlink" title="2. 功能：在一次会话的范围内多次请求间，共享数据"></a>2. 功能：在一次会话的范围内多次请求间，共享数据</h5><h5 id="3-方式："><a href="#3-方式：" class="headerlink" title="3. 方式："></a>3. 方式：</h5><ol>
+<li>客户端会话技术：Cookie</li>
+<li>服务器端会话技术：Session</li>
+</ol>
+<div align='center'>
+    <span style="font-size:38px; color:orange">Cookie</span>
+</div>
+
+
+<h3 id="1-概念："><a href="#1-概念：" class="headerlink" title="1. 概念："></a>1. 概念：</h3><ul>
+<li>客户端会话技术，将数据保存到客户端</li>
+</ul>
+<h3 id="2-快速入门："><a href="#2-快速入门：" class="headerlink" title="2. 快速入门："></a>2. 快速入门：</h3><h4 id="使用步骤："><a href="#使用步骤：" class="headerlink" title="使用步骤："></a>使用步骤：</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token number">1.</span> 创建<span class="token class-name">Cookie</span>对象，绑定数据
+	<span class="token keyword">new</span> <span class="token class-name">Cookie</span><span class="token punctuation">(</span><span class="token class-name">String</span> name<span class="token punctuation">,</span> <span class="token class-name">String</span> value<span class="token punctuation">)</span>
+<span class="token number">2.</span> 发送<span class="token class-name">Cookie</span>对象
+	response<span class="token punctuation">.</span><span class="token function">addCookie</span><span class="token punctuation">(</span><span class="token class-name">Cookie</span> cookie<span class="token punctuation">)</span>
+<span class="token number">3.</span> 获取<span class="token class-name">Cookie</span>，拿到数据
+	<span class="token class-name">Cookie</span><span class="token punctuation">[</span><span class="token punctuation">]</span> request<span class="token punctuation">.</span><span class="token function">getCookies</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="3-实现原理："><a href="#3-实现原理：" class="headerlink" title="3. 实现原理："></a>3. 实现原理：</h3><ul>
+<li>基于响应头set-cookie 和请求头 Cookie 实现</li>
+</ul>
+<h3 id="4-cookie-的细节"><a href="#4-cookie-的细节" class="headerlink" title="4. cookie 的细节"></a>4. cookie 的细节</h3><h5 id="1-一次可不可以发送多个Cookie？"><a href="#1-一次可不可以发送多个Cookie？" class="headerlink" title="1. 一次可不可以发送多个Cookie？"></a>1. 一次可不可以发送多个Cookie？</h5><ol>
+<li>可以创建多个Cookie对象，使用response调用多次addCookie方法发送Cookie 即可</li>
+</ol>
+<h5 id="2-Cookie-在浏览器中保存多长时间？"><a href="#2-Cookie-在浏览器中保存多长时间？" class="headerlink" title="2. Cookie 在浏览器中保存多长时间？"></a>2. Cookie 在浏览器中保存多长时间？</h5><ol>
+<li>默认情况下，当浏览器关闭后，Cookie数据被销毁</li>
+<li>持久化存储:<ul>
+<li>setMaxAge(int seconds)<ol>
+<li>正数：将Cookie 数据写到硬盘的文件中。持久化存储。Cookie存活的秒数</li>
+<li>负数：默认值</li>
+<li>零：删除Cookie信息</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+<h5 id="3-Cookie-能不能存中文？"><a href="#3-Cookie-能不能存中文？" class="headerlink" title="3. Cookie 能不能存中文？"></a>3. Cookie 能不能存中文？</h5><ul>
+<li>可以，但不支持特殊字符，建议用URL编码</li>
+</ul>
+<h5 id="4-Cookie-共享问题？"><a href="#4-Cookie-共享问题？" class="headerlink" title="4. Cookie 共享问题？"></a>4. Cookie 共享问题？</h5><ol>
+<li><p>假设在一个 tomcat 服务器中，部署了多个 web 项目，那么在这些 web 项目中 cookie 能不能共享</p>
+<ul>
+<li>默认情况下不能共享<ul>
+<li>setPath(String path): 设置 cookie 的获取范围。默认情况下，设置当前的虚拟目录<ul>
+<li>如果要共享，则可以将 path 设置为”/“</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>不同的 tomcat 服务器间 cookie 共享问题？</p>
+<ul>
+<li>setDomin(String path): 如果设置一级域名相同，那么多个服务器之间 cookie 可以共享<ul>
+<li>setDomin(“.baidu.com”), 那么tieba.baidu.com 和 news.baidu.com 中 cookie 可以共享</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="5-Cookie-的特点和作用"><a href="#5-Cookie-的特点和作用" class="headerlink" title="5. Cookie 的特点和作用"></a>5. Cookie 的特点和作用</h3><h4 id="1-特点"><a href="#1-特点" class="headerlink" title="1. 特点"></a>1. 特点</h4><ol>
+<li>cookie 存储数据在客户端浏览器</li>
+<li>浏览器对于单个 cookie 的大小有限制(4kb) 以及 对同一个域名下的总 cookie 数量也有限制(20个)</li>
+</ol>
+<h4 id="2-作用"><a href="#2-作用" class="headerlink" title="2. 作用"></a>2. 作用</h4><ol>
+<li>cookie 一般用于存储少量不太敏感的数据</li>
+<li>在不登陆的情况下，完成服务器对客户端的身份识别</li>
+</ol>
+<h3 id="6-案例"><a href="#6-案例" class="headerlink" title="6. 案例"></a>6. 案例</h3><ul>
+<li>记住上一次访问时间</li>
+</ul>
+<h4 id="1-需求"><a href="#1-需求" class="headerlink" title="1. 需求"></a>1. 需求</h4><ol>
+<li>访问一个 Servlet, 如果是第一次访问，则提示：您好，欢迎您首次访问。</li>
+<li>如果不是第一次访问，则提示：欢迎回来，您上次访问时间为：显示时间字符串</li>
+</ol>
+<h4 id="2-分析"><a href="#2-分析" class="headerlink" title="2. 分析"></a>2. 分析</h4><ol>
+<li>可以采用 Cookie l来完成</li>
+<li>在服务器中的 Servlet 判断是否有一个名为 lastTime 的 Cookie<ol>
+<li>有：不是第一次访问<ol>
+<li>响应数据：欢迎回来，您上次访问时间是：lastTime=2023年1月1日11:11:11</li>
+<li>写回 Cookie : lastTime=2023年1月1日11:11:11</li>
+</ol>
+</li>
+<li>没有：是第一次访问<ol>
+<li>响应数据：您好，欢迎您首次访问</li>
+<li>写回 Cookie : lastTime=2023年1月1日11:11:11</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>javaweb</category>
+      </categories>
+      <tags>
+        <tag>javaweb</tag>
+      </tags>
+  </entry>
 </search>

@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="集合进阶">
-    <meta name="description" content="java中的集合进阶">
+    <meta name="keywords" content="会话技术">
+    <meta name="description" content="javaweb中的会话技术">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>集合进阶 | szy Blog</title>
+    <title>会话技术 | szy Blog</title>
     <link rel="icon" type="image/jpeg" href="/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230915160303.jpg">
     
     <style>
@@ -343,12 +343,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://picss.sunbangyan.cn/2023/10/31/0c67e5e89bb3ee8079a33fa7afe7af52.png')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://picst.sunbangyan.cn/2023/10/31/02190b4a88b309204fc4e6a20ca342bb.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">集合进阶</h1>
+                    <h1 class="description center-align post-title">会话技术</h1>
                 </div>
             </div>
         </div>
@@ -372,8 +372,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/javase/">
-                                <span class="chip bg-color">javase</span>
+                            <a href="/tags/javaweb/">
+                                <span class="chip bg-color">javaweb</span>
                             </a>
                         
                     </div>
@@ -384,8 +384,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/javase/" class="post-category">
-                                javase
+                            <a href="/categories/javaweb/" class="post-category">
+                                javaweb
                             </a>
                         
                     </div>
@@ -422,184 +422,103 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <div align='center'>
-    <span style="font-size:45px; color:pink">集合进阶</span>
+    <span style="font-size:45px; color:pink">会话技术</span>
 </div>
 
-<h2 id="0-1-概要"><a href="#0-1-概要" class="headerlink" title="0.1 概要"></a>0.1 概要</h2><h4 id="1-Collection-单列"><a href="#1-Collection-单列" class="headerlink" title="1. Collection (单列):"></a>1. Collection (单列):</h4><ul>
-<li>List (可重复): ArrayList,  LinkedList</li>
-<li>Set (不可重复): HashSet, TreeSet</li>
+<h5 id="1-会话-一次会话中包含多次请求和响应。"><a href="#1-会话-一次会话中包含多次请求和响应。" class="headerlink" title="1. 会话: 一次会话中包含多次请求和响应。"></a>1. 会话: 一次会话中包含多次请求和响应。</h5><ul>
+<li>一次会话：浏览器第一次给服务器资源发送请求，会话建立，知道有一方断开为止</li>
 </ul>
-<h4 id="2-Map-双列"><a href="#2-Map-双列" class="headerlink" title="2. Map (双列)"></a>2. Map (双列)</h4><ul>
-<li>HashMap</li>
-</ul>
-<h4 id="3-Tips-其他方面"><a href="#3-Tips-其他方面" class="headerlink" title="3. Tips (其他方面)"></a>3. Tips (其他方面)</h4><ol>
-<li>Collection, Map, List, Set 等为接口</li>
-<li>ArrayList, LinkedList, HashSet, TreeSet, HashMap 等位实现类</li>
+<h5 id="2-功能：在一次会话的范围内多次请求间，共享数据"><a href="#2-功能：在一次会话的范围内多次请求间，共享数据" class="headerlink" title="2. 功能：在一次会话的范围内多次请求间，共享数据"></a>2. 功能：在一次会话的范围内多次请求间，共享数据</h5><h5 id="3-方式："><a href="#3-方式：" class="headerlink" title="3. 方式："></a>3. 方式：</h5><ol>
+<li>客户端会话技术：Cookie</li>
+<li>服务器端会话技术：Session</li>
 </ol>
+<div align='center'>
+    <span style="font-size:38px; color:orange">Cookie</span>
+</div>
+
+
+<h3 id="1-概念："><a href="#1-概念：" class="headerlink" title="1. 概念："></a>1. 概念：</h3><ul>
+<li>客户端会话技术，将数据保存到客户端</li>
+</ul>
+<h3 id="2-快速入门："><a href="#2-快速入门：" class="headerlink" title="2. 快速入门："></a>2. 快速入门：</h3><h4 id="使用步骤："><a href="#使用步骤：" class="headerlink" title="使用步骤："></a>使用步骤：</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token number">1.</span> 创建<span class="token class-name">Cookie</span>对象，绑定数据
+	<span class="token keyword">new</span> <span class="token class-name">Cookie</span><span class="token punctuation">(</span><span class="token class-name">String</span> name<span class="token punctuation">,</span> <span class="token class-name">String</span> value<span class="token punctuation">)</span>
+<span class="token number">2.</span> 发送<span class="token class-name">Cookie</span>对象
+	response<span class="token punctuation">.</span><span class="token function">addCookie</span><span class="token punctuation">(</span><span class="token class-name">Cookie</span> cookie<span class="token punctuation">)</span>
+<span class="token number">3.</span> 获取<span class="token class-name">Cookie</span>，拿到数据
+	<span class="token class-name">Cookie</span><span class="token punctuation">[</span><span class="token punctuation">]</span> request<span class="token punctuation">.</span><span class="token function">getCookies</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="3-实现原理："><a href="#3-实现原理：" class="headerlink" title="3. 实现原理："></a>3. 实现原理：</h3><ul>
+<li>基于响应头set-cookie 和请求头 Cookie 实现</li>
+</ul>
+<h3 id="4-cookie-的细节"><a href="#4-cookie-的细节" class="headerlink" title="4. cookie 的细节"></a>4. cookie 的细节</h3><h5 id="1-一次可不可以发送多个Cookie？"><a href="#1-一次可不可以发送多个Cookie？" class="headerlink" title="1. 一次可不可以发送多个Cookie？"></a>1. 一次可不可以发送多个Cookie？</h5><ol>
+<li>可以创建多个Cookie对象，使用response调用多次addCookie方法发送Cookie 即可</li>
+</ol>
+<h5 id="2-Cookie-在浏览器中保存多长时间？"><a href="#2-Cookie-在浏览器中保存多长时间？" class="headerlink" title="2. Cookie 在浏览器中保存多长时间？"></a>2. Cookie 在浏览器中保存多长时间？</h5><ol>
+<li>默认情况下，当浏览器关闭后，Cookie数据被销毁</li>
+<li>持久化存储:<ul>
+<li>setMaxAge(int seconds)<ol>
+<li>正数：将Cookie 数据写到硬盘的文件中。持久化存储。Cookie存活的秒数</li>
+<li>负数：默认值</li>
+<li>零：删除Cookie信息</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+<h5 id="3-Cookie-能不能存中文？"><a href="#3-Cookie-能不能存中文？" class="headerlink" title="3. Cookie 能不能存中文？"></a>3. Cookie 能不能存中文？</h5><ul>
+<li>可以，但不支持特殊字符，建议用URL编码</li>
+</ul>
+<h5 id="4-Cookie-共享问题？"><a href="#4-Cookie-共享问题？" class="headerlink" title="4. Cookie 共享问题？"></a>4. Cookie 共享问题？</h5><ol>
+<li><p>假设在一个 tomcat 服务器中，部署了多个 web 项目，那么在这些 web 项目中 cookie 能不能共享</p>
 <ul>
-<li>技巧：Ctrl + Alt + v 快速生成</li>
-</ul>
-<h2 id="1-Collection"><a href="#1-Collection" class="headerlink" title="1. Collection :"></a>1. Collection :</h2><h3 id="1-Collection-集合常用方法："><a href="#1-Collection-集合常用方法：" class="headerlink" title="1. Collection 集合常用方法："></a>1. Collection 集合常用方法：</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token number">1.</span> <span class="token keyword">boolean</span> <span class="token function">add</span><span class="token punctuation">(</span><span class="token class-name">E</span> e<span class="token punctuation">)</span>  <span class="token comment">//添加元素</span>
-<span class="token number">2.</span> <span class="token keyword">boolean</span> <span class="token function">remove</span><span class="token punctuation">(</span><span class="token class-name">Object</span> o<span class="token punctuation">)</span>  <span class="token comment">//从集合中移除指定元素</span>
-<span class="token number">3.</span> <span class="token keyword">void</span> <span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment">//清空结合中所有元素</span>
-<span class="token number">4.</span> <span class="token keyword">boolean</span> <span class="token function">contains</span><span class="token punctuation">(</span><span class="token class-name">Object</span> o<span class="token punctuation">)</span>  <span class="token comment">//判断集合中是否存在指定元素</span>
-<span class="token number">5.</span> <span class="token keyword">boolean</span> <span class="token function">isEmpty</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment">//判断集合是否为空</span>
-<span class="token number">6.</span> <span class="token keyword">int</span> <span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment">//集合的长度，也就是集合中元素的个数</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="2-Collection-集合的便利："><a href="#2-Collection-集合的便利：" class="headerlink" title="2. Collection 集合的便利："></a>2. Collection 集合的便利：</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Collection</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span> c <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token class-name">Interator</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> i <span class="token operator">=</span> c<span class="token punctuation">.</span><span class="token function">interator</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">while</span> <span class="token punctuation">(</span>i<span class="token punctuation">.</span><span class="token function">hasNext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#123;</span>
-    <span class="token class-name">String</span> s <span class="token operator">=</span> i<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="2-List"><a href="#2-List" class="headerlink" title="2. List :"></a>2. List :</h2><h3 id="1-List-集合常用方法"><a href="#1-List-集合常用方法" class="headerlink" title="1. List 集合常用方法 :"></a>1. List 集合常用方法 :</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token number">1.</span> <span class="token keyword">void</span> add <span class="token punctuation">(</span><span class="token keyword">int</span> index<span class="token punctuation">,</span> <span class="token class-name">E</span> element<span class="token punctuation">)</span>  <span class="token comment">//添加元素</span>
-<span class="token number">2.</span> <span class="token class-name">E</span> <span class="token function">remove</span><span class="token punctuation">(</span><span class="token keyword">int</span> index<span class="token punctuation">)</span>  <span class="token comment">//删除指定索引处元素</span>
-<span class="token number">3.</span> <span class="token class-name">E</span> <span class="token function">set</span><span class="token punctuation">(</span><span class="token keyword">int</span> index<span class="token punctuation">,</span> <span class="token class-name">Object</span> o<span class="token punctuation">)</span>  <span class="token comment">//修改索引处的元素，返回被修改的元素(被修改前的元素)</span>
-<span class="token number">4.</span> <span class="token class-name">E</span> <span class="token function">get</span><span class="token punctuation">(</span><span class="token keyword">int</span> index<span class="token punctuation">)</span>  <span class="token comment">//返回指定位置的元素</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="2-特点"><a href="#2-特点" class="headerlink" title="2. 特点"></a>2. 特点</h3><ol>
-<li>ArrayList 底层是数组 (查询快，增删慢)</li>
-<li>LinkedList 底层是链表 (查询慢，增删快)</li>
-</ol>
-<h3 id="3-LinkedList"><a href="#3-LinkedList" class="headerlink" title="3. LinkedList :"></a>3. LinkedList :</h3><h4 id="LinkedList集合的特有功能"><a href="#LinkedList集合的特有功能" class="headerlink" title="LinkedList集合的特有功能:"></a>LinkedList集合的特有功能:</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token number">1.</span> <span class="token keyword">void</span> <span class="token function">addFirst</span><span class="token punctuation">(</span><span class="token class-name">E</span> e<span class="token punctuation">)</span>  <span class="token comment">//头插元素</span>
-<span class="token number">2.</span> <span class="token keyword">void</span> <span class="token function">addLast</span><span class="token punctuation">(</span><span class="token class-name">E</span> e<span class="token punctuation">)</span>  <span class="token comment">//尾插元素</span>
-<span class="token number">3.</span> <span class="token class-name">E</span> <span class="token function">getFirst</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment">//返回列表第一个元素</span>
-<span class="token number">4.</span> <span class="token class-name">E</span> <span class="token function">getLast</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment">//返回列表最后一个元素</span>
-<span class="token number">5.</span> <span class="token class-name">E</span> <span class="token function">removeFirst</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment">//删除列表第一个元素</span>
-<span class="token number">6.</span> <span class="token class-name">E</span> <span class="token function">removeLast</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment">//删除列表中最后一个元素</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="4-其他"><a href="#4-其他" class="headerlink" title="4. 其他"></a>4. 其他</h3><ol>
-<li>List 的并发异常修改</li>
-<li>[10, 233, 3223]  (集合输出格式)</li>
-</ol>
-<h2 id="3-Set"><a href="#3-Set" class="headerlink" title="3. Set:"></a>3. Set:</h2><h3 id="1-特点："><a href="#1-特点：" class="headerlink" title="1. 特点："></a>1. 特点：</h3><ol>
-<li>无重复元素</li>
-<li>没有带索引的方法，所以不能使用普通的for循环</li>
-</ol>
-<h3 id="2-HashSet-集合特点："><a href="#2-HashSet-集合特点：" class="headerlink" title="2. HashSet 集合特点："></a>2. HashSet 集合特点：</h3><ol>
-<li>底层数据结构是哈希表</li>
-<li>对集合的迭代顺序不做保证，不保证存储和去取出的元素顺序一样</li>
-<li>没有带索引的方法，所以不能使用普通的 for 循环便利</li>
-<li>由于是 Set 集合，所以不包含重复元素</li>
-</ol>
-<h3 id="3-HashSet-存储元素："><a href="#3-HashSet-存储元素：" class="headerlink" title="3. HashSet 存储元素："></a>3. HashSet 存储元素：</h3><ul>
-<li>要保证元素唯一性，需要重写 hashCode() 和 equals()</li>
-</ul>
-<h3 id="4-LinkedHashSet-集合特点："><a href="#4-LinkedHashSet-集合特点：" class="headerlink" title="4. LinkedHashSet 集合特点："></a>4. LinkedHashSet 集合特点：</h3><ol>
-<li>哈希表和链表实现的 Set 接口，具有可以测的迭代次序</li>
-<li>由链表保证元素有序，也就是存储和取出顺序一样</li>
-<li>由哈希表保证元素唯一，也就是没有重复的元素</li>
-</ol>
-<h3 id="5-TreeSet-集合特点："><a href="#5-TreeSet-集合特点：" class="headerlink" title="5. TreeSet 集合特点："></a>5. TreeSet 集合特点：</h3><ol>
-<li>元素有序 (按照构造方法排序)<ul>
-<li>TreeSet(): 根据元素的自然顺序进行排序</li>
-<li>TreeSet(Comparator&lt;?&gt;  Comparator) : 根据指定的比较器进行排序</li>
+<li>默认情况下不能共享<ul>
+<li>setPath(String path): 设置 cookie 的获取范围。默认情况下，设置当前的虚拟目录<ul>
+<li>如果要共享，则可以将 path 设置为”/“</li>
 </ul>
 </li>
-<li>没有带索引的方法，不能使用普通 for 循环遍历</li>
-<li>由于是 Set 集合，所以不包含重复元素</li>
-<li>（用 int 类型的包装类型Integer，因为是集合）</li>
-</ol>
-<h2 id="4-其他-1"><a href="#4-其他-1" class="headerlink" title="4. 其他"></a>4. 其他</h2><h3 id="1-哈希值"><a href="#1-哈希值" class="headerlink" title="1. 哈希值"></a>1. 哈希值</h3><ul>
-<li>默认情况下，不同对象的哈希值不同。</li>
-<li>而重写hashCode(), 可以使哈希值相同</li>
 </ul>
-<h3 id="2-自然排序Comparable"><a href="#2-自然排序Comparable" class="headerlink" title="2.自然排序Comparable"></a>2.自然排序Comparable</h3><ul>
-<li>自然排序，就是让元素所属的类实现 Comparable 接口，重写ComparableTo(T O) 方法</li>
-<li>接口：implements Comparable<String> (记得后面接收遍历名), 重写CompareTo(T O) 方法</li>
+</li>
 </ul>
-<h3 id="3-比较器的使用"><a href="#3-比较器的使用" class="headerlink" title="3. 比较器的使用"></a>3. 比较器的使用</h3><ul>
-<li>用 Tree 集合存储自定义对象，带参构造方法使用的是比较器排序对元素进行排序。</li>
-<li>比较器排序，就是让集合构造方法结构 Comparator 实现类对象，重写 Comparable (T O1, T O2)方法</li>
-</ul>
-<h2 id="5-泛型"><a href="#5-泛型" class="headerlink" title="5. 泛型"></a>5. 泛型</h2><h3 id="1-泛型定义格式"><a href="#1-泛型定义格式" class="headerlink" title="1. 泛型定义格式"></a>1. 泛型定义格式</h3><ol>
-<li>&lt;类型&gt;: 指定一种类型的格式。这里的类型可以看成形参。</li>
-<li>&lt;类型1，类型2 … &gt; 指定多种类型的形式。这里的类型可以看作形参。</li>
-</ol>
-<h3 id="2-泛型的好处"><a href="#2-泛型的好处" class="headerlink" title="2. 泛型的好处"></a>2. 泛型的好处</h3><ol>
-<li>把运行期间的问题提前到了编译期。</li>
-<li>避免了强制类型转换。</li>
-</ol>
-<h3 id="3-泛型类定义格式："><a href="#3-泛型类定义格式：" class="headerlink" title="3. 泛型类定义格式："></a>3. 泛型类定义格式：</h3><ol>
-<li>修饰符 class 类名&lt;类型&gt; { }</li>
-<li>public class Generic<T> { }</li>
-</ol>
-<h3 id="4-泛型方法"><a href="#4-泛型方法" class="headerlink" title="4. 泛型方法"></a>4. 泛型方法</h3><ol>
-<li><p>格式：修饰符&lt;类型&gt;  返回值类型  方法名(类型 变量名) { }</p>
 </li>
-<li><p>范例：</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> <span class="token keyword">void</span> <span class="token function">show</span><span class="token punctuation">(</span><span class="token class-name">T</span> t<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-</li>
-</ol>
-<h3 id="5-泛型接口："><a href="#5-泛型接口：" class="headerlink" title="5. 泛型接口："></a>5. 泛型接口：</h3><ol>
-<li><p>格式：修饰符  interface  接口名&lt;类型&gt; { }</p>
-</li>
-<li><p>范例</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">Generic</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> <span class="token punctuation">&#123;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-</li>
-</ol>
-<h3 id="6-类型通配符"><a href="#6-类型通配符" class="headerlink" title="6. 类型通配符"></a>6. 类型通配符</h3><ol>
-<li><p>类型通配符 &lt;?&gt;</p>
+<li><p>不同的 tomcat 服务器间 cookie 共享问题？</p>
 <ul>
-<li><p>例如: </p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span><span class="token punctuation">></span></span> list <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Object</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-</li>
+<li>setDomin(String path): 如果设置一级域名相同，那么多个服务器之间 cookie 可以共享<ul>
+<li>setDomin(“.baidu.com”), 那么tieba.baidu.com 和 news.baidu.com 中 cookie 可以共享</li>
 </ul>
 </li>
-<li><p>类型通配符上限：&lt;? extends 类型&gt;</p>
-</li>
-<li>类型通配符下限：&lt;? super 类型&gt;</li>
-</ol>
-<h3 id="7-可变参数"><a href="#7-可变参数" class="headerlink" title="7. 可变参数"></a>7. 可变参数</h3><ul>
-<li>又称为参数个数可变，用作方法的形参出现，那么方法参数个数就是可变的</li>
 </ul>
-<ol>
-<li><p>格式：修饰符  返回值类型  方法名 (数据类型…变量名) { }</p>
-</li>
-<li><p>范例：</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">int</span> sum <span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token punctuation">&#125;</span>  <span class="token comment">//实际传递的是数组，需要迭代求和</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-</li>
-<li><p>实际例子</p>
 </li>
 </ol>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> sum_1 <span class="token punctuation">&#123;</span>
-	<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">mian</span><span class="token punctuation">(</span><span class="token class-name">String</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-		<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token function">sum</span><span class="token punctuation">(</span><span class="token number">21</span><span class="token punctuation">,</span> <span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">21</span><span class="token punctuation">,</span> <span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">21</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-	<span class="token punctuation">&#125;</span>
-	<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">int</span> sum <span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>  <span class="token comment">//实际传递的是数组</span>
-		<span class="token keyword">int</span> sum <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-		<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">:</span> a<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-			sum <span class="token operator">+=</span> i<span class="token punctuation">;</span>
-		<span class="token punctuation">&#125;</span>
-		<span class="token keyword">return</span> sum<span class="token punctuation">;</span>
-	<span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="6-Map"><a href="#6-Map" class="headerlink" title="6. Map :"></a>6. Map :</h2><h3 id="1-特点：-1"><a href="#1-特点：-1" class="headerlink" title="1. 特点："></a>1. 特点：</h3><ul>
-<li>多态的方式创建 Map 对象</li>
+<h3 id="5-Cookie-的特点和作用"><a href="#5-Cookie-的特点和作用" class="headerlink" title="5. Cookie 的特点和作用"></a>5. Cookie 的特点和作用</h3><h4 id="1-特点"><a href="#1-特点" class="headerlink" title="1. 特点"></a>1. 特点</h4><ol>
+<li>cookie 存储数据在客户端浏览器</li>
+<li>浏览器对于单个 cookie 的大小有限制(4kb) 以及 对同一个域名下的总 cookie 数量也有限制(20个)</li>
+</ol>
+<h4 id="2-作用"><a href="#2-作用" class="headerlink" title="2. 作用"></a>2. 作用</h4><ol>
+<li>cookie 一般用于存储少量不太敏感的数据</li>
+<li>在不登陆的情况下，完成服务器对客户端的身份识别</li>
+</ol>
+<h3 id="6-案例"><a href="#6-案例" class="headerlink" title="6. 案例"></a>6. 案例</h3><ul>
+<li>记住上一次访问时间</li>
 </ul>
-<h3 id="2-Map-集合的基本功能："><a href="#2-Map-集合的基本功能：" class="headerlink" title="2. Map 集合的基本功能："></a>2. Map 集合的基本功能：</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token number">1.</span> <span class="token class-name">V</span> put <span class="token punctuation">(</span><span class="token class-name">K</span> key<span class="token punctuation">,</span> <span class="token class-name">V</span> value<span class="token punctuation">)</span>  <span class="token comment">//添加元素</span>
-<span class="token number">2.</span> <span class="token class-name">V</span> remove <span class="token punctuation">(</span><span class="token class-name">Object</span> key<span class="token punctuation">)</span>  <span class="token comment">//根据键删除元素</span>
-<span class="token number">3.</span> <span class="token keyword">void</span> <span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment">//清空</span>
-<span class="token number">4.</span> <span class="token keyword">boolean</span> <span class="token function">containKey</span><span class="token punctuation">(</span><span class="token class-name">Object</span> key<span class="token punctuation">)</span>  <span class="token comment">//判断集合是否包含指定的键</span>
-<span class="token number">5.</span> <span class="token keyword">boolean</span> <span class="token function">containValue</span><span class="token punctuation">(</span><span class="token class-name">Object</span> value<span class="token punctuation">)</span>  <span class="token comment">//判断集合是否包含指定的值</span>
-<span class="token number">6.</span> <span class="token keyword">boolean</span> <span class="token function">isEmpty</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment">//判断集合是否为空</span>
-<span class="token number">7.</span> <span class="token keyword">int</span> <span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment">//返回集合长度</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="3-Map集合的获取功能："><a href="#3-Map集合的获取功能：" class="headerlink" title="3. Map集合的获取功能："></a>3. Map集合的获取功能：</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token number">1.</span> <span class="token class-name">V</span> <span class="token function">get</span><span class="token punctuation">(</span><span class="token class-name">Object</span> key<span class="token punctuation">)</span>  <span class="token comment">//根据键获取值</span>
-<span class="token number">2.</span> <span class="token class-name">Set</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">K</span><span class="token punctuation">></span></span> <span class="token function">keySet</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment">//获取所有键的值</span>
-<span class="token number">3.</span> <span class="token class-name">Collection</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">V</span><span class="token punctuation">></span></span> <span class="token function">values</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment">//获取所有值的集合</span>
-<span class="token number">4.</span> <span class="token class-name">Set</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Map<span class="token punctuation">.</span>Enter</span><span class="token punctuation">&lt;</span><span class="token class-name">K</span><span class="token punctuation">,</span><span class="token class-name">V</span><span class="token punctuation">></span><span class="token punctuation">></span></span> <span class="token function">entrySet</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment">//获取所有键值对对象的集合 —— 获取所有键值对对象的集合后，可以用 getKey() 和 getValue() 的方法来获取键和值</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="4-注意："><a href="#4-注意：" class="headerlink" title="4. 注意："></a>4. 注意：</h3><ul>
-<li>重写两个方法来保证键的唯一性：hashCode() 和 equals()</li>
-</ul>
-<h3 id="5-TreeMap-参考TreeSet"><a href="#5-TreeMap-参考TreeSet" class="headerlink" title="5. TreeMap: 参考TreeSet"></a>5. TreeMap: 参考TreeSet</h3><ul>
-<li>默认按照键排序</li>
-</ul>
-<h2 id="7-Collections"><a href="#7-Collections" class="headerlink" title="7. Collections:"></a>7. Collections:</h2><h3 id="1-Collections-概述："><a href="#1-Collections-概述：" class="headerlink" title="1. Collections 概述："></a>1. Collections 概述：</h3><ul>
-<li>是针对集合操作的工具类</li>
-</ul>
-<h3 id="2-Collections-类的常用方法："><a href="#2-Collections-类的常用方法：" class="headerlink" title="2. Collections 类的常用方法："></a>2. Collections 类的常用方法：</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token number">1.</span> <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span> <span class="token keyword">extends</span> <span class="token class-name">Comparable</span> <span class="token punctuation">&lt;</span><span class="token operator">?</span><span class="token keyword">super</span> <span class="token class-name">T</span><span class="token punctuation">></span><span class="token punctuation">></span></span> <span class="token keyword">void</span> sort <span class="token punctuation">(</span><span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> list<span class="token punctuation">)</span> <span class="token comment">//升序排序</span>
-<span class="token number">2.</span> <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">reverse</span><span class="token punctuation">(</span><span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span><span class="token punctuation">></span></span> list<span class="token punctuation">)</span>  <span class="token comment">//反转指定列表的元素 (单纯反转)</span>
-<span class="token number">3.</span> <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">shuffle</span><span class="token punctuation">(</span><span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span><span class="token punctuation">></span></span> list<span class="token punctuation">)</span>  <span class="token comment">//使用默认的随机源随机排序列表</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h4 id="1-需求"><a href="#1-需求" class="headerlink" title="1. 需求"></a>1. 需求</h4><ol>
+<li>访问一个 Servlet, 如果是第一次访问，则提示：您好，欢迎您首次访问。</li>
+<li>如果不是第一次访问，则提示：欢迎回来，您上次访问时间为：显示时间字符串</li>
+</ol>
+<h4 id="2-分析"><a href="#2-分析" class="headerlink" title="2. 分析"></a>2. 分析</h4><ol>
+<li>可以采用 Cookie l来完成</li>
+<li>在服务器中的 Servlet 判断是否有一个名为 lastTime 的 Cookie<ol>
+<li>有：不是第一次访问<ol>
+<li>响应数据：欢迎回来，您上次访问时间是：lastTime=2023年1月1日11:11:11</li>
+<li>写回 Cookie : lastTime=2023年1月1日11:11:11</li>
+</ol>
+</li>
+<li>没有：是第一次访问<ol>
+<li>响应数据：您好，欢迎您首次访问</li>
+<li>写回 Cookie : lastTime=2023年1月1日11:11:11</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
 
                 
             </div>
@@ -626,7 +545,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://ich-liebe.github.io/2023/10/31/%E9%9B%86%E5%90%88%E8%BF%9B%E9%98%B6/">https://ich-liebe.github.io/2023/10/31/%E9%9B%86%E5%90%88%E8%BF%9B%E9%98%B6/</a>
+                    <a href="https://ich-liebe.github.io/2023/10/31/%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AF/">https://ich-liebe.github.io/2023/10/31/%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AF/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -664,8 +583,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/javase/">
-                                    <span class="chip bg-color">javase</span>
+                                <a href="/tags/javaweb/">
+                                    <span class="chip bg-color">javaweb</span>
                                 </a>
                             
                         </div>
@@ -1011,9 +930,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2023/10/31/%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AF/">
                     <div class="card-image">
@@ -1030,9 +950,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-10-31
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-10-31
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1045,6 +965,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -1063,23 +984,23 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/10/29/%E5%BC%82%E5%B8%B8/">
+                <a href="/2023/10/31/%E9%9B%86%E5%90%88%E8%BF%9B%E9%98%B6/">
                     <div class="card-image">
                         
-                        <img src="https://picss.sunbangyan.cn/2023/10/29/e865f8ce9d3896b6206f3a52a22fbe75.jpg" class="responsive-img" alt="异常">
+                        <img src="https://picss.sunbangyan.cn/2023/10/31/0c67e5e89bb3ee8079a33fa7afe7af52.png" class="responsive-img" alt="集合进阶">
                         
-                        <span class="card-title">异常</span>
+                        <span class="card-title">集合进阶</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            java中的异常
+                            java中的集合进阶
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-10-29
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-10-31
                             </span>
                         <span class="publish-author">
                             
