@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="会话技术">
-    <meta name="description" content="javaweb中的会话技术">
+    <meta name="keywords" content="JSP">
+    <meta name="description" content="javaweb中的JSP">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>会话技术 | szy Blog</title>
+    <title>JSP | szy Blog</title>
     <link rel="icon" type="image/jpeg" href="/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230915160303.jpg">
     
     <style>
@@ -343,12 +343,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://picst.sunbangyan.cn/2023/10/31/02190b4a88b309204fc4e6a20ca342bb.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://picss.sunbangyan.cn/2023/11/03/602b9ba990460f212d956936d96a15e8.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">会话技术</h1>
+                    <h1 class="description center-align post-title">JSP</h1>
                 </div>
             </div>
         </div>
@@ -397,7 +397,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-10-31
+                    2023-11-03
                 </div>
                 
 
@@ -422,181 +422,106 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <div align='center'>
-    <span style="font-size:45px; color:pink">会话技术</span>
-</div>
-
-<p><strong>1. 会话: 一次会话中包含多次请求和响应。</strong></p>
-<ul>
-<li>一次会话：浏览器第一次给服务器资源发送请求，会话建立，知道有一方断开为止</li>
-</ul>
-<p><strong>2. 功能：在一次会话的范围内多次请求间，共享数据</strong></p>
-<p><strong>3. 方式：</strong></p>
-<ol>
-<li>客户端会话技术：Cookie</li>
-<li>服务器端会话技术：Session</li>
-</ol>
-<div align='center'>
-    <span style="font-size:38px; color:orange">Cookie</span>
-</div>
-
-<h3 id="1-概念："><a href="#1-概念：" class="headerlink" title="1. 概念："></a>1. 概念：</h3><ul>
-<li>客户端会话技术，将数据保存到客户端</li>
-</ul>
-<h3 id="2-快速入门："><a href="#2-快速入门：" class="headerlink" title="2. 快速入门："></a>2. 快速入门：</h3><h4 id="使用步骤："><a href="#使用步骤：" class="headerlink" title="使用步骤："></a>使用步骤：</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token number">1.</span> 创建<span class="token class-name">Cookie</span>对象，绑定数据
-	<span class="token keyword">new</span> <span class="token class-name">Cookie</span><span class="token punctuation">(</span><span class="token class-name">String</span> name<span class="token punctuation">,</span> <span class="token class-name">String</span> value<span class="token punctuation">)</span>
-<span class="token number">2.</span> 发送<span class="token class-name">Cookie</span>对象
-	response<span class="token punctuation">.</span><span class="token function">addCookie</span><span class="token punctuation">(</span><span class="token class-name">Cookie</span> cookie<span class="token punctuation">)</span>
-<span class="token number">3.</span> 获取<span class="token class-name">Cookie</span>，拿到数据
-	<span class="token class-name">Cookie</span><span class="token punctuation">[</span><span class="token punctuation">]</span> request<span class="token punctuation">.</span><span class="token function">getCookies</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="3-实现原理："><a href="#3-实现原理：" class="headerlink" title="3. 实现原理："></a>3. 实现原理：</h3><ul>
-<li>基于响应头set-cookie 和请求头 Cookie 实现</li>
-</ul>
-<h3 id="4-cookie-的细节"><a href="#4-cookie-的细节" class="headerlink" title="4. cookie 的细节"></a>4. cookie 的细节</h3><h5 id="1-一次可不可以发送多个Cookie？"><a href="#1-一次可不可以发送多个Cookie？" class="headerlink" title="1. 一次可不可以发送多个Cookie？"></a>1. 一次可不可以发送多个Cookie？</h5><ol>
-<li>可以创建多个Cookie对象，使用response调用多次addCookie方法发送Cookie 即可</li>
-</ol>
-<h5 id="2-Cookie-在浏览器中保存多长时间？"><a href="#2-Cookie-在浏览器中保存多长时间？" class="headerlink" title="2. Cookie 在浏览器中保存多长时间？"></a>2. Cookie 在浏览器中保存多长时间？</h5><ol>
-<li>默认情况下，当浏览器关闭后，Cookie数据被销毁</li>
-<li>持久化存储:<ul>
-<li>setMaxAge(int seconds)<ol>
-<li>正数：将Cookie 数据写到硬盘的文件中。持久化存储。Cookie存活的秒数</li>
-<li>负数：默认值</li>
-<li>零：删除Cookie信息</li>
-</ol>
-</li>
-</ul>
-</li>
-</ol>
-<h5 id="3-Cookie-能不能存中文？"><a href="#3-Cookie-能不能存中文？" class="headerlink" title="3. Cookie 能不能存中文？"></a>3. Cookie 能不能存中文？</h5><ul>
-<li>可以，但不支持特殊字符，建议用URL编码</li>
-</ul>
-<h5 id="4-Cookie-共享问题？"><a href="#4-Cookie-共享问题？" class="headerlink" title="4. Cookie 共享问题？"></a>4. Cookie 共享问题？</h5><ol>
-<li><p>假设在一个 tomcat 服务器中，部署了多个 web 项目，那么在这些 web 项目中 cookie 能不能共享</p>
-<ul>
-<li>默认情况下不能共享<ul>
-<li>setPath(String path): 设置 cookie 的获取范围。默认情况下，设置当前的虚拟目录<ul>
-<li>如果要共享，则可以将 path 设置为”/“</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>不同的 tomcat 服务器间 cookie 共享问题？</p>
-<ul>
-<li>setDomin(String path): 如果设置一级域名相同，那么多个服务器之间 cookie 可以共享<ul>
-<li>setDomin(“.baidu.com”), 那么tieba.baidu.com 和 news.baidu.com 中 cookie 可以共享</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<h3 id="5-Cookie-的特点和作用"><a href="#5-Cookie-的特点和作用" class="headerlink" title="5. Cookie 的特点和作用"></a>5. Cookie 的特点和作用</h3><h4 id="1-特点"><a href="#1-特点" class="headerlink" title="1. 特点"></a>1. 特点</h4><ol>
-<li>cookie 存储数据在客户端浏览器</li>
-<li>浏览器对于单个 cookie 的大小有限制(4kb) 以及 对同一个域名下的总 cookie 数量也有限制(20个)</li>
-</ol>
-<h4 id="2-作用"><a href="#2-作用" class="headerlink" title="2. 作用"></a>2. 作用</h4><ol>
-<li>cookie 一般用于存储少量不太敏感的数据</li>
-<li>在不登陆的情况下，完成服务器对客户端的身份识别</li>
-</ol>
-<h3 id="6-案例"><a href="#6-案例" class="headerlink" title="6. 案例"></a>6. 案例</h3><ul>
-<li>记住上一次访问时间</li>
-</ul>
-<h4 id="1-需求"><a href="#1-需求" class="headerlink" title="1. 需求"></a>1. 需求</h4><ol>
-<li>访问一个 Servlet, 如果是第一次访问，则提示：您好，欢迎您首次访问。</li>
-<li>如果不是第一次访问，则提示：欢迎回来，您上次访问时间为：显示时间字符串</li>
-</ol>
-<h4 id="2-分析"><a href="#2-分析" class="headerlink" title="2. 分析"></a>2. 分析</h4><ol>
-<li>可以采用 Cookie l来完成</li>
-<li>在服务器中的 Servlet 判断是否有一个名为 lastTime 的 Cookie<ol>
-<li>有：不是第一次访问<ol>
-<li>响应数据：欢迎回来，您上次访问时间是：lastTime=2023年1月1日11:11:11</li>
-<li>写回 Cookie : lastTime=2023年1月1日11:11:11</li>
-</ol>
-</li>
-<li>没有：是第一次访问<ol>
-<li>响应数据：您好，欢迎您首次访问</li>
-<li>写回 Cookie : lastTime=2023年1月1日11:11:11</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-<div align='center'>
-    <span style="font-size:38px; color:orange">Session</span>
+    <span style="font-size:45px; color:pink">JSP:入门学习</span>
 </div>
 
 <h3 id="1-概念"><a href="#1-概念" class="headerlink" title="1. 概念"></a>1. 概念</h3><ul>
-<li>服务器会话技术，在一次会话的多次请求见共享数据，将数据保存在服务器端的对象中。HttpSession</li>
-</ul>
-<h3 id="2-快速入门"><a href="#2-快速入门" class="headerlink" title="2. 快速入门:"></a>2. 快速入门:</h3><h5 id="1-获取HttpSession对象："><a href="#1-获取HttpSession对象：" class="headerlink" title="1. 获取HttpSession对象："></a>1. 获取HttpSession对象：</h5><ul>
-<li>HttpSession session = request.getSession();</li>
-</ul>
-<h5 id="2-使用HttpSession对象："><a href="#2-使用HttpSession对象：" class="headerlink" title="2. 使用HttpSession对象："></a>2. 使用HttpSession对象：</h5><ul>
-<li>Object getAttribute (String name)</li>
-<li>void setAttribute(String name, Object value)</li>
-<li>void removeAttribute(String name)</li>
-</ul>
-<h3 id="3-原理"><a href="#3-原理" class="headerlink" title="3. 原理"></a>3. 原理</h3><ul>
-<li>Session 的实现是依赖于Cookie 的</li>
-</ul>
-<h3 id="4-细节："><a href="#4-细节：" class="headerlink" title="4. 细节："></a>4. 细节：</h3><h5 id="1-当客户端关闭后，服务器端不关闭，两次获取session是否为同一个？"><a href="#1-当客户端关闭后，服务器端不关闭，两次获取session是否为同一个？" class="headerlink" title="1. 当客户端关闭后，服务器端不关闭，两次获取session是否为同一个？"></a>1. 当客户端关闭后，服务器端不关闭，两次获取session是否为同一个？</h5><ul>
-<li><p>默认情况下。不是。</p>
-</li>
-<li><p>如果需要相同，则可以创建Cookie, 键为JSESSIONID, 设置最大存活时间，让cookie持久化保存</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Cookie</span> c <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Cookie</span><span class="token punctuation">(</span><span class="token string">"JSESSIONID"</span><span class="token punctuation">,</span> session<span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-c<span class="token punctuation">.</span><span class="token function">setMaxAge</span><span class="token punctuation">(</span><span class="token number">60</span><span class="token operator">*</span><span class="token number">60</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//存活1小时</span>
-response<span class="token punctuation">.</span><span class="token function">addCookie</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-</li>
-</ul>
-<h5 id="2-客户端不关闭，服务器关闭后，两次获取的session是同一个吗？"><a href="#2-客户端不关闭，服务器关闭后，两次获取的session是同一个吗？" class="headerlink" title="2. 客户端不关闭，服务器关闭后，两次获取的session是同一个吗？"></a>2. 客户端不关闭，服务器关闭后，两次获取的session是同一个吗？</h5><ul>
-<li>不是同一个，但是要确保数据不丢失。tomcat自动完成以下工作<ul>
-<li>session 的钝化：<ul>
-<li>在服务器正常关闭之前，将session 对象序列化到硬盘上</li>
+<li>Java Server Pages: java服务器端页面<ul>
+<li>可以理解为：一个特殊的页面，其中既可以指定定义 html 标签，又可以定义 java 代码</li>
+<li>用于简化书写</li>
 </ul>
 </li>
-<li>session 的活化<ul>
-<li>在服务器启动后，将session 文件转化为内存中的session 对象即可</li>
+</ul>
+<h3 id="2-原理"><a href="#2-原理" class="headerlink" title="2. 原理"></a>2. 原理</h3><ul>
+<li>JSP 本质就是一个Servlet</li>
+</ul>
+<h3 id="3-JSP-的脚本：JSP定义Java代码的方式"><a href="#3-JSP-的脚本：JSP定义Java代码的方式" class="headerlink" title="3. JSP 的脚本：JSP定义Java代码的方式"></a>3. JSP 的脚本：JSP定义Java代码的方式</h3><ol>
+<li><p>&lt;%    代码 %&gt;: 定义的java代码，在service方法中。service方法中可以定义什么，该脚本中就可以定义什么。</p>
+</li>
+<li><p>&lt;%!   代码 %&gt;：定义的java代码，在jsp转换后的java类的成员位置。</p>
+</li>
+<li><p>&lt;%=  代码 %&gt;：定义的Java代码，会输出到页面上。输出语句中可以定义什么，该脚本就可以定义什么。</p>
+</li>
+</ol>
+<h3 id="4-JSP-的内置对象"><a href="#4-JSP-的内置对象" class="headerlink" title="4. JSP 的内置对象"></a>4. JSP 的内置对象</h3><ul>
+<li>在jsp 页面中不需要获取和创建，可以直接使用的对象</li>
+<li>jsp 一共有9个内置对象</li>
+<li>先学习3个<ul>
+<li>request</li>
+<li>response</li>
+<li>out: 字符流输出对象。可以将数据输出到页面上。和response.getWriter() 类似<ul>
+<li>response.getWritet() 和 out.write() 的区别：<ul>
+<li>在tomcat服务器真正给客户端做出响应之前，会先找response缓冲区数据，再找out缓冲区数据。</li>
+<li>response.getWriter() 数据输出永远在out.write() 之前</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<h5 id="3-session-什么时候被销毁？"><a href="#3-session-什么时候被销毁？" class="headerlink" title="3. session 什么时候被销毁？"></a>3. session 什么时候被销毁？</h5><ol>
-<li><p>服务器关闭</p>
 </li>
-<li><p>session 对象调用invalidate()。</p>
-</li>
-<li><p>session 默认失效时间  30分钟.</p>
-<ul>
-<li><p>选择性配置修改</p>
-<session - config>
+</ul>
+<div align='center'>
+    <span style="font-size:45px; color:pink">JSP</span>
+</div>
 
-<p>​    <session - timeout>30&lt;/session - timeout&gt;</p>
-<p>&lt;/session - config&gt;</p>
+
+<h3 id="1-指令"><a href="#1-指令" class="headerlink" title="1. 指令"></a>1. 指令</h3><ul>
+<li>作用：用于配置JSP页面，导入资源文件</li>
+<li>格式：<ul>
+<li>&lt;%@ 指令名称 属性名1=属性值1  属性名2 = 属性值2 . . .%&gt;</li>
+</ul>
+</li>
+<li>分类<ol>
+<li>page         : 配置JSP页面的<ul>
+<li>contentType: 等同于response.setContentType()<ol>
+<li>设置响应体的mime类型以及字符型</li>
+<li>设置当前 jsp 页面的编码 (只能是高级的IDE才生效，如果使用低级工具，则需要设置pageEncoding属性设置当前页面的字符集)</li>
+</ol>
+</li>
+<li>import: 导包</li>
+<li>errorPage: 当前页面发生异常后，会自动跳转到指定的错误页面</li>
+<li>isErrorPage: 表示当前页面是否是错误页面<ul>
+<li>true: 是，可以使用内置对象exception</li>
+<li>false: 否，默认值。不可以使用内置对象exception</li>
+</ul>
 </li>
 </ul>
 </li>
-</ol>
-<h3 id="5-session-的特点"><a href="#5-session-的特点" class="headerlink" title="5. session 的特点"></a>5. session 的特点</h3><ol>
-<li>session 用于存储一次会话的多次请求的数据，存在服务器端</li>
-<li>session 可以存储任意类型，任意大小的数据</li>
-</ol>
-<ul>
-<li><p>session 与 Cookie 的区别</p>
-<ol>
-<li><p>session 存储数据在服务器端，Cookie 在客户端</p>
+<li>include     : 页面包含的。导入页面的资源文件<ul>
+<li>&lt;%@include file=”top.jsp”%&gt;</li>
+</ul>
 </li>
-<li><p>session 没有数据大小限制，Cookie 有</p>
-</li>
-<li><p>session 数据安全，Cookie 相对不安全</p>
+<li>taglib        : 导入资源<ul>
+<li></li>
+</ul>
 </li>
 </ol>
 </li>
 </ul>
-<h3 id="6-案例：验证码"><a href="#6-案例：验证码" class="headerlink" title="6. 案例：验证码"></a>6. 案例：验证码</h3><h4 id="1-案例需求："><a href="#1-案例需求：" class="headerlink" title="1. 案例需求："></a>1. 案例需求：</h4><h5 id="1-访问带有验证码的登录页面login-jsp"><a href="#1-访问带有验证码的登录页面login-jsp" class="headerlink" title="1. 访问带有验证码的登录页面login.jsp"></a>1. 访问带有验证码的登录页面login.jsp</h5><h5 id="2-用户输入用户名，密码以及验证码"><a href="#2-用户输入用户名，密码以及验证码" class="headerlink" title="2. 用户输入用户名，密码以及验证码"></a>2. 用户输入用户名，密码以及验证码</h5><ul>
-<li>如果用户名和密码输入有误，跳转登录页面，提示：用户名或密码错误</li>
-<li>如果验证码输入有误，跳转登录页面，提示：验证码错误</li>
-<li>如果全部输入正确，则跳转主页success.jsp，显示：&lt;用户名&gt;, 欢迎您</li>
+<h3 id="2-注释"><a href="#2-注释" class="headerlink" title="2. 注释"></a>2. 注释</h3><ol>
+<li>html 注释：<ul>
+<li>&lt;! — —&gt;: 只能注释html 代码片段</li>
+</ul>
+</li>
+<li>jsp 注释：推荐使用<ul>
+<li>&lt;%— —%&gt; : 可以注释所有</li>
+</ul>
+</li>
+</ol>
+<h3 id="3-内置对象"><a href="#3-内置对象" class="headerlink" title="3. 内置对象"></a>3. 内置对象</h3><ul>
+<li>在jsp 页面中不需要创建，直接使用的对象</li>
+<li>一共有9个：变量名 和 真实类型 和 作用<ul>
+<li>pageContext         PageContext                    当前页面共享数据，还可以获取其他八个内置对象</li>
+<li>request                 HttpServletRequest          一次请求访问多个资源（转发）</li>
+<li>session                 HttpSession                     一次会话的多个请求见</li>
+<li>application            ServletContext                 所有用户间共享数据</li>
+<li>response              HttpServletResponse       响应对象</li>
+<li>page                     Object                              当前页面（Servlet）的对象  this</li>
+<li>out                        JspWriter                         输出对象，数据输出到页面上</li>
+<li>config                   ServletConfig                   Servlet 的配置对象</li>
+<li>exception             Throwable                        异常对象</li>
+</ul>
+</li>
 </ul>
 
                 
@@ -624,7 +549,7 @@ response<span class="token punctuation">.</span><span class="token function">add
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://ich-liebe.github.io/2023/10/31/%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AF/">https://ich-liebe.github.io/2023/10/31/%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AF/</a>
+                    <a href="https://ich-liebe.github.io/2023/11/03/JSP/">https://ich-liebe.github.io/2023/11/03/JSP/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -1013,18 +938,18 @@ response<span class="token punctuation">.</span><span class="token function">add
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/11/03/JSP/">
+                <a href="/2023/11/03/MVC/">
                     <div class="card-image">
                         
-                        <img src="https://picss.sunbangyan.cn/2023/11/03/602b9ba990460f212d956936d96a15e8.jpg" class="responsive-img" alt="JSP">
+                        <img src="https://picdm.sunbangyan.cn/2023/11/03/cc280602eeb1c46b10834d41f36ff870.jpg" class="responsive-img" alt="MVC">
                         
-                        <span class="card-title">JSP</span>
+                        <span class="card-title">MVC</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            javaweb中的JSP
+                            javaweb_MVC
                         
                     </div>
                     <div class="publish-info">
@@ -1061,18 +986,18 @@ response<span class="token punctuation">.</span><span class="token function">add
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/10/31/%E9%9B%86%E5%90%88%E8%BF%9B%E9%98%B6/">
+                <a href="/2023/10/31/%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AF/">
                     <div class="card-image">
                         
-                        <img src="https://picss.sunbangyan.cn/2023/10/31/0c67e5e89bb3ee8079a33fa7afe7af52.png" class="responsive-img" alt="集合进阶">
+                        <img src="https://picst.sunbangyan.cn/2023/10/31/02190b4a88b309204fc4e6a20ca342bb.jpg" class="responsive-img" alt="会话技术">
                         
-                        <span class="card-title">集合进阶</span>
+                        <span class="card-title">会话技术</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            java中的集合进阶
+                            javaweb中的会话技术
                         
                     </div>
                     <div class="publish-info">
@@ -1083,8 +1008,8 @@ response<span class="token punctuation">.</span><span class="token function">add
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/javase/" class="post-category">
-                                    javase
+                            <a href="/categories/javaweb/" class="post-category">
+                                    javaweb
                                 </a>
                             
                             
@@ -1094,8 +1019,8 @@ response<span class="token punctuation">.</span><span class="token function">add
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/javase/">
-                        <span class="chip bg-color">javase</span>
+                    <a href="/tags/javaweb/">
+                        <span class="chip bg-color">javaweb</span>
                     </a>
                     
                 </div>
