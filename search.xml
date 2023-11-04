@@ -3068,4 +3068,487 @@ response<span class="token punctuation">.</span><span class="token function">add
         <tag>javaweb</tag>
       </tags>
   </entry>
+  <entry>
+    <title>pytorch入门</title>
+    <url>/2023/11/04/pytorch%E5%85%A5%E9%97%A8/</url>
+    <content><![CDATA[<div align='center'>
+    <span style="font-size:45px; color:pink">pytorch入门_1</span>
+</div>
+
+<h2 id="1-读取数据"><a href="#1-读取数据" class="headerlink" title="1. 读取数据"></a>1. 读取数据</h2><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> torch<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>data <span class="token keyword">import</span> Dataset
+<span class="token keyword">from</span> PIL <span class="token keyword">import</span> Image
+<span class="token keyword">import</span> os
+
+
+<span class="token keyword">class</span> <span class="token class-name">MyData</span><span class="token punctuation">(</span>Dataset<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> root_dir<span class="token punctuation">,</span> label_dir<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token comment"># 初始化数据集的根目录和标签目录</span>
+        self<span class="token punctuation">.</span>root_dir <span class="token operator">=</span> root_dir
+        self<span class="token punctuation">.</span>label_dir <span class="token operator">=</span> label_dir
+        self<span class="token punctuation">.</span>path <span class="token operator">=</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>root_dir<span class="token punctuation">,</span> label_dir<span class="token punctuation">)</span>
+        <span class="token comment"># 获取标签目录下的所有图像文件路径</span>
+        self<span class="token punctuation">.</span>img_path <span class="token operator">=</span> os<span class="token punctuation">.</span>listdir<span class="token punctuation">(</span>self<span class="token punctuation">.</span>path<span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">__getitem__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> idx<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token comment"># 根据索引获取图像文件名和路径</span>
+        img_name <span class="token operator">=</span> self<span class="token punctuation">.</span>img_path<span class="token punctuation">[</span>idx<span class="token punctuation">]</span>
+        img_item_path <span class="token operator">=</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>self<span class="token punctuation">.</span>root_dir<span class="token punctuation">,</span> self<span class="token punctuation">.</span>label_dir<span class="token punctuation">,</span> img_name<span class="token punctuation">)</span>
+        <span class="token comment"># 打开图像文件并转换为PIL Image对象</span>
+        img <span class="token operator">=</span> Image<span class="token punctuation">.</span><span class="token builtin">open</span><span class="token punctuation">(</span>img_item_path<span class="token punctuation">)</span>
+        <span class="token comment"># 设置标签为目录名</span>
+        label <span class="token operator">=</span> self<span class="token punctuation">.</span>label_dir
+        <span class="token keyword">return</span> img<span class="token punctuation">,</span> label
+
+    <span class="token keyword">def</span> <span class="token function">__len__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token comment"># 返回数据集的长度，即图像文件的数量</span>
+        <span class="token keyword">return</span> <span class="token builtin">len</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>img_path<span class="token punctuation">)</span>
+
+
+root_dir <span class="token operator">=</span> <span class="token string">"hymenoptera_data/train"</span>
+<span class="token comment"># 定义蚂蚁图像的标签目录</span>
+ants_label_dir <span class="token operator">=</span> <span class="token string">"ants_image"</span>
+<span class="token comment"># 创建蚂蚁图像数据集对象</span>
+ants_dataset <span class="token operator">=</span> MyData<span class="token punctuation">(</span>root_dir<span class="token punctuation">,</span> ants_label_dir<span class="token punctuation">)</span>
+<span class="token comment"># 定义蜜蜂图像的标签目录</span>
+bees_label_dir <span class="token operator">=</span> <span class="token string">"bees_image"</span>
+<span class="token comment"># 创建蜜蜂图像数据集对象</span>
+bees_dataset <span class="token operator">=</span> MyData<span class="token punctuation">(</span>root_dir<span class="token punctuation">,</span> bees_label_dir<span class="token punctuation">)</span>
+
+<span class="token comment"># 将蜜蜂和蚂蚁数据集合并成一个训练数据集</span>
+train_dataset <span class="token operator">=</span> bees_dataset <span class="token operator">+</span> ants_dataset
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="2-批量生成标签文件"><a href="#2-批量生成标签文件" class="headerlink" title="2. 批量生成标签文件"></a>2. 批量生成标签文件</h2><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> os
+
+root_dir <span class="token operator">=</span> <span class="token string">"hymenoptera_data/train"</span>
+target_dir <span class="token operator">=</span> <span class="token string">"ants_image"</span>
+img_path <span class="token operator">=</span> os<span class="token punctuation">.</span>listdir<span class="token punctuation">(</span>os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>root_dir<span class="token punctuation">,</span> target_dir<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment">#img_path = os.listdir("hymenoptera_data/train/ants_image")</span>
+label <span class="token operator">=</span> target_dir<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">'_'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+out_dir <span class="token operator">=</span> <span class="token string">"ants_label"</span>
+
+<span class="token comment"># 针对每个图像文件进行遍历</span>
+<span class="token keyword">for</span> i <span class="token keyword">in</span> img_path<span class="token punctuation">:</span>
+    <span class="token comment"># 从文件名中提取出不带扩展名的部分</span>
+    file_name <span class="token operator">=</span> i<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">'.jpg'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+
+    <span class="token comment"># 创建目标文件路径，文件名与图像文件相同，扩展名为 .txt</span>
+    target_file <span class="token operator">=</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>root_dir<span class="token punctuation">,</span> out_dir<span class="token punctuation">,</span> <span class="token string">"&#123;&#125;.txt"</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>file_name<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># 打开文件并写入标签</span>
+    <span class="token keyword">with</span> <span class="token builtin">open</span><span class="token punctuation">(</span>target_file<span class="token punctuation">,</span> <span class="token string">'w'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+        f<span class="token punctuation">.</span>write<span class="token punctuation">(</span>label<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="3-常见的-Transforms"><a href="#3-常见的-Transforms" class="headerlink" title="3. 常见的 Transforms"></a>3. 常见的 Transforms</h2><ul>
+<li>输入    PIL               Image.open()</li>
+<li>输出    tensor          Totensor()</li>
+<li>作用    warrays        cv.imread()</li>
+</ul>
+<h2 id="4-卷积操作"><a href="#4-卷积操作" class="headerlink" title="4. 卷积操作"></a>4. 卷积操作</h2><p><img src="C:\Users\31025\Pictures\Screenshots\屏幕截图 2023-11-01 222043.png" alt=""></p>
+<p><img src="C:\Users\31025\Pictures\Screenshots\屏幕截图 2023-11-01 222056.png" alt=""></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> torch
+<span class="token keyword">import</span> torch<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>functional <span class="token keyword">as</span> F
+
+<span class="token comment"># 输入图像</span>
+<span class="token builtin">input</span> <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                      <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                      <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                      <span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                      <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 卷积核</span>
+kernel <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                       <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                       <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+<span class="token builtin">input</span> <span class="token operator">=</span> torch<span class="token punctuation">.</span>reshape<span class="token punctuation">(</span><span class="token builtin">input</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+kernel <span class="token operator">=</span> torch<span class="token punctuation">.</span>reshape<span class="token punctuation">(</span>kernel<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token builtin">input</span><span class="token punctuation">.</span>shape<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>kernel<span class="token punctuation">.</span>shape<span class="token punctuation">)</span>
+
+output <span class="token operator">=</span> F<span class="token punctuation">.</span>conv2d<span class="token punctuation">(</span><span class="token builtin">input</span><span class="token punctuation">,</span> kernel<span class="token punctuation">,</span> stride<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>output<span class="token punctuation">)</span>
+
+output <span class="token operator">=</span> F<span class="token punctuation">.</span>conv2d<span class="token punctuation">(</span><span class="token builtin">input</span><span class="token punctuation">,</span> kernel<span class="token punctuation">,</span> stride<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>output<span class="token punctuation">)</span>
+
+output <span class="token operator">=</span> F<span class="token punctuation">.</span>conv2d<span class="token punctuation">(</span><span class="token builtin">input</span><span class="token punctuation">,</span> kernel<span class="token punctuation">,</span> stride<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> padding<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>output<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="5-卷积层"><a href="#5-卷积层" class="headerlink" title="5. 卷积层"></a>5. 卷积层</h2><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> torch
+<span class="token keyword">import</span> torchvision
+<span class="token keyword">from</span> torch <span class="token keyword">import</span> nn
+<span class="token keyword">from</span> torch<span class="token punctuation">.</span>nn <span class="token keyword">import</span> Conv2d
+<span class="token keyword">from</span> torch<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>data <span class="token keyword">import</span> DataLoader
+<span class="token keyword">from</span> torch<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>tensorboard <span class="token keyword">import</span> SummaryWriter
+
+dataset <span class="token operator">=</span> torchvision<span class="token punctuation">.</span>datasets<span class="token punctuation">.</span>CIFAR10<span class="token punctuation">(</span><span class="token string">"../data"</span><span class="token punctuation">,</span> train<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> transform<span class="token operator">=</span>torchvision<span class="token punctuation">.</span>transforms<span class="token punctuation">.</span>ToTensor<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> download<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+
+dataloader <span class="token operator">=</span> DataLoader<span class="token punctuation">(</span>dataset<span class="token punctuation">,</span> batch_size<span class="token operator">=</span><span class="token number">64</span><span class="token punctuation">)</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Tudui</span><span class="token punctuation">(</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token builtin">super</span><span class="token punctuation">(</span>Tudui<span class="token punctuation">,</span> self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>conv1 <span class="token operator">=</span> Conv2d<span class="token punctuation">(</span>in_channels<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span> out_channels<span class="token operator">=</span><span class="token number">6</span><span class="token punctuation">,</span> kernel_size<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span> stride<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> padding<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        x <span class="token operator">=</span> self<span class="token punctuation">.</span>conv1<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> x
+
+tudui <span class="token operator">=</span> Tudui<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+writer <span class="token operator">=</span> SummaryWriter<span class="token punctuation">(</span><span class="token string">"../logs"</span><span class="token punctuation">)</span>
+
+step <span class="token operator">=</span> <span class="token number">0</span>
+<span class="token keyword">for</span> data <span class="token keyword">in</span> dataloader<span class="token punctuation">:</span>
+    imgs<span class="token punctuation">,</span> targets <span class="token operator">=</span> data
+    output <span class="token operator">=</span> tudui<span class="token punctuation">(</span>imgs<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>imgs<span class="token punctuation">.</span>shape<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>output<span class="token punctuation">.</span>shape<span class="token punctuation">)</span>
+    <span class="token comment">#torch.Size([64, 3, 32, 32])</span>
+    writer<span class="token punctuation">.</span>add_images<span class="token punctuation">(</span><span class="token string">"input"</span><span class="token punctuation">,</span> imgs<span class="token punctuation">,</span> step<span class="token punctuation">)</span>
+    <span class="token comment">#torch.Size([64, 6, 30, 30])</span>
+
+    output <span class="token operator">=</span> torch<span class="token punctuation">.</span>reshape<span class="token punctuation">(</span>output<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    writer<span class="token punctuation">.</span>add_images<span class="token punctuation">(</span><span class="token string">"output"</span><span class="token punctuation">,</span> output<span class="token punctuation">,</span> step<span class="token punctuation">)</span>
+
+    step <span class="token operator">=</span> step <span class="token operator">+</span> <span class="token number">1</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="6-最大池化的使用"><a href="#6-最大池化的使用" class="headerlink" title="6. 最大池化的使用"></a>6. 最大池化的使用</h2><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> torch
+<span class="token keyword">import</span> torchvision
+<span class="token keyword">from</span> torch <span class="token keyword">import</span> nn
+<span class="token keyword">from</span> torch<span class="token punctuation">.</span>nn <span class="token keyword">import</span> MaxPool2d
+<span class="token keyword">from</span> torch<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>data <span class="token keyword">import</span> DataLoader
+<span class="token keyword">from</span> torch<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>tensorboard <span class="token keyword">import</span> SummaryWriter
+
+dataset <span class="token operator">=</span> torchvision<span class="token punctuation">.</span>datasets<span class="token punctuation">.</span>CIFAR10<span class="token punctuation">(</span><span class="token string">"../data"</span><span class="token punctuation">,</span> train<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">,</span> download<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span>
+                                       transform<span class="token operator">=</span>torchvision<span class="token punctuation">.</span>transforms<span class="token punctuation">.</span>ToTensor<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+
+dataloader <span class="token operator">=</span> DataLoader<span class="token punctuation">(</span>dataset<span class="token punctuation">,</span> batch_size<span class="token operator">=</span><span class="token number">64</span><span class="token punctuation">)</span>
+
+<span class="token comment"># input = torch.tensor([[1, 2, 0, 3, 1],</span>
+<span class="token comment">#                       [0, 1, 2, 3, 1],</span>
+<span class="token comment">#                       [1, 2, 1, 0, 0],</span>
+<span class="token comment">#                       [5, 2, 3, 1, 1],</span>
+<span class="token comment">#                       [2, 1, 0, 1, 1]], dtype=torch.float32)</span>
+<span class="token comment">#</span>
+<span class="token comment"># input = torch.reshape(input, (-1, 1, 5, 5))</span>
+<span class="token comment"># print(input.shape)</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Tudui</span><span class="token punctuation">(</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token builtin">super</span><span class="token punctuation">(</span>Tudui<span class="token punctuation">,</span> self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>maxpool1 <span class="token operator">=</span> MaxPool2d<span class="token punctuation">(</span>kernel_size<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span> ceil_mode<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> <span class="token builtin">input</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        output <span class="token operator">=</span> self<span class="token punctuation">.</span>maxpool1<span class="token punctuation">(</span><span class="token builtin">input</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> output
+
+tudui <span class="token operator">=</span> Tudui<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment"># output = tudui(input)</span>
+<span class="token comment"># print(output)</span>
+
+writer <span class="token operator">=</span> SummaryWriter<span class="token punctuation">(</span><span class="token string">"../logs_maxpool"</span><span class="token punctuation">)</span>
+step <span class="token operator">=</span> <span class="token number">0</span>
+
+<span class="token keyword">for</span> data <span class="token keyword">in</span> dataloader<span class="token punctuation">:</span>
+    imgs<span class="token punctuation">,</span> targets <span class="token operator">=</span> data
+    writer<span class="token punctuation">.</span>add_images<span class="token punctuation">(</span><span class="token string">"input"</span><span class="token punctuation">,</span> imgs<span class="token punctuation">,</span> step<span class="token punctuation">)</span>
+    output <span class="token operator">=</span> tudui<span class="token punctuation">(</span>imgs<span class="token punctuation">)</span>
+    writer<span class="token punctuation">.</span>add_images<span class="token punctuation">(</span><span class="token string">"output"</span><span class="token punctuation">,</span> output<span class="token punctuation">,</span> step<span class="token punctuation">)</span>
+
+    step <span class="token operator">=</span> step <span class="token operator">+</span> <span class="token number">1</span>
+
+writer<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="7-非线性激活"><a href="#7-非线性激活" class="headerlink" title="7. 非线性激活"></a>7. 非线性激活</h2><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> torch
+<span class="token keyword">import</span> torchvision<span class="token punctuation">.</span>datasets
+<span class="token keyword">from</span> torch <span class="token keyword">import</span> nn
+<span class="token keyword">from</span> torch<span class="token punctuation">.</span>nn <span class="token keyword">import</span> ReLU<span class="token punctuation">,</span> Sigmoid
+<span class="token keyword">from</span> torch<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>data <span class="token keyword">import</span> DataLoader
+<span class="token keyword">from</span> torch<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>tensorboard <span class="token keyword">import</span> SummaryWriter
+
+<span class="token builtin">input</span> <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">0.5</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                      <span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+<span class="token builtin">input</span> <span class="token operator">=</span> torch<span class="token punctuation">.</span>reshape<span class="token punctuation">(</span><span class="token builtin">input</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token builtin">input</span><span class="token punctuation">.</span>shape<span class="token punctuation">)</span>
+
+dataset <span class="token operator">=</span> torchvision<span class="token punctuation">.</span>datasets<span class="token punctuation">.</span>CIFAR10<span class="token punctuation">(</span><span class="token string">"../data"</span><span class="token punctuation">,</span> train<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">,</span> download<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span>
+                                       transform<span class="token operator">=</span>torchvision<span class="token punctuation">.</span>transforms<span class="token punctuation">.</span>ToTensor<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+dataloader <span class="token operator">=</span> DataLoader<span class="token punctuation">(</span>dataset<span class="token punctuation">,</span> batch_size<span class="token operator">=</span><span class="token number">64</span><span class="token punctuation">)</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Tudui</span><span class="token punctuation">(</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token builtin">super</span><span class="token punctuation">(</span>Tudui<span class="token punctuation">,</span> self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>relu1 <span class="token operator">=</span> ReLU<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>sigmoid1 <span class="token operator">=</span> Sigmoid<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> <span class="token builtin">input</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        output <span class="token operator">=</span> self<span class="token punctuation">.</span>sigmoid1<span class="token punctuation">(</span><span class="token builtin">input</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> output
+
+tudui <span class="token operator">=</span> Tudui<span class="token punctuation">(</span><span class="token punctuation">)</span>
+step <span class="token operator">=</span> <span class="token number">0</span>
+writer <span class="token operator">=</span> SummaryWriter<span class="token punctuation">(</span><span class="token string">"../logs_relu"</span><span class="token punctuation">)</span>
+<span class="token keyword">for</span> data <span class="token keyword">in</span> dataloader<span class="token punctuation">:</span>
+    imgs<span class="token punctuation">,</span> targets <span class="token operator">=</span> data
+    writer<span class="token punctuation">.</span>add_images<span class="token punctuation">(</span><span class="token string">"input"</span><span class="token punctuation">,</span> imgs<span class="token punctuation">,</span> global_step<span class="token operator">=</span>step<span class="token punctuation">)</span>
+    output <span class="token operator">=</span> tudui<span class="token punctuation">(</span>imgs<span class="token punctuation">)</span>
+    writer<span class="token punctuation">.</span>add_images<span class="token punctuation">(</span><span class="token string">"output"</span><span class="token punctuation">,</span> output<span class="token punctuation">,</span> step<span class="token punctuation">)</span>
+    step <span class="token operator">+=</span> <span class="token number">1</span>
+
+writer<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="8-神经网络-搭建小实战和Sequential的使用"><a href="#8-神经网络-搭建小实战和Sequential的使用" class="headerlink" title="8. 神经网络 - 搭建小实战和Sequential的使用"></a>8. 神经网络 - 搭建小实战和Sequential的使用</h2><ul>
+<li>CIFAR 10 model 结构</li>
+</ul>
+<p><img src="C:\Users\31025\Pictures\Screenshots\屏幕截图 2023-11-04 095657.png" alt=""></p>
+<ul>
+<li>计算</li>
+</ul>
+<p><img src="C:\Users\31025\Pictures\Screenshots\屏幕截图 2023-11-04 100240.png" alt=""></p>
+<ul>
+<li>未使用Sequential</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> torch
+<span class="token keyword">from</span> torch <span class="token keyword">import</span> nn
+<span class="token keyword">from</span> torch<span class="token punctuation">.</span>nn <span class="token keyword">import</span> Conv2d<span class="token punctuation">,</span> MaxPool2d<span class="token punctuation">,</span> Flatten<span class="token punctuation">,</span> Linear<span class="token punctuation">,</span> Sequential
+<span class="token keyword">from</span> torch<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>tensorboard <span class="token keyword">import</span> SummaryWriter
+
+
+<span class="token keyword">class</span> <span class="token class-name">Tudui</span><span class="token punctuation">(</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token builtin">super</span><span class="token punctuation">(</span>Tudui<span class="token punctuation">,</span> self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token comment"># 第一个卷积部分</span>
+        self<span class="token punctuation">.</span>conv1 <span class="token operator">=</span> Conv2d<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">32</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> padding<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span>
+        <span class="token comment"># 第一个池化部分</span>
+        self<span class="token punctuation">.</span>maxpool1 <span class="token operator">=</span> MaxPool2d<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
+        <span class="token comment"># 第二个卷积部分</span>
+        self<span class="token punctuation">.</span>conv2 <span class="token operator">=</span> Conv2d<span class="token punctuation">(</span><span class="token number">32</span><span class="token punctuation">,</span> <span class="token number">32</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> padding<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span>
+        <span class="token comment"># 第二个池化部分</span>
+        self<span class="token punctuation">.</span>maxpool2 <span class="token operator">=</span> MaxPool2d<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
+        <span class="token comment"># 第三个卷积部分</span>
+        self<span class="token punctuation">.</span>conv3 <span class="token operator">=</span> Conv2d<span class="token punctuation">(</span><span class="token number">32</span><span class="token punctuation">,</span> <span class="token number">64</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> padding<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span>
+        <span class="token comment"># 第三个池化部分</span>
+        self<span class="token punctuation">.</span>maxpool3 <span class="token operator">=</span> MaxPool2d<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
+        <span class="token comment"># 对数据进行展平</span>
+        self<span class="token punctuation">.</span>flatten <span class="token operator">=</span> Flatten<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token comment"># 第一个线性层</span>
+        self<span class="token punctuation">.</span>linear1 <span class="token operator">=</span> Linear<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">,</span> <span class="token number">64</span><span class="token punctuation">)</span>
+        <span class="token comment"># 第二个线性层</span>
+        self<span class="token punctuation">.</span>linear2 <span class="token operator">=</span> Linear<span class="token punctuation">(</span><span class="token number">64</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        x <span class="token operator">=</span> self<span class="token punctuation">.</span>conv1<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+        x <span class="token operator">=</span> self<span class="token punctuation">.</span>maxpool1<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+        x <span class="token operator">=</span> self<span class="token punctuation">.</span>conv2<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+        x <span class="token operator">=</span> self<span class="token punctuation">.</span>maxpool2<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+        x <span class="token operator">=</span> self<span class="token punctuation">.</span>conv3<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+        x <span class="token operator">=</span> self<span class="token punctuation">.</span>maxpool3<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+        x <span class="token operator">=</span> self<span class="token punctuation">.</span>flatten<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+        x <span class="token operator">=</span> self<span class="token punctuation">.</span>linear1<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+        x <span class="token operator">=</span> self<span class="token punctuation">.</span>linear2<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+        
+        <span class="token keyword">return</span> x
+
+
+tudui <span class="token operator">=</span> Tudui<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment"># 利用print进行可视化</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>tudui<span class="token punctuation">)</span>
+<span class="token builtin">input</span> <span class="token operator">=</span> torch<span class="token punctuation">.</span>ones<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">64</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">32</span><span class="token punctuation">,</span> <span class="token number">32</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+output <span class="token operator">=</span> tudui<span class="token punctuation">(</span><span class="token builtin">input</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>output<span class="token punctuation">.</span>shape<span class="token punctuation">)</span>
+
+
+<span class="token comment"># 利用tensorboard进行可视化</span>
+writer <span class="token operator">=</span> SummaryWriter<span class="token punctuation">(</span><span class="token string">"../logs_seq"</span><span class="token punctuation">)</span>
+writer<span class="token punctuation">.</span>add_graph<span class="token punctuation">(</span>tudui<span class="token punctuation">,</span> <span class="token builtin">input</span><span class="token punctuation">)</span>
+writer<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li>使用Sequential</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> torch
+<span class="token keyword">from</span> torch <span class="token keyword">import</span> nn
+<span class="token keyword">from</span> torch<span class="token punctuation">.</span>nn <span class="token keyword">import</span> Conv2d<span class="token punctuation">,</span> MaxPool2d<span class="token punctuation">,</span> Flatten<span class="token punctuation">,</span> Linear<span class="token punctuation">,</span> Sequential
+<span class="token keyword">from</span> torch<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>tensorboard <span class="token keyword">import</span> SummaryWriter
+
+
+<span class="token keyword">class</span> <span class="token class-name">Tudui</span><span class="token punctuation">(</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token builtin">super</span><span class="token punctuation">(</span>Tudui<span class="token punctuation">,</span> self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>module1 <span class="token operator">=</span> Sequential<span class="token punctuation">(</span>
+            Conv2d<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">32</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> padding<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            MaxPool2d<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            Conv2d<span class="token punctuation">(</span><span class="token number">32</span><span class="token punctuation">,</span> <span class="token number">32</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> padding<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            MaxPool2d<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            Conv2d<span class="token punctuation">(</span><span class="token number">32</span><span class="token punctuation">,</span> <span class="token number">64</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> padding<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            MaxPool2d<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            Flatten<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            Linear<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">,</span> <span class="token number">64</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            Linear<span class="token punctuation">(</span><span class="token number">64</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span>
+        <span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        x <span class="token operator">=</span> self<span class="token punctuation">.</span>module1<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+
+        <span class="token keyword">return</span> x
+
+
+tudui <span class="token operator">=</span> Tudui<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment"># 利用print进行可视化</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>tudui<span class="token punctuation">)</span>
+<span class="token builtin">input</span> <span class="token operator">=</span> torch<span class="token punctuation">.</span>ones<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">64</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">32</span><span class="token punctuation">,</span> <span class="token number">32</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+output <span class="token operator">=</span> tudui<span class="token punctuation">(</span><span class="token builtin">input</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>output<span class="token punctuation">.</span>shape<span class="token punctuation">)</span>
+
+
+<span class="token comment"># 利用tensorboard进行可视化</span>
+writer <span class="token operator">=</span> SummaryWriter<span class="token punctuation">(</span><span class="token string">"../logs_seq"</span><span class="token punctuation">)</span>
+writer<span class="token punctuation">.</span>add_graph<span class="token punctuation">(</span>tudui<span class="token punctuation">,</span> <span class="token builtin">input</span><span class="token punctuation">)</span>
+writer<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="9-损失函数与反向传播"><a href="#9-损失函数与反向传播" class="headerlink" title="9. 损失函数与反向传播"></a>9. 损失函数与反向传播</h2><p><img src="C:\Users\31025\Pictures\Screenshots\屏幕截图 2023-11-04 121307.png" alt=""></p>
+<p>​    <img src="C:\Users\31025\Pictures\Screenshots\屏幕截图 2023-11-04 144942.png" alt=""></p>
+<p>​    </p>
+<ul>
+<li>loss</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> torch
+<span class="token keyword">from</span> torch <span class="token keyword">import</span> nn
+<span class="token keyword">from</span> torch<span class="token punctuation">.</span>nn <span class="token keyword">import</span> L1Loss<span class="token punctuation">,</span> MSELoss
+
+<span class="token builtin">input</span> <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">,</span> dtype<span class="token operator">=</span>torch<span class="token punctuation">.</span>float32<span class="token punctuation">)</span>
+targets <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">,</span> dtype<span class="token operator">=</span>torch<span class="token punctuation">.</span>float32<span class="token punctuation">)</span>
+
+<span class="token builtin">input</span> <span class="token operator">=</span> torch<span class="token punctuation">.</span>reshape<span class="token punctuation">(</span><span class="token builtin">input</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+targets <span class="token operator">=</span> torch<span class="token punctuation">.</span>reshape<span class="token punctuation">(</span>targets<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+logs <span class="token operator">=</span> L1Loss<span class="token punctuation">(</span>reduction<span class="token operator">=</span><span class="token string">'sum'</span><span class="token punctuation">)</span>
+result <span class="token operator">=</span> logs<span class="token punctuation">(</span><span class="token builtin">input</span><span class="token punctuation">,</span> targets<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span>
+
+<span class="token comment"># 方差</span>
+loss_mes <span class="token operator">=</span> MSELoss<span class="token punctuation">(</span><span class="token punctuation">)</span>
+mes_result <span class="token operator">=</span> loss_mes<span class="token punctuation">(</span><span class="token builtin">input</span><span class="token punctuation">,</span> targets<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>mes_result<span class="token punctuation">)</span>
+
+
+x <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">0.1</span><span class="token punctuation">,</span> <span class="token number">0.2</span><span class="token punctuation">,</span> <span class="token number">0.3</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+y <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+x <span class="token operator">=</span> torch<span class="token punctuation">.</span>reshape<span class="token punctuation">(</span>x<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+loss_cross <span class="token operator">=</span> nn<span class="token punctuation">.</span>CrossEntropyLoss<span class="token punctuation">(</span><span class="token punctuation">)</span>
+result_cross <span class="token operator">=</span> loss_cross<span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>result_cross<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li>CrossEntropyLoss</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> torchvision<span class="token punctuation">.</span>datasets
+<span class="token keyword">from</span> torch <span class="token keyword">import</span> nn
+<span class="token keyword">from</span> torch<span class="token punctuation">.</span>nn <span class="token keyword">import</span> Sequential<span class="token punctuation">,</span> Conv2d<span class="token punctuation">,</span> MaxPool2d<span class="token punctuation">,</span> Linear<span class="token punctuation">,</span> Flatten
+<span class="token keyword">from</span> torch<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>data <span class="token keyword">import</span> DataLoader
+
+dataset <span class="token operator">=</span> torchvision<span class="token punctuation">.</span>datasets<span class="token punctuation">.</span>CIFAR10<span class="token punctuation">(</span><span class="token string">"../data"</span><span class="token punctuation">,</span> train<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">,</span> download<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span>
+                                       transform<span class="token operator">=</span>torchvision<span class="token punctuation">.</span>transforms<span class="token punctuation">.</span>ToTensor<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+dataloader <span class="token operator">=</span> DataLoader<span class="token punctuation">(</span>dataset<span class="token punctuation">,</span> batch_size<span class="token operator">=</span><span class="token number">64</span><span class="token punctuation">)</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Tudui</span><span class="token punctuation">(</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token builtin">super</span><span class="token punctuation">(</span>Tudui<span class="token punctuation">,</span> self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>module1 <span class="token operator">=</span> Sequential<span class="token punctuation">(</span>
+            Conv2d<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">32</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> padding<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            MaxPool2d<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            Conv2d<span class="token punctuation">(</span><span class="token number">32</span><span class="token punctuation">,</span> <span class="token number">32</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> padding<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            MaxPool2d<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            Conv2d<span class="token punctuation">(</span><span class="token number">32</span><span class="token punctuation">,</span> <span class="token number">64</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> padding<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            MaxPool2d<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            Flatten<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            Linear<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">,</span> <span class="token number">64</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            Linear<span class="token punctuation">(</span><span class="token number">64</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span>
+        <span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        x <span class="token operator">=</span> self<span class="token punctuation">.</span>module1<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+
+        <span class="token keyword">return</span> x
+
+
+loss <span class="token operator">=</span> nn<span class="token punctuation">.</span>CrossEntropyLoss<span class="token punctuation">(</span><span class="token punctuation">)</span>
+tudui <span class="token operator">=</span> Tudui<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">for</span> data <span class="token keyword">in</span> dataloader<span class="token punctuation">:</span>
+    imgs<span class="token punctuation">,</span> targets <span class="token operator">=</span> data
+    output <span class="token operator">=</span> tudui<span class="token punctuation">(</span>imgs<span class="token punctuation">)</span>
+    result_loss <span class="token operator">=</span> loss<span class="token punctuation">(</span>output<span class="token punctuation">,</span> targets<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>result_loss<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="10-优化器"><a href="#10-优化器" class="headerlink" title="10. 优化器"></a>10. 优化器</h2><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> torch<span class="token punctuation">.</span>optim
+<span class="token keyword">import</span> torchvision<span class="token punctuation">.</span>datasets
+<span class="token keyword">from</span> torch <span class="token keyword">import</span> nn
+<span class="token keyword">from</span> torch<span class="token punctuation">.</span>nn <span class="token keyword">import</span> Sequential<span class="token punctuation">,</span> Conv2d<span class="token punctuation">,</span> MaxPool2d<span class="token punctuation">,</span> Linear<span class="token punctuation">,</span> Flatten
+<span class="token keyword">from</span> torch<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>data <span class="token keyword">import</span> DataLoader
+
+dataset <span class="token operator">=</span> torchvision<span class="token punctuation">.</span>datasets<span class="token punctuation">.</span>CIFAR10<span class="token punctuation">(</span><span class="token string">"../data"</span><span class="token punctuation">,</span> train<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">,</span> download<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span>
+                                       transform<span class="token operator">=</span>torchvision<span class="token punctuation">.</span>transforms<span class="token punctuation">.</span>ToTensor<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+dataloader <span class="token operator">=</span> DataLoader<span class="token punctuation">(</span>dataset<span class="token punctuation">,</span> batch_size<span class="token operator">=</span><span class="token number">64</span><span class="token punctuation">)</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Tudui</span><span class="token punctuation">(</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token builtin">super</span><span class="token punctuation">(</span>Tudui<span class="token punctuation">,</span> self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>module1 <span class="token operator">=</span> Sequential<span class="token punctuation">(</span>
+            Conv2d<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">32</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> padding<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            MaxPool2d<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            Conv2d<span class="token punctuation">(</span><span class="token number">32</span><span class="token punctuation">,</span> <span class="token number">32</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> padding<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            MaxPool2d<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            Conv2d<span class="token punctuation">(</span><span class="token number">32</span><span class="token punctuation">,</span> <span class="token number">64</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> padding<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            MaxPool2d<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            Flatten<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            Linear<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">,</span> <span class="token number">64</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            Linear<span class="token punctuation">(</span><span class="token number">64</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span>
+        <span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        x <span class="token operator">=</span> self<span class="token punctuation">.</span>module1<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+
+        <span class="token keyword">return</span> x
+
+loss <span class="token operator">=</span> nn<span class="token punctuation">.</span>CrossEntropyLoss<span class="token punctuation">(</span><span class="token punctuation">)</span>
+tudui <span class="token operator">=</span> Tudui<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 定义优化器</span>
+optim <span class="token operator">=</span> torch<span class="token punctuation">.</span>optim<span class="token punctuation">.</span>SGD<span class="token punctuation">(</span>tudui<span class="token punctuation">.</span>parameters<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> lr<span class="token operator">=</span><span class="token number">0.01</span><span class="token punctuation">)</span>
+
+<span class="token keyword">for</span> epoch <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    running_loss <span class="token operator">=</span> <span class="token number">0.0</span>
+    <span class="token keyword">for</span> data <span class="token keyword">in</span> dataloader<span class="token punctuation">:</span>
+        imgs<span class="token punctuation">,</span> targets <span class="token operator">=</span> data
+        output <span class="token operator">=</span> tudui<span class="token punctuation">(</span>imgs<span class="token punctuation">)</span>
+        result_loss <span class="token operator">=</span> loss<span class="token punctuation">(</span>output<span class="token punctuation">,</span> targets<span class="token punctuation">)</span>
+        <span class="token comment"># 将网络中的每个参数的梯度清零，以便在下一次反向传播时不会受到之前计算出的梯度的影响。</span>
+        optim<span class="token punctuation">.</span>zero_grad<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token comment">#  调用损失函数的反向传播，计算出每个节点的梯度。此操作通过链式法则将误差从输出层向输入层传播，并计算每个参数的梯度。</span>
+        result_loss<span class="token punctuation">.</span>backward<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token comment"># 使用优化器来更新模型的参数。优化器根据计算出的梯度和选择的优化算法来调整模型参数，以减小损失函数的值。</span>
+        optim<span class="token punctuation">.</span>step<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        running_loss <span class="token operator">=</span> running_loss <span class="token operator">+</span> result_loss
+    <span class="token keyword">print</span><span class="token punctuation">(</span>running_loss<span class="token punctuation">)</span>
+
+
+<span class="token comment"># forward 前向传播</span>
+<span class="token comment"># backward 反向传播</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
+      <categories>
+        <category>pytorch</category>
+      </categories>
+      <tags>
+        <tag>pytorch</tag>
+      </tags>
+  </entry>
 </search>
