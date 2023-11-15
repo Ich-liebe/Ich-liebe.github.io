@@ -4299,10 +4299,14 @@ using namespace std<span class="token punctuation">;</span>
 
 
 <ol>
-<li>面积：二维向量叉乘等于围成的平行四边形的面积 <strong>(取绝对值)</strong>，除以二就是所围成的三角形的面积。</li>
-<li>顺逆：根据叉乘的正负可以判断两条边是顺逆排列，<strong>为正就是顺时针排列</strong>。</li>
-<li>长度：向量的长度是向量本身的<strong>点积的平方根</strong></li>
-<li>角度：两个向量夹角的余弦等于它们的点积与它们长度的乘积的商<strong>(A和B的点积 / A和B的模长)</strong></li>
+<li><p>面积：二维向量叉乘等于围成的平行四边形的面积 <strong>(取绝对值)</strong>，除以二就是所围成的三角形的面积。</p>
+</li>
+<li><p>顺逆：根据叉乘的正负可以判断两条边是顺逆排列，<strong>为正就是顺时针排列</strong>。</p>
+</li>
+<li><p>长度：向量的长度是向量本身的<strong>点积的平方根</strong></p>
+</li>
+<li><p>角度：两个向量夹角的余弦等于它们的点积与它们长度的乘积的商<strong>(A和B的点积 / A和B的模长)</strong></p>
+</li>
 </ol>
 <ul>
 <li>抄的 jls 的板子(</li>
