@@ -4345,7 +4345,7 @@ using namespace std<span class="token punctuation">;</span>
 db <span class="token function">dot</span><span class="token punctuation">(</span><span class="token keyword">const</span> Point <span class="token operator">&amp;</span>u<span class="token punctuation">,</span> <span class="token keyword">const</span> Point <span class="token operator">&amp;</span>v<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">return</span> u<span class="token punctuation">.</span>x <span class="token operator">*</span> v<span class="token punctuation">.</span>x <span class="token operator">+</span> u<span class="token punctuation">.</span>y <span class="token operator">*</span> v<span class="token punctuation">.</span>y<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span>
-
+<span class="token comment">//记得传的是边(点相减)</span>
 db <span class="token function">len</span><span class="token punctuation">(</span><span class="token keyword">const</span> Point <span class="token operator">&amp;</span>u<span class="token punctuation">,</span> <span class="token keyword">const</span> Point <span class="token operator">&amp;</span>v<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">return</span> <span class="token function">sqrt</span><span class="token punctuation">(</span><span class="token function">dot</span><span class="token punctuation">(</span>u<span class="token punctuation">,</span> v<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span>
