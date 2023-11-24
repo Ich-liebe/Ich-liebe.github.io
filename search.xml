@@ -2041,153 +2041,6 @@ db <span class="token function">cross</span><span class="token punctuation">(</s
       </tags>
   </entry>
   <entry>
-    <title>javase_多线程</title>
-    <url>/2023/11/16/javase-%E5%A4%9A%E7%BA%BF%E7%A8%8B/</url>
-    <content><![CDATA[<p><div align='center'>
-    <span style="font-size:45px;color:pink">多线程</span>
-</div></p>
-<h3 id="1-实现多线程"><a href="#1-实现多线程" class="headerlink" title="1. 实现多线程"></a>1. 实现多线程</h3><h4 id="1-进程"><a href="#1-进程" class="headerlink" title="1. 进程"></a>1. 进程</h4><ul>
-<li><strong>是正在运行的程序</strong></li>
-</ul>
-<ol>
-<li>系统进行资源分配和调用的独立单位</li>
-<li>每一个进程都有他自己的内存空间和系统资源</li>
-</ol>
-<h4 id="2-线程"><a href="#2-线程" class="headerlink" title="2. 线程"></a>2. 线程</h4><ul>
-<li><strong>是进程中的单个顺序控制流，是一条执行路径</strong></li>
-</ul>
-<ol>
-<li>单线程</li>
-<li>多线程</li>
-</ol>
-<h4 id="3-线程生命周期"><a href="#3-线程生命周期" class="headerlink" title="3. 线程生命周期"></a>3. 线程生命周期</h4><ul>
-<li>新建 —&gt; 就绪 —&gt; 运行 —&gt; 死亡</li>
-<li>​               (&lt;— 阻塞 &lt;—)</li>
-</ul>
-<h4 id="4-多线程的调用"><a href="#4-多线程的调用" class="headerlink" title="4. 多线程的调用"></a>4. 多线程的调用</h4><p><strong>方式1. 继承Thread类</strong></p>
-<ul>
-<li>定义一个MyThread 类，然后继承Thread类，重写run方法</li>
-<li>start(): 启动线程，然后由JVM调用此线程的run方法</li>
-</ul>
-<h4 id="5-设置和获取线程名称"><a href="#5-设置和获取线程名称" class="headerlink" title="5. 设置和获取线程名称"></a>5. 设置和获取线程名称</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token number">1.</span> <span class="token keyword">void</span> <span class="token function">setName</span><span class="token punctuation">(</span><span class="token class-name">String</span> name<span class="token punctuation">)</span>  <span class="token comment">//设置</span>
-<span class="token number">2.</span> <span class="token keyword">void</span> <span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span>             <span class="token comment">//获取</span>
-    
-   	<span class="token comment">//获取main()方法所在线程的名称：  xxx.currentThread.getName();</span>
-<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span>  <span class="token comment">//返回对当前正在执行的线程对象的引用</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="6-Thread中获取和设置线程优先级的方法"><a href="#6-Thread中获取和设置线程优先级的方法" class="headerlink" title="6. Thread中获取和设置线程优先级的方法"></a>6. Thread中获取和设置线程优先级的方法</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token number">1.</span> <span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">int</span> <span class="token function">getPriority</span><span class="token punctuation">(</span><span class="token punctuation">)</span>    <span class="token comment">//返回线程优先级</span>
-<span class="token number">2.</span> <span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">void</span> <span class="token function">setPriority</span><span class="token punctuation">(</span><span class="token punctuation">)</span>   <span class="token comment">//更改线程优先级</span>
-<span class="token number">3.</span> <span class="token comment">//默认是5，范围是1~10</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<h4 id="7-线程控制"><a href="#7-线程控制" class="headerlink" title="7. 线程控制"></a>7. 线程控制</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token number">1.</span> <span class="token keyword">static</span> <span class="token keyword">void</span> sleep <span class="token punctuation">(</span><span class="token keyword">long</span> millis<span class="token punctuation">)</span>     <span class="token comment">//使当前执行的线程停留指定的毫秒数</span>
-<span class="token number">2.</span> <span class="token keyword">void</span> <span class="token function">join</span><span class="token punctuation">(</span><span class="token punctuation">)</span>						 <span class="token comment">//等待这个线程的死亡</span>
-<span class="token number">3.</span> <span class="token keyword">void</span> <span class="token function">setDaemon</span><span class="token punctuation">(</span><span class="token keyword">boolean</span> on<span class="token punctuation">)</span>          <span class="token comment">//将此线程标记为守护线程，当运行的线程是守护线程时，java虚拟机退出(也就是主线程结束，只剩下守护程序)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<h4 id="8-多线程的实现方式"><a href="#8-多线程的实现方式" class="headerlink" title="8. 多线程的实现方式"></a>8. 多线程的实现方式</h4><p><strong>1. 两种实现方式</strong></p>
-<ol>
-<li>继承Thread类</li>
-<li>实现Runnable接口</li>
-</ol>
-<p><strong>2. 实现Runnable接口</strong></p>
-<ol>
-<li>定义一个类实现Runnable接口</li>
-<li>重写run()方法</li>
-<li>创建类对象</li>
-<li>以类对象为构造方法的参数       创建Thread类的对象</li>
-<li>启动线程</li>
-</ol>
-<p><strong>3. 相比而言，实现Runnable接口的好处</strong></p>
-<ol>
-<li>避免了java单继承的局限性</li>
-<li>适合多个相同程序的代码去处理 同一个资源的情况，把线程和程序的代码、数据有效分离，较好的体现了面向对象的设计思想</li>
-</ol>
-<h3 id="2-线程同步"><a href="#2-线程同步" class="headerlink" title="2. 线程同步"></a>2. 线程同步</h3><h4 id="1-线程执行的随机性导致问题"><a href="#1-线程执行的随机性导致问题" class="headerlink" title="1. 线程执行的随机性导致问题"></a>1. 线程执行的随机性导致问题</h4><h4 id="2-同步代码块"><a href="#2-同步代码块" class="headerlink" title="2. 同步代码块"></a>2. 同步代码块</h4><ol>
-<li><p>格式：</p>
-<p>synchronized(任意对象) {</p>
-<p>​    多条语句操作共享数据的代码</p>
-<p>}</p>
-</li>
-<li><p>synchronized(任意对象) : 就相当于给代码加上锁了，任意对象可以看成一把锁</p>
-</li>
-<li><p>同步的好处和弊端：</p>
-<ul>
-<li>好处：解决了多线程的数据安全问题</li>
-<li>坏处：当线程很多时，每个线程都会区判断同步上的锁，这是很耗资源的，无形中会降低程序的运行效率</li>
-</ul>
-</li>
-</ol>
-<h4 id="3-同步方法"><a href="#3-同步方法" class="headerlink" title="3. 同步方法"></a>3. 同步方法</h4><ul>
-<li>就是把synchronized关键字加到方法上</li>
-</ul>
-<ol>
-<li>格式：<ul>
-<li>修饰符 synchronized 返回值类型 方法名(方法参数) { }</li>
-</ul>
-</li>
-<li>同步方法的锁对象：this<ul>
-<li>同步静态方法的锁对象：类名.class</li>
-<li>格式：<ul>
-<li>修饰符 static synchronized 返回值类型 方法名(方法参数) { }</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<h4 id="4-线程安全的类"><a href="#4-线程安全的类" class="headerlink" title="4. 线程安全的类"></a>4. 线程安全的类</h4><p><strong>1. StringBuilder:</strong></p>
-<ul>
-<li>线程安全，可变的字符序列</li>
-</ul>
-<p><strong>2. Vector:</strong></p>
-<ul>
-<li>该类实现了List接口，使其成为Java Collections Framework的成员</li>
-<li>与新的集合实现不同，Vector被同步。如果不需要线程安全，建议使用ArrayList代替Vector</li>
-</ul>
-<p><strong>3. Hashtable:</strong></p>
-<ul>
-<li>该类实现了哈希表。任何非null对象都可以用作键或者值</li>
-<li>该表实现了Map接口，使其成为Java Collections Framework的成员</li>
-<li>与新的集合实现不同，Vector被同步。如果不需要线程安全，建议使用HashMap代替Hashtable</li>
-</ul>
-<p><strong>4. </strong></p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Collections</span><span class="token punctuation">.</span>synchronizedList  <span class="token comment">//返回由指定列表变成的线程安全列表</span>
-	例如：<span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> list <span class="token operator">=</span> <span class="token class-name">Collections</span><span class="token punctuation">.</span><span class="token function">synchronizedList</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<h4 id="5-Lock锁"><a href="#5-Lock锁" class="headerlink" title="5. Lock锁"></a>5. Lock锁</h4><ol>
-<li><p>Lock提供比 synchronized() 更广泛的锁定操作</p>
-<ol>
-<li>void lock()   //上锁</li>
-<li>void unlock()   //释放锁</li>
-</ol>
-</li>
-<li><p>Lock锁是接口 不能直接实例化，采用实现类ReentrantLock来实例化 (多态）</p>
-<ul>
-<li>构造方法 ReentrantLock()</li>
-<li>例子：</li>
-</ul>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">private</span> <span class="token class-name">Lock</span> lock <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ReentrantLock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-lock<span class="token punctuation">.</span><span class="token function">lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-lock<span class="token punctuation">.</span><span class="token function">unlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-</li>
-<li><p>有异常可以用 try () { } finally () { } ，来保证unlock( ) 开锁一定执行</p>
-</li>
-</ol>
-<h3 id="3-生产者与消费者"><a href="#3-生产者与消费者" class="headerlink" title="3. 生产者与消费者"></a>3. 生产者与消费者</h3><ol>
-<li>十分经典的多线程写作模式<ul>
-<li>一类是消费者用于消费数据</li>
-<li>一类是生产者用于生产数据</li>
-</ul>
-</li>
-<li>生产者 —&gt; 共享数据区域 &lt;— 消费者</li>
-<li></li>
-</ol>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">void</span> <span class="token function">wait</span><span class="token punctuation">(</span><span class="token punctuation">)</span>              <span class="token comment">//导致当前线程等待，直到另一个线程调用该对象的notify()方法或者notifyall()方法</span>
-<span class="token keyword">void</span> <span class="token function">notify</span><span class="token punctuation">(</span><span class="token punctuation">)</span>            <span class="token comment">//唤醒正在等待对象监视器的单个进程</span>
-<span class="token keyword">void</span> <span class="token function">notifyall</span><span class="token punctuation">(</span><span class="token punctuation">)</span>         <span class="token comment">//唤醒正在等待对象监视器的所有进程</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-]]></content>
-      <categories>
-        <category>javase</category>
-      </categories>
-      <tags>
-        <tag>javase</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>javase_IO流</title>
     <url>/2023/11/16/javase_IO%E6%B5%81/</url>
     <content><![CDATA[<div align='center'>
@@ -5522,6 +5375,411 @@ bool <span class="token function">check</span><span class="token punctuation">(<
       </categories>
       <tags>
         <tag>快读</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>网络编程</title>
+    <url>/2023/11/24/javase_%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</url>
+    <content><![CDATA[<div align='center'>
+    <span style="font-size:45px;color:pink">网络编程</span>
+</div>
+
+
+<h3 id="1-网络编程"><a href="#1-网络编程" class="headerlink" title="1. 网络编程"></a>1. 网络编程</h3><h4 id="1-网络编程概述："><a href="#1-网络编程概述：" class="headerlink" title="1. 网络编程概述："></a>1. 网络编程概述：</h4><ul>
+<li>在网络通信协议下，实现网络互连的不同计算机上运行的程序可以进行数据交换</li>
+</ul>
+<h4 id="2-网络编程3要素"><a href="#2-网络编程3要素" class="headerlink" title="2. 网络编程3要素"></a>2. 网络编程3要素</h4><ol>
+<li><strong>IP地址</strong></li>
+<li><strong>端口</strong>  (应用程序的标识)</li>
+<li><strong>协议</strong>  (通信双方必须同时遵守才能完成数据交换)  常见的协议由UPD协议和TCP协议</li>
+</ol>
+<h4 id="3-IP地址"><a href="#3-IP地址" class="headerlink" title="3. IP地址"></a>3. IP地址</h4><ul>
+<li>是网路中设备的唯一标识</li>
+</ul>
+<ol>
+<li>IP地址分为两大类：<ul>
+<li>IPv4 和 IPv6</li>
+</ul>
+</li>
+<li>常用命令<ul>
+<li>cmd<ul>
+<li>ipconfig: 查看本机的IP地址</li>
+<li>Ping IP地址：检查网络是否联通</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>特殊IP地址<ul>
+<li>127.0.0.1<ul>
+<li>是回送地址，可以代表本机地址，一般用来测试使用</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="4-InetAddress"><a href="#4-InetAddress" class="headerlink" title="4. InetAddress"></a>4. InetAddress</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">static</span> <span class="token class-name">InetAddress</span> <span class="token function">getByName</span><span class="token punctuation">(</span><span class="token class-name">String</span> host<span class="token punctuation">)</span>   <span class="token comment">//确定主机名称的IP地址。主机名称可以是及其名称，也可以是IP地址</span>
+<span class="token class-name">String</span> <span class="token function">getHostName</span><span class="token punctuation">(</span><span class="token punctuation">)</span>					  <span class="token comment">//获取此IP地址的主机名称</span>
+<span class="token class-name">String</span> <span class="token function">getHostAddress</span><span class="token punctuation">(</span><span class="token punctuation">)</span>					  <span class="token comment">//获取IP地址字符串</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h4 id="5-端口"><a href="#5-端口" class="headerlink" title="5. 端口"></a>5. 端口</h4><ul>
+<li>设备上应用程序的唯一标识</li>
+</ul>
+<h4 id="6-协议"><a href="#6-协议" class="headerlink" title="6. 协议"></a>6. 协议</h4><ul>
+<li>计算机网络中，连接和通信的规则被称为网络通信协议</li>
+<li>UPD协议：用户数据报协议</li>
+<li>TCP协议：传输控制协议  ——&gt; ——&gt; ——&gt; ”三次握手“</li>
+</ul>
+<h3 id="2-UDP-通信程序"><a href="#2-UDP-通信程序" class="headerlink" title="2. UDP 通信程序"></a>2. UDP 通信程序</h3><h4 id="1"><a href="#1" class="headerlink" title="1."></a>1.</h4><p><strong>1. UPD协议是一种不可靠的网络协议，他在通信的两端各建立一个Socket对象，但这两个只是发送，接收的对象。因此基于UPD协议的通信双方而言，没有所谓的客户端和服务器概念</strong></p>
+<h4 id="2-UPD发送数据"><a href="#2-UPD发送数据" class="headerlink" title="2. UPD发送数据"></a>2. UPD发送数据</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token number">1.</span> 创建发送端<span class="token class-name">Socket</span>对象<span class="token punctuation">(</span><span class="token class-name">DatagramSocket</span><span class="token punctuation">)</span>
+	<span class="token class-name">DatagramSocket</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token number">2.</span> 创建数据，并把数据打包  —— 要发送的数据，长度，地址，端口
+	<span class="token class-name">DatagramPacket</span><span class="token punctuation">(</span><span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> buf<span class="token punctuation">,</span> <span class="token keyword">int</span> length<span class="token punctuation">,</span> <span class="token class-name">InetAddress</span> address<span class="token punctuation">,</span> <span class="token keyword">int</span> port<span class="token punctuation">)</span>
+<span class="token number">3.</span> 调用<span class="token class-name">DatagramSocket</span>对象发送数据
+	<span class="token keyword">void</span> <span class="token function">send</span><span class="token punctuation">(</span><span class="token class-name">Datagrampacket</span> p<span class="token punctuation">)</span>
+<span class="token number">4.</span> 关闭发送端
+	<span class="token keyword">void</span> <span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="3-UPD接收数据"><a href="#3-UPD接收数据" class="headerlink" title="3. UPD接收数据"></a>3. UPD接收数据</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token number">1.</span> 创建接收数据端
+	<span class="token class-name">DatagramSocket</span> ds <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">DatagramSocket</span><span class="token punctuation">(</span><span class="token number">12345</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token number">2.</span> 接收数据
+	<span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> bytes <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token number">1024</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+	<span class="token class-name">DatagramPacket</span> dp <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">DatagramPacket</span><span class="token punctuation">(</span><span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> buf<span class="token punctuation">,</span> <span class="token keyword">int</span> length<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	ds<span class="token punctuation">.</span><span class="token function">receive</span><span class="token punctuation">(</span>dp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token number">3.</span> 解析数据包，显示数据
+	<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token number">4.</span> 关闭接收端
+	ds<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="3-TCP通信程序"><a href="#3-TCP通信程序" class="headerlink" title="3. TCP通信程序"></a>3. TCP通信程序</h3><h4 id="1-Tcp发送数据"><a href="#1-Tcp发送数据" class="headerlink" title="1. Tcp发送数据"></a>1. Tcp发送数据</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token number">1.</span> 创建客户端的<span class="token class-name">Socket</span>对象<span class="token punctuation">(</span><span class="token class-name">Socket</span><span class="token punctuation">)</span>
+	<span class="token class-name">Socket</span><span class="token punctuation">(</span><span class="token class-name">String</span> host<span class="token punctuation">,</span> <span class="token keyword">int</span> port<span class="token punctuation">)</span>
+<span class="token number">2.</span> 获取输出流，写数据
+	<span class="token class-name">OutputStream</span> <span class="token function">getOutputStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
+<span class="token number">3.</span> 释放资源
+	<span class="token keyword">void</span> <span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="2-Tcp接收数据"><a href="#2-Tcp接收数据" class="headerlink" title="2. Tcp接收数据"></a>2. Tcp接收数据</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token number">1.</span> 创建服务器端<span class="token class-name">Socket</span>对象<span class="token punctuation">(</span><span class="token class-name">ServerSocket</span><span class="token punctuation">)</span>
+	<span class="token class-name">ServerSocket</span><span class="token punctuation">(</span><span class="token keyword">int</span> port<span class="token punctuation">)</span>
+<span class="token number">2.</span> 监听客户端端口，返回一个<span class="token class-name">Socket</span>对象
+	<span class="token class-name">Socket</span> <span class="token function">accept</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token number">3.</span> 获取输入流，读数据，并把数据显示在控制台
+	<span class="token class-name">InputStream</span> <span class="token function">getInputStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token number">4.</span> 释放资源
+	<span class="token keyword">void</span> <span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="3"><a href="#3" class="headerlink" title="3."></a>3.</h4><p>sk.shutdownOutput(); //表示结束</p>
+<h4 id="4"><a href="#4" class="headerlink" title="4."></a>4.</h4><p>用线程来实现多个客户端上传服务器</p>
+]]></content>
+      <categories>
+        <category>javase</category>
+      </categories>
+      <tags>
+        <tag>javase</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Lambda表达式</title>
+    <url>/2023/11/24/javase_Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
+    <content><![CDATA[<div align='center'>
+    <span style="font-size:45px;color:pink">Lambda表达式</span>
+</div>
+
+<ul>
+<li><strong>Lambda就是一个接口的类实现</strong></li>
+</ul>
+<h4 id="1-Lambda表达式三要素"><a href="#1-Lambda表达式三要素" class="headerlink" title="1. Lambda表达式三要素"></a>1. Lambda表达式三要素</h4><ol>
+<li>形式参数</li>
+<li>箭头</li>
+<li>代码块</li>
+</ol>
+<h4 id="2-Lambda使用前提"><a href="#2-Lambda使用前提" class="headerlink" title="2. Lambda使用前提"></a>2. Lambda使用前提</h4><ol>
+<li>有一个接口</li>
+<li>有且仅有一个抽象方法</li>
+</ol>
+<h4 id="3-Lambda省略模式"><a href="#3-Lambda省略模式" class="headerlink" title="3. Lambda省略模式"></a>3. Lambda省略模式</h4><ol>
+<li>参数类型可以省略</li>
+<li>参数有且仅有一个，小括号可以省略</li>
+<li>代码块语句只有一条，可以省略大括号和分号，以及return</li>
+</ol>
+<h4 id="4-Lambda表达式和匿名内部类的区别"><a href="#4-Lambda表达式和匿名内部类的区别" class="headerlink" title="4. Lambda表达式和匿名内部类的区别"></a>4. Lambda表达式和匿名内部类的区别</h4><ol>
+<li>所需类型不同<ul>
+<li>匿名内部类：      可以是接口，可以是抽象类，也可以是具体类</li>
+<li>Lambda表达式：只能是接口</li>
+</ul>
+</li>
+<li>使用限制不同<ul>
+<li>匿名内部类：      无限制</li>
+<li>Lambda表达式：接口中只能由一个抽象方法</li>
+</ul>
+</li>
+<li>实现原理不同<ul>
+<li>匿名内部类：        编译之后，产生一个单独的 .class文件</li>
+<li>Lambda表达式：   编译之后，没有一个单独的 .class字节码文件，对应的字节码文件会在运行时动态生成</li>
+</ul>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>javase</category>
+      </categories>
+      <tags>
+        <tag>javase</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>javase_多线程</title>
+    <url>/2023/11/16/javase_%E5%A4%9A%E7%BA%BF%E7%A8%8B/</url>
+    <content><![CDATA[<p><div align='center'>
+    <span style="font-size:45px;color:pink">多线程</span>
+</div></p>
+<h3 id="1-实现多线程"><a href="#1-实现多线程" class="headerlink" title="1. 实现多线程"></a>1. 实现多线程</h3><h4 id="1-进程"><a href="#1-进程" class="headerlink" title="1. 进程"></a>1. 进程</h4><ul>
+<li><strong>是正在运行的程序</strong></li>
+</ul>
+<ol>
+<li>系统进行资源分配和调用的独立单位</li>
+<li>每一个进程都有他自己的内存空间和系统资源</li>
+</ol>
+<h4 id="2-线程"><a href="#2-线程" class="headerlink" title="2. 线程"></a>2. 线程</h4><ul>
+<li><strong>是进程中的单个顺序控制流，是一条执行路径</strong></li>
+</ul>
+<ol>
+<li>单线程</li>
+<li>多线程</li>
+</ol>
+<h4 id="3-线程生命周期"><a href="#3-线程生命周期" class="headerlink" title="3. 线程生命周期"></a>3. 线程生命周期</h4><ul>
+<li>新建 —&gt; 就绪 —&gt; 运行 —&gt; 死亡</li>
+<li>​               (&lt;— 阻塞 &lt;—)</li>
+</ul>
+<h4 id="4-多线程的调用"><a href="#4-多线程的调用" class="headerlink" title="4. 多线程的调用"></a>4. 多线程的调用</h4><p><strong>方式1. 继承Thread类</strong></p>
+<ul>
+<li>定义一个MyThread 类，然后继承Thread类，重写run方法</li>
+<li>start(): 启动线程，然后由JVM调用此线程的run方法</li>
+</ul>
+<h4 id="5-设置和获取线程名称"><a href="#5-设置和获取线程名称" class="headerlink" title="5. 设置和获取线程名称"></a>5. 设置和获取线程名称</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token number">1.</span> <span class="token keyword">void</span> <span class="token function">setName</span><span class="token punctuation">(</span><span class="token class-name">String</span> name<span class="token punctuation">)</span>  <span class="token comment">//设置</span>
+<span class="token number">2.</span> <span class="token keyword">void</span> <span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span>             <span class="token comment">//获取</span>
+    
+   	<span class="token comment">//获取main()方法所在线程的名称：  xxx.currentThread.getName();</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span>  <span class="token comment">//返回对当前正在执行的线程对象的引用</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="6-Thread中获取和设置线程优先级的方法"><a href="#6-Thread中获取和设置线程优先级的方法" class="headerlink" title="6. Thread中获取和设置线程优先级的方法"></a>6. Thread中获取和设置线程优先级的方法</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token number">1.</span> <span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">int</span> <span class="token function">getPriority</span><span class="token punctuation">(</span><span class="token punctuation">)</span>    <span class="token comment">//返回线程优先级</span>
+<span class="token number">2.</span> <span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">void</span> <span class="token function">setPriority</span><span class="token punctuation">(</span><span class="token punctuation">)</span>   <span class="token comment">//更改线程优先级</span>
+<span class="token number">3.</span> <span class="token comment">//默认是5，范围是1~10</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h4 id="7-线程控制"><a href="#7-线程控制" class="headerlink" title="7. 线程控制"></a>7. 线程控制</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token number">1.</span> <span class="token keyword">static</span> <span class="token keyword">void</span> sleep <span class="token punctuation">(</span><span class="token keyword">long</span> millis<span class="token punctuation">)</span>     <span class="token comment">//使当前执行的线程停留指定的毫秒数</span>
+<span class="token number">2.</span> <span class="token keyword">void</span> <span class="token function">join</span><span class="token punctuation">(</span><span class="token punctuation">)</span>						 <span class="token comment">//等待这个线程的死亡</span>
+<span class="token number">3.</span> <span class="token keyword">void</span> <span class="token function">setDaemon</span><span class="token punctuation">(</span><span class="token keyword">boolean</span> on<span class="token punctuation">)</span>          <span class="token comment">//将此线程标记为守护线程，当运行的线程是守护线程时，java虚拟机退出(也就是主线程结束，只剩下守护程序)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h4 id="8-多线程的实现方式"><a href="#8-多线程的实现方式" class="headerlink" title="8. 多线程的实现方式"></a>8. 多线程的实现方式</h4><p><strong>1. 两种实现方式</strong></p>
+<ol>
+<li>继承Thread类</li>
+<li>实现Runnable接口</li>
+</ol>
+<p><strong>2. 实现Runnable接口</strong></p>
+<ol>
+<li>定义一个类实现Runnable接口</li>
+<li>重写run()方法</li>
+<li>创建类对象</li>
+<li>以类对象为构造方法的参数       创建Thread类的对象</li>
+<li>启动线程</li>
+</ol>
+<p><strong>3. 相比而言，实现Runnable接口的好处</strong></p>
+<ol>
+<li>避免了java单继承的局限性</li>
+<li>适合多个相同程序的代码去处理 同一个资源的情况，把线程和程序的代码、数据有效分离，较好的体现了面向对象的设计思想</li>
+</ol>
+<h3 id="2-线程同步"><a href="#2-线程同步" class="headerlink" title="2. 线程同步"></a>2. 线程同步</h3><h4 id="1-线程执行的随机性导致问题"><a href="#1-线程执行的随机性导致问题" class="headerlink" title="1. 线程执行的随机性导致问题"></a>1. 线程执行的随机性导致问题</h4><h4 id="2-同步代码块"><a href="#2-同步代码块" class="headerlink" title="2. 同步代码块"></a>2. 同步代码块</h4><ol>
+<li><p>格式：</p>
+<p>synchronized(任意对象) {</p>
+<p>​    多条语句操作共享数据的代码</p>
+<p>}</p>
+</li>
+<li><p>synchronized(任意对象) : 就相当于给代码加上锁了，任意对象可以看成一把锁</p>
+</li>
+<li><p>同步的好处和弊端：</p>
+<ul>
+<li>好处：解决了多线程的数据安全问题</li>
+<li>坏处：当线程很多时，每个线程都会区判断同步上的锁，这是很耗资源的，无形中会降低程序的运行效率</li>
+</ul>
+</li>
+</ol>
+<h4 id="3-同步方法"><a href="#3-同步方法" class="headerlink" title="3. 同步方法"></a>3. 同步方法</h4><ul>
+<li>就是把synchronized关键字加到方法上</li>
+</ul>
+<ol>
+<li>格式：<ul>
+<li>修饰符 synchronized 返回值类型 方法名(方法参数) { }</li>
+</ul>
+</li>
+<li>同步方法的锁对象：this<ul>
+<li>同步静态方法的锁对象：类名.class</li>
+<li>格式：<ul>
+<li>修饰符 static synchronized 返回值类型 方法名(方法参数) { }</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="4-线程安全的类"><a href="#4-线程安全的类" class="headerlink" title="4. 线程安全的类"></a>4. 线程安全的类</h4><p><strong>1. StringBuilder:</strong></p>
+<ul>
+<li>线程安全，可变的字符序列</li>
+</ul>
+<p><strong>2. Vector:</strong></p>
+<ul>
+<li>该类实现了List接口，使其成为Java Collections Framework的成员</li>
+<li>与新的集合实现不同，Vector被同步。如果不需要线程安全，建议使用ArrayList代替Vector</li>
+</ul>
+<p><strong>3. Hashtable:</strong></p>
+<ul>
+<li>该类实现了哈希表。任何非null对象都可以用作键或者值</li>
+<li>该表实现了Map接口，使其成为Java Collections Framework的成员</li>
+<li>与新的集合实现不同，Vector被同步。如果不需要线程安全，建议使用HashMap代替Hashtable</li>
+</ul>
+<p><strong>4. </strong></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Collections</span><span class="token punctuation">.</span>synchronizedList  <span class="token comment">//返回由指定列表变成的线程安全列表</span>
+	例如：<span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> list <span class="token operator">=</span> <span class="token class-name">Collections</span><span class="token punctuation">.</span><span class="token function">synchronizedList</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h4 id="5-Lock锁"><a href="#5-Lock锁" class="headerlink" title="5. Lock锁"></a>5. Lock锁</h4><ol>
+<li><p>Lock提供比 synchronized() 更广泛的锁定操作</p>
+<ol>
+<li>void lock()   //上锁</li>
+<li>void unlock()   //释放锁</li>
+</ol>
+</li>
+<li><p>Lock锁是接口 不能直接实例化，采用实现类ReentrantLock来实例化 (多态）</p>
+<ul>
+<li>构造方法 ReentrantLock()</li>
+<li>例子：</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">private</span> <span class="token class-name">Lock</span> lock <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ReentrantLock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+lock<span class="token punctuation">.</span><span class="token function">lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+lock<span class="token punctuation">.</span><span class="token function">unlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>有异常可以用 try () { } finally () { } ，来保证unlock( ) 开锁一定执行</p>
+</li>
+</ol>
+<h3 id="3-生产者与消费者"><a href="#3-生产者与消费者" class="headerlink" title="3. 生产者与消费者"></a>3. 生产者与消费者</h3><ol>
+<li>十分经典的多线程写作模式<ul>
+<li>一类是消费者用于消费数据</li>
+<li>一类是生产者用于生产数据</li>
+</ul>
+</li>
+<li>生产者 —&gt; 共享数据区域 &lt;— 消费者</li>
+<li></li>
+</ol>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">void</span> <span class="token function">wait</span><span class="token punctuation">(</span><span class="token punctuation">)</span>              <span class="token comment">//导致当前线程等待，直到另一个线程调用该对象的notify()方法或者notifyall()方法</span>
+<span class="token keyword">void</span> <span class="token function">notify</span><span class="token punctuation">(</span><span class="token punctuation">)</span>            <span class="token comment">//唤醒正在等待对象监视器的单个进程</span>
+<span class="token keyword">void</span> <span class="token function">notifyall</span><span class="token punctuation">(</span><span class="token punctuation">)</span>         <span class="token comment">//唤醒正在等待对象监视器的所有进程</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+]]></content>
+      <categories>
+        <category>javase</category>
+      </categories>
+      <tags>
+        <tag>javase</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>方法引用</title>
+    <url>/2023/11/24/javase_%E6%96%B9%E6%B3%95%E5%BC%95%E7%94%A8/</url>
+    <content><![CDATA[<div align='center'>
+    <span style="font-size:45px;color:pink">方法引用</span>
+</div>
+
+<h4 id="1-方法引用符"><a href="#1-方法引用符" class="headerlink" title="1. 方法引用符"></a>1. 方法引用符</h4><ul>
+<li>可推导就是可省略</li>
+</ul>
+<ol>
+<li><p>::为引用运算符，他所在的表达式被成为方法引用</p>
+</li>
+<li><p>Lambda表达式：usePrintable(s —&gt; System.out.println(s));</p>
+<p>方法引用: usePrintable(System.out::println);</p>
+</li>
+</ol>
+<h4 id="2-Lambda表达式的方法引用"><a href="#2-Lambda表达式的方法引用" class="headerlink" title="2. Lambda表达式的方法引用"></a>2. Lambda表达式的方法引用</h4><ol>
+<li><p>引用类方法       (其实就是引用类的静态方法)</p>
+<ul>
+<li><p>格式：类名::静态方法</p>
+</li>
+<li><p>范例：Integer::parseInt</p>
+<p>​          Integer类方法：public static int parseInt(String s)  //String 转为 Int</p>
+</li>
+</ul>
+</li>
+<li><p>引用对象的实例方法      (其实就是引用类中的成员方法)</p>
+<ul>
+<li>格式：对象::成员方法</li>
+<li>范例：”hello” :: toUpperCase<ul>
+<li>String类中的方法： public String toUpperCase()   //所有字符转为大写</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>引用类的实例方法       (其实就是引用类中的成员方法)</p>
+<ul>
+<li>格式：类型::成员方法 </li>
+<li>范例：String :: substring<ul>
+<li>String类中的方法：public String substring (int beginIndex, int endIndex)  //截取字符串，返回子串</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>引用构造器                (其实就是引用构造方法)</p>
+<ul>
+<li>格式：类名::new</li>
+<li>范例：Student::new</li>
+</ul>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>javase</category>
+      </categories>
+      <tags>
+        <tag>javase</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>接口组成更新</title>
+    <url>/2023/11/24/javase_%E6%8E%A5%E5%8F%A3%E7%BB%84%E6%88%90%E6%9B%B4%E6%96%B0/</url>
+    <content><![CDATA[<div align='center'>
+    <span style="font-size:45px;color:pink">接口组成更新</span>
+</div>
+
+<h4 id="1-接口的组成更新概述"><a href="#1-接口的组成更新概述" class="headerlink" title="1. 接口的组成更新概述"></a>1. 接口的组成更新概述</h4><ol>
+<li>接口的组成：<ol>
+<li>常量(默认)：       public static final</li>
+<li>抽象方法(默认)：public Abstract</li>
+</ol>
+</li>
+</ol>
+<h4 id="2-接口中的默认方法"><a href="#2-接口中的默认方法" class="headerlink" title="2. 接口中的默认方法"></a>2. 接口中的默认方法</h4><ul>
+<li>格式：(public) default 返回值类型 方法名(参数列表) {  }</li>
+<li>范例：(public) default void show3( ) { }</li>
+<li>注意事项：<ol>
+<li>可以重写可以不重写</li>
+<li>public 可以省略</li>
+</ol>
+</li>
+</ul>
+<h4 id="3-接口中的静态方法"><a href="#3-接口中的静态方法" class="headerlink" title="3. 接口中的静态方法"></a>3. 接口中的静态方法</h4><ul>
+<li>格式：(public) static 返回值类型 方法名(参数列表) {  }</li>
+<li>范例：(public) static void show ( ) {  }</li>
+<li>注意事项：<ol>
+<li>静态方法只能通过接口名调用，不能通过实现类或者对象名调用</li>
+<li>public 可以省略</li>
+</ol>
+</li>
+</ul>
+<h4 id="4-接口中的私有方法"><a href="#4-接口中的私有方法" class="headerlink" title="4. 接口中的私有方法"></a>4. 接口中的私有方法</h4><ul>
+<li>格式1：private 返回值类型 方法名(参数列表) {  }</li>
+<li><p>范例1：private void show() {  }</p>
+</li>
+<li><p>格式2：private static 返回值类型 方法名(参数列表) {  }    (私有静态方法)</p>
+</li>
+<li><p>范例2：private static void show() {  }</p>
+</li>
+<li><p>注意事项：</p>
+<ol>
+<li>默认方法可以调用静态方法和非静态方法</li>
+<li>静态方法只能调用静态方法</li>
+</ol>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>javase</category>
+      </categories>
+      <tags>
+        <tag>javase</tag>
       </tags>
   </entry>
 </search>
