@@ -7376,4 +7376,80 @@ using namespace std<span class="token punctuation">;</span>
         <tag>codeforces</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Stream流</title>
+    <url>/2023/12/01/javase_Stream%E6%B5%81/</url>
+    <content><![CDATA[<div align='center'>
+    <span style="font-size:45px;color:pink">Stream流</span>
+</div>
+
+
+
+<h3 id="1-体验Stream流"><a href="#1-体验Stream流" class="headerlink" title="1. 体验Stream流"></a>1. 体验Stream流</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java">arrayList<span class="token punctuation">.</span><span class="token function">stream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>s <span class="token operator">-></span> s<span class="token punctuation">.</span><span class="token function">startWith</span><span class="token punctuation">(</span><span class="token string">"张"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>s <span class="token operator">-></span> s<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token operator">::</span><span class="token function">println</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="2-Stream流的生成方式"><a href="#2-Stream流的生成方式" class="headerlink" title="2. Stream流的生成方式"></a>2. Stream流的生成方式</h3><h4 id="1"><a href="#1" class="headerlink" title="1."></a>1.</h4><ol>
+<li>生成流<ul>
+<li>通过数据源(数组，集合)生成流<ul>
+<li>例：list.Stream()</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>中间操作<ul>
+<li>一个流后可跟有零或多个中间操作，主要目的是打开流，做出某种程度的数据过滤 / 映射，然后返回一个新的流，交给下一个操作使用</li>
+</ul>
+</li>
+<li>终结操作<ul>
+<li>一个流只能有一个终结操作，当这个操作执行后，流就被使用”光”了，无法再被操作。<ul>
+<li>例：forEach()</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="2-Stream常见生成方式"><a href="#2-Stream常见生成方式" class="headerlink" title="2. Stream常见生成方式"></a>2. Stream常见生成方式</h4><ol>
+<li>Collection体系的集合可以使用默认方法Stream()生成流<ul>
+<li>default Stream&lt; E &gt; stream</li>
+</ul>
+</li>
+<li>Map体系的集合间生成流     (调用方法：keySet(), values(), entrySet() )</li>
+<li>数组可以通过Stream接口的静态方法 of (T…values)生成流   (Stream.of(数组))</li>
+</ol>
+<h3 id="3-Stream流常见中间操作方法"><a href="#3-Stream流常见中间操作方法" class="headerlink" title="3. Stream流常见中间操作方法"></a>3. Stream流常见中间操作方法</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token number">1.</span> <span class="token class-name">Stream</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> <span class="token function">filter</span><span class="token punctuation">(</span><span class="token class-name">Predicate</span> predicate<span class="token punctuation">)</span> <span class="token operator">:</span> 用于流中数据的过滤
+	predicate接口的方法					<span class="token keyword">boolean</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token class-name">T</span> t<span class="token punctuation">)</span><span class="token operator">:</span> 进行判断，返回一个<span class="token keyword">boolean</span>值
+<span class="token number">2.</span> <span class="token class-name">Stream</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> <span class="token function">limit</span><span class="token punctuation">(</span><span class="token keyword">long</span> maxSize<span class="token punctuation">)</span> <span class="token operator">:</span> 截取指定参数个数的数据，返回此流中元素组成的流
+<span class="token number">3.</span> <span class="token class-name">Stream</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> <span class="token function">skip</span><span class="token punctuation">(</span><span class="token keyword">long</span> n<span class="token punctuation">)</span> <span class="token operator">:</span> 跳过指定参数个数的数据，返回由该流剩余元素组成的流
+<span class="token number">4.</span> <span class="token keyword">static</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> <span class="token class-name">Stream</span> <span class="token function">concat</span><span class="token punctuation">(</span><span class="token class-name">Stream</span> a<span class="token punctuation">,</span> <span class="token class-name">Stream</span> b<span class="token punctuation">)</span> <span class="token operator">:</span> 合并a和b两个流为一个流  <span class="token punctuation">(</span>静态方法<span class="token punctuation">)</span>
+<span class="token number">5.</span> stream<span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span>  <span class="token function">distict</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> 返回由该流不同元素<span class="token punctuation">(</span>根据<span class="token class-name">Object</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span><span class="token class-name">Object</span><span class="token punctuation">)</span><span class="token punctuation">)</span> 组成的流
+<span class="token number">6.</span> <span class="token class-name">Stream</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> <span class="token function">sorted</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> 根据自然顺序排序，返回由此流元素组成的流
+<span class="token number">7.</span> <span class="token class-name">Stream</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> <span class="token function">sorted</span><span class="token punctuation">(</span><span class="token class-name">Comparator</span> comparator<span class="token punctuation">)</span> <span class="token operator">:</span> 根据提供的<span class="token class-name">Comparator</span>进行排序，返回由此流元素组成的流
+<span class="token number">8.</span> <span class="token class-name">Stream</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> <span class="token function">sorted</span><span class="token punctuation">(</span><span class="token class-name">Comparator</span> comparator<span class="token punctuation">)</span> <span class="token operator">:</span> 返回由给定函数应用于此流的元素结果组成的流
+	<span class="token class-name">Function</span>接口中的方法						<span class="token class-name">R</span> <span class="token function">apply</span><span class="token punctuation">(</span><span class="token class-name">T</span> t<span class="token punctuation">)</span>
+		例子：list<span class="token punctuation">.</span><span class="token function">stream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>s <span class="token operator">-></span> <span class="token class-name">Integer</span><span class="token punctuation">.</span><span class="token function">valueOf</span><span class="token punctuation">(</span><span class="token class-name">S</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token operator">::</span><span class="token function">println</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token number">9.</span> <span class="token class-name">IntStream</span> <span class="token function">mapToInt</span><span class="token punctuation">(</span><span class="token class-name">ToIntFunction</span> mapper<span class="token punctuation">)</span> <span class="token operator">:</span> 返回一个<span class="token class-name">IntStream</span>其中包含  将给定函数应用于此流的结果<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="4-Stream流常见的终结操作方法"><a href="#4-Stream流常见的终结操作方法" class="headerlink" title="4. Stream流常见的终结操作方法"></a>4. Stream流常见的终结操作方法</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token number">1.</span> <span class="token keyword">void</span> <span class="token function">forEach</span><span class="token punctuation">(</span><span class="token class-name">Consumer</span> action<span class="token punctuation">)</span> <span class="token operator">:</span> 对此流的每个元素进行操作
+			<span class="token class-name">Consumer</span>接口的方法		<span class="token keyword">void</span> <span class="token function">accept</span><span class="token punctuation">(</span><span class="token class-name">T</span> t<span class="token punctuation">)</span> <span class="token operator">:</span> 对给定的参数操作
+<span class="token number">2.</span> <span class="token keyword">long</span> <span class="token function">count</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> 返回此流中的元素数<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h4 id="5-Stream的收集操作"><a href="#5-Stream的收集操作" class="headerlink" title="5. Stream的收集操作"></a>5. Stream的收集操作</h4><ol>
+<li><p>Stream流的收集方法</p>
+<ul>
+<li>R collect(Collect collector)<ul>
+<li>但这个收集方法的参数是一个Collector接口</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>工具类Collector 提供了具体的收集方法</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> <span class="token class-name">Collector</span> <span class="token function">toList</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> 把元素收集到<span class="token class-name">List</span>集合中
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> <span class="token class-name">Collector</span> <span class="token function">toSet</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token operator">:</span> 把元素收集到<span class="token class-name">Set</span>集合中
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">Collector</span> <span class="token function">toMap</span><span class="token punctuation">(</span><span class="token class-name">Function</span> keyMapper<span class="token punctuation">,</span> <span class="token class-name">Function</span> valueMapper<span class="token punctuation">)</span> <span class="token operator">:</span> 把元素收集到<span class="token class-name">Map</span>集合中<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>javase</category>
+      </categories>
+      <tags>
+        <tag>javase</tag>
+      </tags>
+  </entry>
 </search>
