@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Stream流">
-    <meta name="description" content="javase_Stream流">
+    <meta name="keywords" content="反射">
+    <meta name="description" content="javase_反射">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Stream流 | szy Blog</title>
+    <title>反射 | szy Blog</title>
     <link rel="icon" type="image/jpeg" href="/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230915160303.jpg">
     
     <style>
@@ -343,12 +343,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://picst.sunbangyan.cn/2023/12/01/aa98d63bcf0c46b1ff96b253c46aa379.jpeg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://picss.sunbangyan.cn/2023/12/09/aa4d3ab4987a7d4cc6e42b875130486b.jpeg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Stream流</h1>
+                    <h1 class="description center-align post-title">反射</h1>
                 </div>
             </div>
         </div>
@@ -397,7 +397,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-12-01
+                    2023-12-09
                 </div>
                 
 
@@ -422,70 +422,131 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <div align='center'>
-    <span style="font-size:45px;color:pink">Stream流</span>
+    <span style="font-size:45px;color:pink">反射</span>
 </div>
 
 
-
-<h3 id="1-体验Stream流"><a href="#1-体验Stream流" class="headerlink" title="1. 体验Stream流"></a>1. 体验Stream流</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java">arrayList<span class="token punctuation">.</span><span class="token function">stream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>s <span class="token operator">-></span> s<span class="token punctuation">.</span><span class="token function">startWith</span><span class="token punctuation">(</span><span class="token string">"张"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>s <span class="token operator">-></span> s<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token operator">::</span><span class="token function">println</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h3 id="2-Stream流的生成方式"><a href="#2-Stream流的生成方式" class="headerlink" title="2. Stream流的生成方式"></a>2. Stream流的生成方式</h3><h4 id="1"><a href="#1" class="headerlink" title="1."></a>1.</h4><ol>
-<li>生成流<ul>
-<li>通过数据源(数组，集合)生成流<ul>
-<li>例：list.Stream()</li>
+<h3 id="0-5"><a href="#0-5" class="headerlink" title="0.5"></a>0.5</h3><p>Class类与字节码文件：<br>Class类是Java反射机制的一部分，它代表了在运行时加载的类和接口。<br>通过Class类，我们可以获取一个对象所属的类的信息，并进行相应操作。</p>
+<p>字节码文件 (.class文件) 是由Java源代码编译而成的二进制文件形成，其中包含了虚拟机能够理解和执行的指令集。<br>在Java程序运行之前，先将源代码编译为字节码并保存在磁盘上。<br>当程序需要执行时，虚拟机会读取并解释这些字节码指令来实现对应功能。</p>
+<h3 id="1-类加载器"><a href="#1-类加载器" class="headerlink" title="1. 类加载器"></a>1. 类加载器</h3><h4 id="1-类加载："><a href="#1-类加载：" class="headerlink" title="1, 类加载："></a>1, 类加载：</h4><ul>
+<li><strong>类的加载，类的连接，类的初始化 统称为 类加载。</strong></li>
+</ul>
+<ol>
+<li>类的加载<ul>
+<li>就是指将 class 读入内存，并为之创建一个java.lang.Class对象</li>
+<li>任何类被使用时，系统都会为之建立一个java.lang.Class对象</li>
 </ul>
 </li>
+<li>类的连接<ul>
+<li>验证阶段：检验被加载的类是否有正确的内部结构，并和其他类协调一致</li>
+<li>准备阶段：负责为类的类变量分布内存，并设置默认初始化值</li>
+<li>解析阶段：将类的二进制数据中的符号引用替换为直接引用</li>
 </ul>
 </li>
-<li>中间操作<ul>
-<li>一个流后可跟有零或多个中间操作，主要目的是打开流，做出某种程度的数据过滤 / 映射，然后返回一个新的流，交给下一个操作使用</li>
-</ul>
-</li>
-<li>终结操作<ul>
-<li>一个流只能有一个终结操作，当这个操作执行后，流就被使用”光”了，无法再被操作。<ul>
-<li>例：forEach()</li>
-</ul>
+<li>类的初始化<ul>
+<li>主要是对类变量进行初始化<ol>
+<li>先加载并连接该类</li>
+<li>先初始化直接父类</li>
+<li>一次执行初始化语句</li>
+</ol>
 </li>
 </ul>
 </li>
 </ol>
-<h4 id="2-Stream常见生成方式"><a href="#2-Stream常见生成方式" class="headerlink" title="2. Stream常见生成方式"></a>2. Stream常见生成方式</h4><ol>
-<li>Collection体系的集合可以使用默认方法Stream()生成流<ul>
-<li>default Stream&lt; E &gt; stream</li>
-</ul>
+<h4 id="2-类加载器"><a href="#2-类加载器" class="headerlink" title="2.类加载器"></a>2.类加载器</h4><ol>
+<li><p>类加载器作用：负责将类 .class文件加载到内存中，并为之生成对应的 java.lang.Class对象</p>
 </li>
-<li>Map体系的集合间生成流     (调用方法：keySet(), values(), entrySet() )</li>
-<li>数组可以通过Stream接口的静态方法 of (T…values)生成流   (Stream.of(数组))</li>
-</ol>
-<h3 id="3-Stream流常见中间操作方法"><a href="#3-Stream流常见中间操作方法" class="headerlink" title="3. Stream流常见中间操作方法"></a>3. Stream流常见中间操作方法</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token number">1.</span> <span class="token class-name">Stream</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> <span class="token function">filter</span><span class="token punctuation">(</span><span class="token class-name">Predicate</span> predicate<span class="token punctuation">)</span> <span class="token operator">:</span> 用于流中数据的过滤
-	predicate接口的方法					<span class="token keyword">boolean</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token class-name">T</span> t<span class="token punctuation">)</span><span class="token operator">:</span> 进行判断，返回一个<span class="token keyword">boolean</span>值
-<span class="token number">2.</span> <span class="token class-name">Stream</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> <span class="token function">limit</span><span class="token punctuation">(</span><span class="token keyword">long</span> maxSize<span class="token punctuation">)</span> <span class="token operator">:</span> 截取指定参数个数的数据，返回此流中元素组成的流
-<span class="token number">3.</span> <span class="token class-name">Stream</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> <span class="token function">skip</span><span class="token punctuation">(</span><span class="token keyword">long</span> n<span class="token punctuation">)</span> <span class="token operator">:</span> 跳过指定参数个数的数据，返回由该流剩余元素组成的流
-<span class="token number">4.</span> <span class="token keyword">static</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> <span class="token class-name">Stream</span> <span class="token function">concat</span><span class="token punctuation">(</span><span class="token class-name">Stream</span> a<span class="token punctuation">,</span> <span class="token class-name">Stream</span> b<span class="token punctuation">)</span> <span class="token operator">:</span> 合并a和b两个流为一个流  <span class="token punctuation">(</span>静态方法<span class="token punctuation">)</span>
-<span class="token number">5.</span> stream<span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span>  <span class="token function">distict</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> 返回由该流不同元素<span class="token punctuation">(</span>根据<span class="token class-name">Object</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span><span class="token class-name">Object</span><span class="token punctuation">)</span><span class="token punctuation">)</span> 组成的流
-<span class="token number">6.</span> <span class="token class-name">Stream</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> <span class="token function">sorted</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> 根据自然顺序排序，返回由此流元素组成的流
-<span class="token number">7.</span> <span class="token class-name">Stream</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> <span class="token function">sorted</span><span class="token punctuation">(</span><span class="token class-name">Comparator</span> comparator<span class="token punctuation">)</span> <span class="token operator">:</span> 根据提供的<span class="token class-name">Comparator</span>进行排序，返回由此流元素组成的流
-<span class="token number">8.</span> <span class="token class-name">Stream</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> <span class="token function">sorted</span><span class="token punctuation">(</span><span class="token class-name">Comparator</span> comparator<span class="token punctuation">)</span> <span class="token operator">:</span> 返回由给定函数应用于此流的元素结果组成的流
-	<span class="token class-name">Function</span>接口中的方法						<span class="token class-name">R</span> <span class="token function">apply</span><span class="token punctuation">(</span><span class="token class-name">T</span> t<span class="token punctuation">)</span>
-		例子：list<span class="token punctuation">.</span><span class="token function">stream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>s <span class="token operator">-></span> <span class="token class-name">Integer</span><span class="token punctuation">.</span><span class="token function">valueOf</span><span class="token punctuation">(</span><span class="token class-name">S</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token operator">::</span><span class="token function">println</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token number">9.</span> <span class="token class-name">IntStream</span> <span class="token function">mapToInt</span><span class="token punctuation">(</span><span class="token class-name">ToIntFunction</span> mapper<span class="token punctuation">)</span> <span class="token operator">:</span> 返回一个<span class="token class-name">IntStream</span>其中包含  将给定函数应用于此流的结果<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="4-Stream流常见的终结操作方法"><a href="#4-Stream流常见的终结操作方法" class="headerlink" title="4. Stream流常见的终结操作方法"></a>4. Stream流常见的终结操作方法</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token number">1.</span> <span class="token keyword">void</span> <span class="token function">forEach</span><span class="token punctuation">(</span><span class="token class-name">Consumer</span> action<span class="token punctuation">)</span> <span class="token operator">:</span> 对此流的每个元素进行操作
-			<span class="token class-name">Consumer</span>接口的方法		<span class="token keyword">void</span> <span class="token function">accept</span><span class="token punctuation">(</span><span class="token class-name">T</span> t<span class="token punctuation">)</span> <span class="token operator">:</span> 对给定的参数操作
-<span class="token number">2.</span> <span class="token keyword">long</span> <span class="token function">count</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> 返回此流中的元素数<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<h4 id="5-Stream的收集操作"><a href="#5-Stream的收集操作" class="headerlink" title="5. Stream的收集操作"></a>5. Stream的收集操作</h4><ol>
-<li><p>Stream流的收集方法</p>
+<li><p>java 运行时具有以下内置加载器</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token number">1.</span> <span class="token class-name">Bootstrap</span> <span class="token keyword">class</span> loader<span class="token operator">:</span>  虚拟机的内置加载器，通常表示为<span class="token keyword">null</span><span class="token punctuation">,</span> 没有父<span class="token keyword">null</span>
+<span class="token number">2.</span> <span class="token class-name">Platform</span> <span class="token keyword">class</span> loader<span class="token operator">:</span>  平台加载器<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token number">3.</span> <span class="token class-name">System</span> <span class="token keyword">class</span> loader<span class="token operator">:</span>  应用程序加载器<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>类加载器继承关系：</p>
 <ul>
-<li>R collect(Collect collector)<ul>
-<li>但这个收集方法的参数是一个Collector接口</li>
+<li>System父加载器为Platform，Plagform父加载器为Bootstrap</li>
 </ul>
 </li>
+<li><p>ClassLoader: </p>
+<ul>
+<li>负责加载器的对象</li>
 </ul>
 </li>
-<li><p>工具类Collector 提供了具体的收集方法</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> <span class="token class-name">Collector</span> <span class="token function">toList</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> 把元素收集到<span class="token class-name">List</span>集合中
-<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> <span class="token class-name">Collector</span> <span class="token function">toSet</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token operator">:</span> 把元素收集到<span class="token class-name">Set</span>集合中
-<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">Collector</span> <span class="token function">toMap</span><span class="token punctuation">(</span><span class="token class-name">Function</span> keyMapper<span class="token punctuation">,</span> <span class="token class-name">Function</span> valueMapper<span class="token punctuation">)</span> <span class="token operator">:</span> 把元素收集到<span class="token class-name">Map</span>集合中<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<li><p>ClassLoader中的两个方法</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token number">1.</span> <span class="token keyword">static</span> <span class="token class-name">ClassLoader</span> <span class="token function">getSystemClassLoader</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span>  返回用于委托的系统类加载器
+<span class="token number">2.</span> <span class="token class-name">ClassLoader</span> <span class="token function">getParent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span>  返回父类加载器进行委派<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 </li>
 </ol>
+<h3 id="2-反射"><a href="#2-反射" class="headerlink" title="2. 反射"></a>2. 反射</h3><ul>
+<li>技巧：public void setAccessible (boolean flag) : 值为 true ，取消访问检查</li>
+</ul>
+<h4 id="1-获取-class-类对象"><a href="#1-获取-class-类对象" class="headerlink" title="1. 获取 class 类对象"></a>1. 获取 class 类对象</h4><ul>
+<li><strong>要通过反射去实现一个类，首先我们要获取到该类的字节码文件，也就是类型为 Class 类型的对象</strong></li>
+<li><strong>获取Class类对象实际上就是在获取对应的字节码文件</strong></li>
+</ul>
+<ol>
+<li>使用类的 class 属性。<ul>
+<li>例：student.class</li>
+</ul>
+</li>
+<li>调用对象的 getClass () 方法 （该方法是 Object 类中的方法，所有的 java 对象都可以调用此方法)<ul>
+<li>例：Student s = new Student ();            s.getClass();</li>
+</ul>
+</li>
+<li>使用 Class 类中的静态方法 forName (String className) ，该方法需要传入字符串参数，也就是某个类的全路径，也就是完整包名的路径<ul>
+<li>例：Class.forName (“han_2.Student”)</li>
+</ul>
+</li>
+</ol>
+<h4 id="2-反射获取构造方法并使用"><a href="#2-反射获取构造方法并使用" class="headerlink" title="2.反射获取构造方法并使用"></a>2.反射获取构造方法并使用</h4><ol>
+<li><p>Class 类中用于获取构造方法的方法</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token number">1.</span> <span class="token class-name">Constructor</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span><span class="token punctuation">></span></span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">getConstructors</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> 返回所有公共构造方法的数组
+<span class="token number">2.</span> <span class="token class-name">Constructor</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span><span class="token punctuation">></span></span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">getDeclaredConstructors</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> 返回所有构造方法的数组
+<span class="token number">3.</span> <span class="token class-name">Constructor</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span><span class="token punctuation">></span></span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">getConstructor</span><span class="token punctuation">(</span><span class="token class-name">Class</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span><span class="token punctuation">></span></span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>parameter <span class="token class-name">Types</span><span class="token punctuation">)</span><span class="token operator">:</span> 返回单个公共构造方法
+<span class="token number">4.</span> <span class="token class-name">Constructor</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span><span class="token punctuation">></span></span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">getDeclaredConstructor</span><span class="token punctuation">(</span><span class="token class-name">Class</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span><span class="token punctuation">></span></span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>parameter <span class="token class-name">Types</span><span class="token punctuation">)</span><span class="token operator">:</span> 返回单个构造方法对象<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>Class 类中用于创建对象的方法</p>
+<ul>
+<li>T newInstance(Object … initargs): 根据指定的构造方法创建对象</li>
+</ul>
+</li>
+<li><p>基本数据也可通过 .class来得到对应的 Class 类型</p>
+</li>
+</ol>
+<h4 id="3-反射获取成员变量并使用"><a href="#3-反射获取成员变量并使用" class="headerlink" title="3. 反射获取成员变量并使用"></a>3. 反射获取成员变量并使用</h4><ol>
+<li><p>Class 类中用于获取成员变量的方法</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token number">1.</span> <span class="token class-name">Field</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">getFields</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> 公共数组
+<span class="token number">2.</span> <span class="token class-name">Field</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">getDeclaredFields</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> 所有 数组
+<span class="token number">3.</span> <span class="token class-name">Field</span> <span class="token function">getField</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> 公共单个
+<span class="token number">4.</span> <span class="token class-name">Field</span> <span class="token function">getDeclaredFields</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> 所有 单个<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>Field 类中给成员对象变量赋值的方法：</p>
+<ul>
+<li>void set (Object obj, Object value)：obj 赋值value</li>
+</ul>
+</li>
+</ol>
+<h4 id="4-反射获取成员方法并使用"><a href="#4-反射获取成员方法并使用" class="headerlink" title="4. 反射获取成员方法并使用"></a>4. 反射获取成员方法并使用</h4><ol>
+<li><p>Class 类中用于获取成员方法的方法</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token number">1.</span> <span class="token class-name">Method</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">getMethods</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> 公共数组<span class="token punctuation">(</span>包括继承<span class="token punctuation">)</span>
+<span class="token number">2.</span> <span class="token class-name">Method</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">getDeclaredMethods</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> 所有数组
+<span class="token number">3.</span> <span class="token class-name">Method</span> <span class="token function">getMethod</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> 公共单个
+<span class="token number">4.</span> <span class="token class-name">Method</span> <span class="token function">getDeclaredMethod</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> 所有单个<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>Method 类中用于调用成员方法的方法：</p>
+<ul>
+<li>Object invoke (Object obj, Object … args): 调用 obj 对象的成员方法，参数是 args ，返回值类型是 Object</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li><strong>总结三步</strong><ol>
+<li>得到字节码文件</li>
+<li>得到构造方法</li>
+<li>利用构造方法创建对象</li>
+<li>……</li>
+</ol>
+</li>
+</ul>
 
                 
             </div>
@@ -512,7 +573,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://ich-liebe.github.io/2023/12/01/javase_Stream%E6%B5%81/">https://ich-liebe.github.io/2023/12/01/javase_Stream%E6%B5%81/</a>
+                    <a href="https://ich-liebe.github.io/2023/12/09/javase_%E5%8F%8D%E5%B0%84/">https://ich-liebe.github.io/2023/12/09/javase_%E5%8F%8D%E5%B0%84/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -901,18 +962,18 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/12/09/javase_%E5%8F%8D%E5%B0%84/">
+                <a href="/2023/12/09/javase-Junit%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/">
                     <div class="card-image">
                         
-                        <img src="https://picss.sunbangyan.cn/2023/12/09/aa4d3ab4987a7d4cc6e42b875130486b.jpeg" class="responsive-img" alt="反射">
+                        <img src="https://picdl.sunbangyan.cn/2023/12/09/1336baef081b7cb10e51c9c6e9034c6f.jpeg" class="responsive-img" alt="Junit单元测试">
                         
-                        <span class="card-title">反射</span>
+                        <span class="card-title">Junit单元测试</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            javase_反射
+                            javase_Junit单元测试
                         
                     </div>
                     <div class="publish-info">
@@ -949,30 +1010,30 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/11/30/CF_CodeTON_Round_7_Div1+Div2/">
+                <a href="/2023/12/01/javase_Stream%E6%B5%81/">
                     <div class="card-image">
                         
-                        <img src="https://picss.sunbangyan.cn/2023/11/30/9899f7b410ece2eedff52f47bf4abffa.jpeg" class="responsive-img" alt="CodeTON Round 7 (Div. 1 + Div. 2)">
+                        <img src="https://picst.sunbangyan.cn/2023/12/01/aa98d63bcf0c46b1ff96b253c46aa379.jpeg" class="responsive-img" alt="Stream流">
                         
-                        <span class="card-title">CodeTON Round 7 (Div. 1 + Div. 2)</span>
+                        <span class="card-title">Stream流</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            CodeTON Round 7 (Div. 1 + Div. 2)
+                            javase_Stream流
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-11-30
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-12-01
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E9%A2%98%E8%A7%A3/" class="post-category">
-                                    题解
+                            <a href="/categories/javase/" class="post-category">
+                                    javase
                                 </a>
                             
                             
@@ -982,8 +1043,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/codeforces/">
-                        <span class="chip bg-color">codeforces</span>
+                    <a href="/tags/javase/">
+                        <span class="chip bg-color">javase</span>
                     </a>
                     
                 </div>

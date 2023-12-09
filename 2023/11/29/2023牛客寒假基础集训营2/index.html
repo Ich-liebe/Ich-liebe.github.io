@@ -434,7 +434,7 @@
 </div>
 
 <h3 id="A"><a href="#A" class="headerlink" title="A"></a>A</h3><p><strong>—— 简单</strong></p>
-<h4 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h4><p>给定一个整数 n，两个区间$[L_1,R_1]$，$[L_2,R_2]$。 现在想知道从两个区间内分别取一个数 a 和 b，问有多少种不同的取法。</p>
+<h4 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h4><p>给定一个整数 n，两个区间$[L_1,R_1]$，$[L_2,R_2]$。 现在想知道从两个区间内分别取一个数 a 和 b，使得 a + b = n，问有多少种不同的取法。</p>
 <h4 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h4><p>我们让第一个区间取值为 a，那么第二个区间取值就为 n - a，然后取两个区间的交集即可。</p>
 <p>A与B的区别在于 A的数据范围小，可以暴力</p>
 <h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;bits/stdc++.h></span></span>
@@ -578,10 +578,7 @@ ll a<span class="token punctuation">[</span>N<span class="token punctuation">]</
 </div>
 
 <h3 id="D"><a href="#D" class="headerlink" title="D"></a>D</h3><p><strong>—— 偏简单</strong></p>
-<p><strong>—— 树DFS，经典结论</strong></p>
-<ul>
-<li><strong>两个向量内部允许任意重排，则点积最大方法为都升序排列</strong></li>
-</ul>
+<p><strong>—— 树DFS</strong></p>
 <h4 id="题意-3"><a href="#题意-3" class="headerlink" title="题意"></a>题意</h4><p>给定一个有 n 个节点的能量树，根为 1。先给定每个节点的父节点，然后给定 n 个能量球，并给出每个能量球的能量 v 。现在把 n 个能量球放在树的每个节点上，使每个节点恰好有一个能量球。自下而上，每个节点都能额外获得子节点的能量(可向上累加)。问最大的总能量为多少。</p>
 <h4 id="解题思路-3"><a href="#解题思路-3" class="headerlink" title="解题思路"></a>解题思路</h4><p>其实不难想到，既然子节点的能量可以向上传递，那么只要保证越深的节点能量越大，就可以使得总能量越大。此时，我们只需要求出每个节点的深度就可以，因为深度就是一个节点的能量的使用次数。(初始深度为 1)</p>
 <p>第一次做这样的题，有思路，甚至非常清晰，但就是想不出如何去解决。不过现在学到了，或许还不晚？大概。</p>
