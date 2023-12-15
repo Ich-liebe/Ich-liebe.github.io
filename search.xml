@@ -8230,4 +8230,175 @@ using namespace std<span class="token punctuation">;</span>
         <tag>新生杯</tag>
       </tags>
   </entry>
+  <entry>
+    <title>反射2</title>
+    <url>/2023/12/15/javase_%E5%8F%8D%E5%B0%842/</url>
+    <content><![CDATA[<div align='center'>
+    <span style="font-size:45px;color:pink">反射2</span>
+</div>
+
+
+<ul>
+<li><strong>框架设计的灵魂</strong></li>
+</ul>
+<h3 id="1-框架："><a href="#1-框架：" class="headerlink" title="1. 框架："></a>1. 框架：</h3><ul>
+<li>半成品软件。可以在框架的基础上进行软件开发</li>
+</ul>
+<h3 id="2-反射机制"><a href="#2-反射机制" class="headerlink" title="2. 反射机制"></a>2. 反射机制</h3><ul>
+<li>将类的各个部分封装成最想，这就是反射机制</li>
+</ul>
+<h4 id="1-好处"><a href="#1-好处" class="headerlink" title="1. 好处"></a>1. 好处</h4><ol>
+<li>在程序的运行过程中，操作这些对象。</li>
+<li>可以解耦，提高程序的可扩展性。</li>
+</ol>
+<h4 id="2-java-代码在计算机中三阶段"><a href="#2-java-代码在计算机中三阶段" class="headerlink" title="2. java 代码在计算机中三阶段"></a>2. java 代码在计算机中三阶段</h4><ol>
+<li>源代码阶段：{ (.java)    编译  —&gt;   (.class)}</li>
+<li>Class类对象阶段：{ (.class)   类加载器 —&gt;  (Class类对象)}</li>
+<li>Runtime运行的阶段： { ()  创建对象   —&gt;   ()}</li>
+</ol>
+<h3 id="3-获取-Class-对象的方式"><a href="#3-获取-Class-对象的方式" class="headerlink" title="3. 获取 Class 对象的方式"></a>3. 获取 Class 对象的方式</h3><ol>
+<li>Class.forName(“类名”) :  将字节码文件加载进内存中，返回Class 对象   (第一阶段)<ul>
+<li>多用于配置文件，将类定义在配置文件中。 读取文件，加载类</li>
+</ul>
+</li>
+<li>类名.class : 通过类名的属性 class 获取    (第二阶段)<ul>
+<li>多用于参数的传递</li>
+</ul>
+</li>
+<li>对象.getClass() : getClass 的方法在 object 中定义着。(第三阶段)<ul>
+<li>多用于对象的字节码获取</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>结论：统一字节码文件 (*.class) 在一次程序运行过程中，只会被加载一次，不论通过哪一种方式获取的Class对象都是同一个。</li>
+</ul>
+<h3 id="4-Class-对象功能"><a href="#4-Class-对象功能" class="headerlink" title="4. Class 对象功能"></a>4. Class 对象功能</h3><h4 id="1-获取功能"><a href="#1-获取功能" class="headerlink" title="1. 获取功能"></a>1. 获取功能</h4><ol>
+<li>获取成员变量们……</li>
+<li>获取构造方法们……</li>
+<li>获取成员方法们……</li>
+<li>获取类名……</li>
+</ol>
+]]></content>
+      <categories>
+        <category>javase</category>
+      </categories>
+      <tags>
+        <tag>javase</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>注解</title>
+    <url>/2023/12/15/javase_%E6%B3%A8%E8%A7%A3/</url>
+    <content><![CDATA[<div align='center'>
+    <span style="font-size:45px;color:pink">注解</span>
+</div>
+
+<ul>
+<li><strong>注解的概念：说明程序的。 （给计算机看）</strong></li>
+<li><strong>注释的概念：用文字描述程序。  （给程序员看）</strong></li>
+<li><strong>作用分类：</strong><ol>
+<li>编写文档：通过代码里标识的注解生成文档   【生成doc文档】</li>
+<li>代码分析：通过代码里标识的注解对代码进行分析  【使用反射】</li>
+<li>编译检查：通过代码里标识的注解让编译器能够实现基本的编译检查  【Override】</li>
+</ol>
+</li>
+</ul>
+<h3 id="1-JDK预定义的一些注解"><a href="#1-JDK预定义的一些注解" class="headerlink" title="1. JDK预定义的一些注解"></a>1. JDK预定义的一些注解</h3><ul>
+<li>@Overrice:   检测被该注解标注的方法是否继承自父类（接口）的</li>
+<li>@Deprecated:  该注释标识的内容，标识已过时</li>
+<li>@SuppressWarnings:  压制警告        (一般：@SuppressWarnings(“all”))</li>
+</ul>
+<h3 id="2-自定义注释"><a href="#2-自定义注释" class="headerlink" title="2. 自定义注释"></a>2. 自定义注释</h3><h4 id="1-格式："><a href="#1-格式：" class="headerlink" title="1. 格式："></a>1. 格式：</h4><ul>
+<li><p>元注解</p>
+<p>public @Interface 注解名称 {</p>
+<p>​        属性列表;</p>
+<p>}</p>
+</li>
+</ul>
+<h4 id="2-本质："><a href="#2-本质：" class="headerlink" title="2. 本质："></a>2. 本质：</h4><ul>
+<li><strong>注解本质上就是一个接口，该接口默认继承Annotation接口</strong><ul>
+<li>public interface MyAnno extends java.lang.annotation.Annotation { }</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-属性："><a href="#3-属性：" class="headerlink" title="3. 属性："></a>3. 属性：</h4><ul>
+<li><strong>接口中的抽象方法</strong><ul>
+<li>要求    <ol>
+<li>属性返回值类型：<ul>
+<li>基本数据类型</li>
+<li>String</li>
+<li>枚举</li>
+<li>注解</li>
+<li>以上类型的数组</li>
+</ul>
+</li>
+<li>定义了属性，在使用时需要给属性赋值<ol>
+<li>使用 default 关键字给属性默认初始化值，则使用注解时，可不进行属性的赋值</li>
+<li>如果属性的名称是 value ，则 value 可以省略，直接赋值即可。</li>
+<li>数组赋值，用 { } 包裹，一个值可以省略 { }</li>
+</ol>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-元注解"><a href="#4-元注解" class="headerlink" title="4. 元注解"></a>4. 元注解</h4><ul>
+<li><strong>用于描述注解的注解</strong><ul>
+<li>@Target:  用于描述能够作用的位置<ul>
+<li>TYPE: 可以作用于类上</li>
+<li>METHOD: 可以作用于方法上</li>
+<li>FIELD：可以作用于成员变量上</li>
+</ul>
+</li>
+<li>@Retention : 描述注解被保留的的阶段（三个阶段）<ul>
+<li>@Retention(RetentionPolicy.RUNTIME) : (第三阶段) 当前被描述的注解，会保留到 class 字节码文件中，并被JVM 读取</li>
+</ul>
+</li>
+<li>@Documented: 加上这个注解，在生成doc文档时，会保留类中成员方法和成员变量的注解    （描述注解是否被抽取到API文档中）</li>
+<li>@Inherited : 继承父类注解        （描述是否被子类继承）</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-在程序使用-解析-注解："><a href="#3-在程序使用-解析-注解：" class="headerlink" title="3. 在程序使用(解析) 注解："></a>3. 在程序使用(解析) 注解：</h3><ul>
+<li><strong>获取注解中定义的属性值</strong></li>
+</ul>
+<h4 id="1-获取注解定义的位置的对象"><a href="#1-获取注解定义的位置的对象" class="headerlink" title="1. 获取注解定义的位置的对象"></a>1. 获取注解定义的位置的对象</h4><ul>
+<li>（Class, Method, Field）</li>
+</ul>
+<h4 id="2-获取指定的注解"><a href="#2-获取指定的注解" class="headerlink" title="2. 获取指定的注解"></a>2. 获取指定的注解</h4><ul>
+<li><p>getAnnotation(Class) 是 Java 反射中的一个方法，用于获取指定元素上的特定注解。</p>
+</li>
+<li><p>其实就是在内存中生成了一个该注解接口的子类实现方法：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ProImpl</span> <span class="token keyword">implements</span> <span class="token class-name">Pro</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token string">"han_03.Demo1"</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">methodName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token string">"show"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+</ul>
+<ol>
+<li><strong>调用这个注解中的抽象方法，来获取配置的属性值</strong></li>
+</ol>
+<h3 id="4-小结："><a href="#4-小结：" class="headerlink" title="4. 小结："></a>4. 小结：</h3><ol>
+<li><strong>大多数时候，我们会使用注释，不需要自定义注解</strong></li>
+<li><strong>注释给谁用</strong><ol>
+<li>编译期</li>
+<li>解析陈冠希</li>
+</ol>
+</li>
+<li><strong>注解不是程序的一部分，可以理解为注解就是一个标签</strong></li>
+</ol>
+]]></content>
+      <categories>
+        <category>javase</category>
+      </categories>
+      <tags>
+        <tag>javase</tag>
+      </tags>
+  </entry>
 </search>
