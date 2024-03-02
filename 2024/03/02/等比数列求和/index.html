@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="注解">
-    <meta name="description" content="javase_注解">
+    <meta name="keywords" content="等比数列">
+    <meta name="description" content="等比数列求和">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>注解 | szy Blog</title>
+    <title>等比数列求和 | szy Blog</title>
     <link rel="icon" type="image/jpeg" href="/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230915160303.jpg">
     
     <style>
@@ -343,12 +343,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://www.freeimg.cn/i/2023/12/15/657bc56b8fa53.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://www.freeimg.cn/i/2024/03/02/65e2a1e8cb3fe.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">注解</h1>
+                    <h1 class="description center-align post-title">等比数列求和</h1>
                 </div>
             </div>
         </div>
@@ -372,8 +372,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/javase/">
-                                <span class="chip bg-color">javase</span>
+                            <a href="/tags/%E7%AD%89%E6%AF%94%E6%95%B0%E5%88%97%E6%B1%82%E5%92%8C/">
+                                <span class="chip bg-color">等比数列求和</span>
                             </a>
                         
                     </div>
@@ -384,8 +384,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/javase/" class="post-category">
-                                javase
+                            <a href="/categories/%E6%9D%BF%E5%AD%90/" class="post-category">
+                                板子
                             </a>
                         
                     </div>
@@ -397,7 +397,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-12-15
+                    2024-03-02
                 </div>
                 
 
@@ -422,108 +422,38 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <div align='center'>
-    <span style="font-size:45px;color:pink">注解</span>
+    <span style="font-size:40px; color:pink">等比数列求和</span>
 </div>
 
+
+
 <ul>
-<li><strong>注解的概念：说明程序的。 （给计算机看）</strong></li>
-<li><strong>注释的概念：用文字描述程序。  （给程序员看）</strong></li>
-<li><strong>作用分类：</strong><ol>
-<li>编写文档：通过代码里标识的注解生成文档   【生成doc文档】</li>
-<li>代码分析：通过代码里标识的注解对代码进行分析  【使用反射】</li>
-<li>编译检查：通过代码里标识的注解让编译器能够实现基本的编译检查  【Override】</li>
-</ol>
+<li>很久没更新了  怎会绘世呢？  </li>
+</ul>
+<ul>
+<li><p>拿来主义  -&gt; 指路</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://comzyh.com/blog/archives/795/">等比数列求和的二分法 | Comzyh的博客</a></p>
+</li>
+<li><p>简而言之  等差为a，前k项的和</p>
 </li>
 </ul>
-<h3 id="1-JDK预定义的一些注解"><a href="#1-JDK预定义的一些注解" class="headerlink" title="1. JDK预定义的一些注解"></a>1. JDK预定义的一些注解</h3><ul>
-<li>@Overrice:   检测被该注解标注的方法是否继承自父类（接口）的</li>
-<li>@Deprecated:  该注释标识的内容，标识已过时</li>
-<li>@SuppressWarnings:  压制警告        (一般：@SuppressWarnings(“all”))</li>
-</ul>
-<h3 id="2-自定义注释"><a href="#2-自定义注释" class="headerlink" title="2. 自定义注释"></a>2. 自定义注释</h3><h4 id="1-格式："><a href="#1-格式：" class="headerlink" title="1. 格式："></a>1. 格式：</h4><ul>
-<li><p>元注解</p>
-<p>public @Interface 注解名称 {</p>
-<p>​        属性列表;</p>
-<p>}</p>
-</li>
-</ul>
-<h4 id="2-本质："><a href="#2-本质：" class="headerlink" title="2. 本质："></a>2. 本质：</h4><ul>
-<li><strong>注解本质上就是一个接口，该接口默认继承Annotation接口</strong><ul>
-<li>public interface MyAnno extends java.lang.annotation.Annotation { }</li>
-</ul>
-</li>
-</ul>
-<h4 id="3-属性："><a href="#3-属性：" class="headerlink" title="3. 属性："></a>3. 属性：</h4><ul>
-<li><strong>接口中的抽象方法</strong><ul>
-<li>要求    <ol>
-<li>属性返回值类型：<ul>
-<li>基本数据类型</li>
-<li>String</li>
-<li>枚举</li>
-<li>注解</li>
-<li>以上类型的数组</li>
-</ul>
-</li>
-<li>定义了属性，在使用时需要给属性赋值<ol>
-<li>使用 default 关键字给属性默认初始化值，则使用注解时，可不进行属性的赋值</li>
-<li>如果属性的名称是 value ，则 value 可以省略，直接赋值即可。</li>
-<li>数组赋值，用 { } 包裹，一个值可以省略 { }</li>
-</ol>
-</li>
-</ol>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="4-元注解"><a href="#4-元注解" class="headerlink" title="4. 元注解"></a>4. 元注解</h4><ul>
-<li><strong>用于描述注解的注解</strong><ul>
-<li>@Target:  用于描述能够作用的位置<ul>
-<li>TYPE: 可以作用于类上</li>
-<li>METHOD: 可以作用于方法上</li>
-<li>FIELD：可以作用于成员变量上</li>
-</ul>
-</li>
-<li>@Retention : 描述注解被保留的的阶段（三个阶段）<ul>
-<li>@Retention(RetentionPolicy.RUNTIME) : (第三阶段) 当前被描述的注解，会保留到 class 字节码文件中，并被JVM 读取</li>
-</ul>
-</li>
-<li>@Documented: 加上这个注解，在生成doc文档时，会保留类中成员方法和成员变量的注解    （描述注解是否被抽取到API文档中）</li>
-<li>@Inherited : 继承父类注解        （描述是否被子类继承）</li>
-</ul>
-</li>
-</ul>
-<h3 id="3-在程序使用-解析-注解："><a href="#3-在程序使用-解析-注解：" class="headerlink" title="3. 在程序使用(解析) 注解："></a>3. 在程序使用(解析) 注解：</h3><ul>
-<li><strong>获取注解中定义的属性值</strong></li>
-</ul>
-<h4 id="1-获取注解定义的位置的对象"><a href="#1-获取注解定义的位置的对象" class="headerlink" title="1. 获取注解定义的位置的对象"></a>1. 获取注解定义的位置的对象</h4><ul>
-<li>（Class, Method, Field）</li>
-</ul>
-<h4 id="2-获取指定的注解"><a href="#2-获取指定的注解" class="headerlink" title="2. 获取指定的注解"></a>2. 获取指定的注解</h4><ul>
-<li><p>getAnnotation(Class) 是 Java 反射中的一个方法，用于获取指定元素上的特定注解。</p>
-</li>
-<li><p>其实就是在内存中生成了一个该注解接口的子类实现方法：</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ProImpl</span> <span class="token keyword">implements</span> <span class="token class-name">Pro</span> <span class="token punctuation">&#123;</span>
-	<span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">return</span> <span class="token string">"han_03.Demo1"</span><span class="token punctuation">;</span>
-	<span class="token punctuation">&#125;</span>
-    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">methodName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">return</span> <span class="token string">"show"</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">ll <span class="token function">sum</span><span class="token punctuation">(</span>ll a<span class="token punctuation">,</span>ll k<span class="token punctuation">,</span> ll mod<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    ll ans <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    ll sum <span class="token operator">=</span> a<span class="token punctuation">;</span> <span class="token comment">//S(y)</span>
+    ll mul <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment">//a^x</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>k<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>k<span class="token operator">&amp;</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            ans <span class="token operator">=</span> <span class="token punctuation">(</span>ans <span class="token operator">+</span> mul <span class="token operator">*</span> sum<span class="token punctuation">)</span> <span class="token operator">%</span> mod<span class="token punctuation">;</span>
+            mul <span class="token operator">=</span> mul <span class="token operator">*</span> a <span class="token operator">%</span> mod<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        sum <span class="token operator">=</span> sum <span class="token operator">*</span> <span class="token punctuation">(</span>a <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">%</span> mod<span class="token punctuation">;</span>
+        a <span class="token operator">=</span> a <span class="token operator">*</span> a <span class="token operator">%</span> mod<span class="token punctuation">;</span>
+        k <span class="token operator">>>=</span> <span class="token number">1</span><span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
-</ul>
-<ol>
-<li><strong>调用这个注解中的抽象方法，来获取配置的属性值</strong></li>
-</ol>
-<h3 id="4-小结："><a href="#4-小结：" class="headerlink" title="4. 小结："></a>4. 小结：</h3><ol>
-<li><strong>大多数时候，我们会使用注释，不需要自定义注解</strong></li>
-<li><strong>注释给谁用</strong><ol>
-<li>编译期</li>
-<li>解析陈冠希</li>
-</ol>
-</li>
-<li><strong>注解不是程序的一部分，可以理解为注解就是一个标签</strong></li>
-</ol>
+    <span class="token keyword">return</span> ans<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
                 
             </div>
@@ -550,7 +480,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://ich-liebe.github.io/2023/12/15/javase_%E6%B3%A8%E8%A7%A3/">https://ich-liebe.github.io/2023/12/15/javase_%E6%B3%A8%E8%A7%A3/</a>
+                    <a href="https://ich-liebe.github.io/2024/03/02/%E7%AD%89%E6%AF%94%E6%95%B0%E5%88%97%E6%B1%82%E5%92%8C/">https://ich-liebe.github.io/2024/03/02/%E7%AD%89%E6%AF%94%E6%95%B0%E5%88%97%E6%B1%82%E5%92%8C/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -588,8 +518,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/javase/">
-                                    <span class="chip bg-color">javase</span>
+                                <a href="/tags/%E7%AD%89%E6%AF%94%E6%95%B0%E5%88%97%E6%B1%82%E5%92%8C/">
+                                    <span class="chip bg-color">等比数列求和</span>
                                 </a>
                             
                         </div>
@@ -935,9 +865,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2024/03/02/%E7%AD%89%E6%AF%94%E6%95%B0%E5%88%97%E6%B1%82%E5%92%8C/">
                     <div class="card-image">
@@ -954,9 +885,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2024-03-02
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-03-02
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -969,6 +900,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -987,18 +919,18 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/12/15/javase_%E5%8F%8D%E5%B0%842/">
+                <a href="/2023/12/15/javase_%E6%B3%A8%E8%A7%A3/">
                     <div class="card-image">
                         
-                        <img src="https://www.freeimg.cn/i/2023/12/15/657bc569ae762.jpg" class="responsive-img" alt="反射2">
+                        <img src="https://www.freeimg.cn/i/2023/12/15/657bc56b8fa53.jpg" class="responsive-img" alt="注解">
                         
-                        <span class="card-title">反射2</span>
+                        <span class="card-title">注解</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            javase_反射2
+                            javase_注解
                         
                     </div>
                     <div class="publish-info">
