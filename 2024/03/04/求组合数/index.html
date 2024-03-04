@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="等比数列">
-    <meta name="description" content="等比数列求和">
+    <meta name="keywords" content="组合数">
+    <meta name="description" content="求组合数">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>等比数列求和 | szy Blog</title>
+    <title>求组合数 | szy Blog</title>
     <link rel="icon" type="image/jpeg" href="/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230915160303.jpg">
     
     <style>
@@ -343,12 +343,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://www.freeimg.cn/i/2024/03/02/65e2a1e8cb3fe.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://www.freeimg.cn/i/2024/03/04/65e5597696d2b.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">等比数列求和</h1>
+                    <h1 class="description center-align post-title">求组合数</h1>
                 </div>
             </div>
         </div>
@@ -372,8 +372,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E7%AD%89%E6%AF%94%E6%95%B0%E5%88%97%E6%B1%82%E5%92%8C/">
-                                <span class="chip bg-color">等比数列求和</span>
+                            <a href="/tags/%E6%B1%82%E7%BB%84%E5%90%88%E6%95%B0/">
+                                <span class="chip bg-color">求组合数</span>
                             </a>
                         
                     </div>
@@ -397,7 +397,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2024-03-02
+                    2024-03-04
                 </div>
                 
 
@@ -422,38 +422,37 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <div align='center'>
-    <span style="font-size:40px; color:pink">等比数列求和</span>
+    <span style="font-size:40px; color:pink">求组合数</span>
 </div>
 
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">ll fact<span class="token punctuation">[</span>N<span class="token punctuation">]</span><span class="token punctuation">,</span> infact<span class="token punctuation">[</span>N<span class="token punctuation">]</span><span class="token punctuation">;</span>
 
-
-<ul>
-<li>很久没更新了  怎会绘世呢？  </li>
-</ul>
-<ul>
-<li><p>拿来主义  -&gt; 指路</p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://comzyh.com/blog/archives/795/">等比数列求和的二分法 | Comzyh的博客</a></p>
-</li>
-<li><p>简而言之  等差为a，前k项的和</p>
-</li>
-</ul>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c">ll <span class="token function">sum</span><span class="token punctuation">(</span>ll a<span class="token punctuation">,</span>ll k<span class="token punctuation">,</span> ll mod<span class="token punctuation">)</span>
-<span class="token punctuation">&#123;</span>
-    ll ans <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-    ll sum <span class="token operator">=</span> a<span class="token punctuation">;</span> <span class="token comment">//S(y)</span>
-    ll mul <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment">//a^x</span>
+ll <span class="token function">qmi</span><span class="token punctuation">(</span>ll a<span class="token punctuation">,</span> ll k<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    ll ans <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
     <span class="token keyword">while</span> <span class="token punctuation">(</span>k<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>k<span class="token operator">&amp;</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            ans <span class="token operator">=</span> <span class="token punctuation">(</span>ans <span class="token operator">+</span> mul <span class="token operator">*</span> sum<span class="token punctuation">)</span> <span class="token operator">%</span> mod<span class="token punctuation">;</span>
-            mul <span class="token operator">=</span> mul <span class="token operator">*</span> a <span class="token operator">%</span> mod<span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-        sum <span class="token operator">=</span> sum <span class="token operator">*</span> <span class="token punctuation">(</span>a <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">%</span> mod<span class="token punctuation">;</span>
-        a <span class="token operator">=</span> a <span class="token operator">*</span> a <span class="token operator">%</span> mod<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>k<span class="token operator">&amp;</span><span class="token number">1</span><span class="token punctuation">)</span> ans <span class="token operator">=</span> a <span class="token operator">*</span> ans <span class="token operator">%</span> mod<span class="token punctuation">;</span>
         k <span class="token operator">>>=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        a <span class="token operator">=</span> a <span class="token operator">*</span> a <span class="token operator">%</span> mod<span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span>
     <span class="token keyword">return</span> ans<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">int</span> <span class="token function">iniv</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token function">qmi</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> mod <span class="token operator">-</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">void</span> <span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    fact<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> infact<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> N<span class="token punctuation">;</span> i <span class="token operator">++</span> <span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        fact<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> fact<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">*</span> i <span class="token operator">%</span> mod<span class="token punctuation">;</span>
+        infact<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> infact<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token function">iniv</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token operator">%</span> mod<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+ll <span class="token function">C</span><span class="token punctuation">(</span>ll n<span class="token punctuation">,</span> ll m<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">&lt;</span> m<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> fact<span class="token punctuation">[</span>n<span class="token punctuation">]</span> <span class="token operator">*</span> infact<span class="token punctuation">[</span>n <span class="token operator">-</span> m<span class="token punctuation">]</span> <span class="token operator">%</span> mod <span class="token operator">*</span> infact<span class="token punctuation">[</span>m<span class="token punctuation">]</span> <span class="token operator">%</span> mod<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
                 
             </div>
@@ -480,7 +479,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://ich-liebe.github.io/2024/03/02/%E7%AD%89%E6%AF%94%E6%95%B0%E5%88%97%E6%B1%82%E5%92%8C/">https://ich-liebe.github.io/2024/03/02/%E7%AD%89%E6%AF%94%E6%95%B0%E5%88%97%E6%B1%82%E5%92%8C/</a>
+                    <a href="https://ich-liebe.github.io/2024/03/04/%E6%B1%82%E7%BB%84%E5%90%88%E6%95%B0/">https://ich-liebe.github.io/2024/03/04/%E6%B1%82%E7%BB%84%E5%90%88%E6%95%B0/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -518,8 +517,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E7%AD%89%E6%AF%94%E6%95%B0%E5%88%97%E6%B1%82%E5%92%8C/">
-                                    <span class="chip bg-color">等比数列求和</span>
+                                <a href="/tags/%E6%B1%82%E7%BB%84%E5%90%88%E6%95%B0/">
+                                    <span class="chip bg-color">求组合数</span>
                                 </a>
                             
                         </div>
@@ -869,24 +868,72 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2024/03/04/%E6%B1%82%E7%BB%84%E5%90%88%E6%95%B0/">
+                <a href="/2024/03/04/%E7%89%9B%E5%AE%A2%E5%91%A8%E8%B5%9B35/">
                     <div class="card-image">
                         
-                        <img src="https://www.freeimg.cn/i/2024/03/04/65e5597696d2b.jpg" class="responsive-img" alt="求组合数">
+                        <img src="https://www.freeimg.cn/i/2024/03/04/65e55e033ae5a.jpg" class="responsive-img" alt="牛客周赛35">
                         
-                        <span class="card-title">求组合数</span>
+                        <span class="card-title">牛客周赛35</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            求组合数
+                            牛客周赛题解
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
                             <i class="far fa-clock fa-fw icon-date"></i>2024-03-04
                         </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E9%A2%98%E8%A7%A3/" class="post-category">
+                                    题解
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E7%89%9B%E5%AE%A2%E5%91%A8%E8%B5%9B/">
+                        <span class="chip bg-color">牛客周赛</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2024/03/02/%E7%AD%89%E6%AF%94%E6%95%B0%E5%88%97%E6%B1%82%E5%92%8C/">
+                    <div class="card-image">
+                        
+                        <img src="https://www.freeimg.cn/i/2024/03/02/65e2a1e8cb3fe.jpg" class="responsive-img" alt="等比数列求和">
+                        
+                        <span class="card-title">等比数列求和</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            等比数列求和
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-03-02
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -902,56 +949,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%B1%82%E7%BB%84%E5%90%88%E6%95%B0/">
-                        <span class="chip bg-color">求组合数</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2023/12/15/javase_%E6%B3%A8%E8%A7%A3/">
-                    <div class="card-image">
-                        
-                        <img src="https://www.freeimg.cn/i/2023/12/15/657bc56b8fa53.jpg" class="responsive-img" alt="注解">
-                        
-                        <span class="card-title">注解</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            javase_注解
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-12-15
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/javase/" class="post-category">
-                                    javase
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/javase/">
-                        <span class="chip bg-color">javase</span>
+                    <a href="/tags/%E7%AD%89%E6%AF%94%E6%95%B0%E5%88%97%E6%B1%82%E5%92%8C/">
+                        <span class="chip bg-color">等比数列求和</span>
                     </a>
                     
                 </div>
