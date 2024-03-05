@@ -695,7 +695,7 @@ using namespace std<span class="token punctuation">;</span>
 
 
 <h3 id="F"><a href="#F" class="headerlink" title="F"></a>F</h3><h4 id="题意-5"><a href="#题意-5" class="headerlink" title="题意"></a>题意</h4><p>给定一个数组，求左右非空子序列的权值之和。<br>权值定义为：数组中所有元素乘积的因子数量。</p>
-<h4 id="解题思路-5"><a href="#解题思路-5" class="headerlink" title="解题思路"></a>解题思路</h4><p>$f() <em> 2^{cnt1} </em> \sum_0^{cnt2}C(cnt2, i) * \sum_0^{cnt3}C(cnt3, j);$  </p>
+<h4 id="解题思路-5"><a href="#解题思路-5" class="headerlink" title="解题思路"></a>解题思路</h4><p>$f() <em> 2^{cnt1} </em> \sum_0^{cnt2}C(cnt2, i) * \sum_0^{cnt3}C(cnt3, j)$  </p>
 <p>其中$f()=\sum_0^{cnt2}\sum_0^{cnt3}(i + 1) * (j + 1)$ </p>
 <p>$cntx$ 为 x 出现的次数</p>
 <p>$f()$的值是怎么来的呢，根据$x=p1^{q1}<em>p2^{q2} </em> ……$ 其中 p 为质因子，q 为质因子出现的次数，</p>
@@ -779,8 +779,8 @@ ll <span class="token function">C</span><span class="token punctuation">(</span>
 
 
 <h3 id="G"><a href="#G" class="headerlink" title="G"></a>G</h3><h4 id="题意-6"><a href="#题意-6" class="headerlink" title="题意"></a>题意</h4><p>相比于F，只增加了 n 的数据范围。</p>
-<h4 id="解题思路-6"><a href="#解题思路-6" class="headerlink" title="解题思路"></a>解题思路</h4><p>$（i+1)<em>(j+1) </em> 2^{cnt1} <em> \sum_0^{cnt2}C(cnt2, i) </em> \sum_0^{cnt3}C(cnt3, j);$  这一步</p>
-<p>可以写成 $2^{cnt1} <em> \sum_0^{cnt2}C(cnt2, i) </em>(i+1) <em> \sum_0^{cnt3}C(cnt3, j)</em>(j+1);$<br>也就是分别将 i 和 j 的部分拆开，将双层 for 循环改为两个单层 for 循环。</p>
+<h4 id="解题思路-6"><a href="#解题思路-6" class="headerlink" title="解题思路"></a>解题思路</h4><p>$（i+1)<em>(j+1) </em> 2^{cnt1} <em> \sum_0^{cnt2}C(cnt2, i) </em> \sum_0^{cnt3}C(cnt3, j)$  这一步</p>
+<p>可以写成 $2^{cnt1} <em> \sum_0^{cnt2}C(cnt2, i) </em>(i+1) <em> \sum_0^{cnt3}C(cnt3, j)</em>(j+1)$<br>也就是分别将 i 和 j 的部分拆开，将双层 for 循环改为两个单层 for 循环。</p>
 <h4 id="代码-6"><a href="#代码-6" class="headerlink" title="代码"></a>代码</h4><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;vector></span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;algorithm></span></span>
@@ -1268,29 +1268,28 @@ ll <span class="token function">C</span><span class="token punctuation">(</span>
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2024/03/04/%E7%89%9B%E5%AE%A2%E5%91%A8%E8%B5%9B35/">
+                <a href="/2024/03/05/ABC343/">
                     <div class="card-image">
                         
-                        <img src="https://www.freeimg.cn/i/2024/03/04/65e55e033ae5a.jpg" class="responsive-img" alt="牛客周赛35">
+                        <img src="https://www.freeimg.cn/i/2024/03/05/65e714e372bd0.jpg" class="responsive-img" alt="ABC343">
                         
-                        <span class="card-title">牛客周赛35</span>
+                        <span class="card-title">ABC343</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            牛客周赛题解
+                            ABC343题解
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-03-04
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2024-03-05
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1303,12 +1302,11 @@ ll <span class="token function">C</span><span class="token punctuation">(</span>
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E7%89%9B%E5%AE%A2%E5%91%A8%E8%B5%9B/">
-                        <span class="chip bg-color">牛客周赛</span>
+                    <a href="/tags/ABC/">
+                        <span class="chip bg-color">ABC</span>
                     </a>
                     
                 </div>
