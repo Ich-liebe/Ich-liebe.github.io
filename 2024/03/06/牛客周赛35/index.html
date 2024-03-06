@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="牛客周赛">
-    <meta name="description" content="牛客周赛题解">
+    <meta name="description" content="牛客周赛35题解">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -397,7 +397,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2024-03-04
+                    2024-03-06
                 </div>
                 
 
@@ -424,6 +424,7 @@
                 <div align='center'>
     <span style="font-size:30px;color:pink">A 小红的字符串切割</span>
 </div>
+
 
 
 <ul>
@@ -455,6 +456,7 @@ using namespace std<span class="token punctuation">;</span>
 <div align='center'>
     <span style="font-size:30px;color:pink">B 小红的数组分配</span>
 </div>
+
 
 
 <h3 id="B"><a href="#B" class="headerlink" title="B"></a>B</h3><h4 id="题意-1"><a href="#题意-1" class="headerlink" title="题意"></a>题意</h4><p>一个长度为2 * n 的数组，需要把所有元素平分到两个数组a 和 b 中，需要满足两个数组的数一一对应相等</p>
@@ -503,6 +505,7 @@ using namespace std<span class="token punctuation">;</span>
 </div>
 
 
+
 <h3 id="C"><a href="#C" class="headerlink" title="C"></a>C</h3><h4 id="题意-2"><a href="#题意-2" class="headerlink" title="题意"></a>题意</h4><p>有n个鸡窝，每个鸡窝位于坐标轴上某一点，有一只小鸡会随机在一直鸡窝中出现。<br>现在可以放两个栅栏，如果小鸡出现在栅栏中间，那就可以关住。<br>给出两个栅栏最大距离，问关住鸡的最大概率。</p>
 <h4 id="解题思路-2"><a href="#解题思路-2" class="headerlink" title="解题思路"></a>解题思路</h4><p>存储鸡窝位置后，先进行排序，使得鸡窝的位置有序化。<br>之后只需要卡住左右的鸡窝即可，如果当前距离小于最大距离，就计算概率。<br>如果可以卡住，就有右区间点++，如果超出了最大距离，就左区间点++。<br>如何计算概率呢？就是当前卡住的鸡窝的数量 / 总的鸡窝数量。</p>
 <h4 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h4><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
@@ -541,6 +544,7 @@ using namespace std<span class="token punctuation">;</span>
 <div align='center'>
     <span style="font-size:30px;color:pink">D 小红的排列构造</span>
 </div>
+
 
 
 <h3 id="D"><a href="#D" class="headerlink" title="D"></a>D</h3><h4 id="题意-3"><a href="#题意-3" class="headerlink" title="题意"></a>题意</h4><p>给定一个数组，需要修改最少的元素，使得数组变成一个排列。</p>
@@ -597,6 +601,7 @@ using namespace std<span class="token punctuation">;</span>
 <div align='center'>
     <span style="font-size:30px;color:pink">E 小红的无向图构造</span>
 </div>
+
 
 
 <h3 id="E"><a href="#E" class="headerlink" title="E"></a>E</h3><h4 id="题意-4"><a href="#题意-4" class="headerlink" title="题意"></a>题意</h4><p>需要构造一个无向连通图，共有n个点m条边。<br>限制条件为第 i 号节点到 1 号节点的最短长度为 $a_i$ </p>
@@ -694,6 +699,7 @@ using namespace std<span class="token punctuation">;</span>
 </div>
 
 
+
 <h3 id="F"><a href="#F" class="headerlink" title="F"></a>F</h3><h4 id="题意-5"><a href="#题意-5" class="headerlink" title="题意"></a>题意</h4><p>给定一个数组，求左右非空子序列的权值之和。<br>权值定义为：数组中所有元素乘积的因子数量。</p>
 <h4 id="解题思路-5"><a href="#解题思路-5" class="headerlink" title="解题思路"></a>解题思路</h4><p>$f() <em> 2^{cnt1} </em> \sum_0^{cnt2}C(cnt2, i) * \sum_0^{cnt3}C(cnt3, j)$  </p>
 <p>其中$f()=\sum_0^{cnt2}\sum_0^{cnt3}(i + 1) * (j + 1)$ </p>
@@ -776,6 +782,7 @@ ll <span class="token function">C</span><span class="token punctuation">(</span>
 <div align='center'>
     <span style="font-size:30px;color:pink">G 小红的子序列权值和（hard)</span>
 </div>
+
 
 
 <h3 id="G"><a href="#G" class="headerlink" title="G"></a>G</h3><h4 id="题意-6"><a href="#题意-6" class="headerlink" title="题意"></a>题意</h4><p>相比于F，只增加了 n 的数据范围。</p>
@@ -883,7 +890,7 @@ ll <span class="token function">C</span><span class="token punctuation">(</span>
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://ich-liebe.github.io/2024/03/04/%E7%89%9B%E5%AE%A2%E5%91%A8%E8%B5%9B35/">https://ich-liebe.github.io/2024/03/04/%E7%89%9B%E5%AE%A2%E5%91%A8%E8%B5%9B35/</a>
+                    <a href="https://ich-liebe.github.io/2024/03/06/%E7%89%9B%E5%AE%A2%E5%91%A8%E8%B5%9B35/">https://ich-liebe.github.io/2024/03/06/%E7%89%9B%E5%AE%A2%E5%91%A8%E8%B5%9B35/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -1268,28 +1275,78 @@ ll <span class="token function">C</span><span class="token punctuation">(</span>
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2024/03/05/ABC343/">
+                <a href="/2024/03/06/%E7%89%9B%E5%AE%A2%E5%91%A8%E8%B5%9B35/">
                     <div class="card-image">
                         
-                        <img src="https://www.freeimg.cn/i/2024/03/05/65e714e372bd0.jpg" class="responsive-img" alt="ABC343">
+                        <img src="https://www.freeimg.cn/i/2024/03/04/65e55e033ae5a.jpg" class="responsive-img" alt="牛客周赛35">
                         
-                        <span class="card-title">ABC343</span>
+                        <span class="card-title">牛客周赛35</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            ABC343题解
+                            牛客周赛35题解
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2024-03-05
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-03-06
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E9%A2%98%E8%A7%A3/" class="post-category">
+                                    题解
+                                </a>
+                            
+                            
                         </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E7%89%9B%E5%AE%A2%E5%91%A8%E8%B5%9B/">
+                        <span class="chip bg-color">牛客周赛</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2024/03/06/%E5%A4%A7%E8%87%A3%E7%9A%84%E6%97%85%E8%B4%B9/">
+                    <div class="card-image">
+                        
+                        <img src="https://www.freeimg.cn/i/2024/03/06/65e86e605531d.jpg" class="responsive-img" alt="大臣的旅费">
+                        
+                        <span class="card-title">大臣的旅费</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            大臣的旅费
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-03-06
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1305,56 +1362,8 @@ ll <span class="token function">C</span><span class="token punctuation">(</span>
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/ABC/">
-                        <span class="chip bg-color">ABC</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2024/03/04/%E6%B1%82%E7%BB%84%E5%90%88%E6%95%B0/">
-                    <div class="card-image">
-                        
-                        <img src="https://www.freeimg.cn/i/2024/03/04/65e5597696d2b.jpg" class="responsive-img" alt="求组合数">
-                        
-                        <span class="card-title">求组合数</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            求组合数
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-03-04
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E6%9D%BF%E5%AD%90/" class="post-category">
-                                    板子
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E6%B1%82%E7%BB%84%E5%90%88%E6%95%B0/">
-                        <span class="chip bg-color">求组合数</span>
+                    <a href="/tags/%E5%A4%A7%E8%87%A3%E7%9A%84%E6%97%85%E8%B4%B9/">
+                        <span class="chip bg-color">大臣的旅费</span>
                     </a>
                     
                 </div>
