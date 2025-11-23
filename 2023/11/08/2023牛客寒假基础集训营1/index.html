@@ -340,6 +340,19 @@
 </header>
 
     
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
 
 
 
@@ -372,12 +385,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E9%A2%98%E8%A7%A3/">
-                                <span class="chip bg-color">题解</span>
-                            </a>
-                        
                             <a href="/tags/2023%E7%89%9B%E5%AE%A2%E5%AF%92%E5%81%87/">
                                 <span class="chip bg-color">2023牛客寒假</span>
+                            </a>
+                        
+                            <a href="/tags/%E9%A2%98%E8%A7%A3/">
+                                <span class="chip bg-color">题解</span>
                             </a>
                         
                     </div>
@@ -985,12 +998,12 @@ using namespace std<span class="token punctuation">;</span>
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E9%A2%98%E8%A7%A3/">
-                                    <span class="chip bg-color">题解</span>
-                                </a>
-                            
                                 <a href="/tags/2023%E7%89%9B%E5%AE%A2%E5%AF%92%E5%81%87/">
                                     <span class="chip bg-color">2023牛客寒假</span>
+                                </a>
+                            
+                                <a href="/tags/%E9%A2%98%E8%A7%A3/">
+                                    <span class="chip bg-color">题解</span>
                                 </a>
                             
                         </div>
